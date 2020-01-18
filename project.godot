@@ -1,0 +1,63 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Node",
+"class": "GameGraph",
+"language": "GDScript",
+"path": "res://addons/game_graph/GameGraph.gd"
+}, {
+"base": "MarginContainer",
+"class": "GameGraphDialogLine",
+"language": "GDScript",
+"path": "res://addons/game_graph/graph_nodes/GameGraphDialogLine.gd"
+}, {
+"base": "GraphNode",
+"class": "GameGraphDialogNode",
+"language": "GDScript",
+"path": "res://addons/game_graph/graph_nodes/GameGraphDialogNode.gd"
+}, {
+"base": "Control",
+"class": "GameGraphEditor",
+"language": "GDScript",
+"path": "res://addons/game_graph/GameGraphEditor.gd"
+}, {
+"base": "GraphNode",
+"class": "GameGraphNode",
+"language": "GDScript",
+"path": "res://addons/game_graph/graph_nodes/GameGraphNode.gd"
+}, {
+"base": "EditorPlugin",
+"class": "GameGraphPlugin",
+"language": "GDScript",
+"path": "res://addons/game_graph/GameGraphPlugin.gd"
+} ]
+_global_script_class_icons={
+"GameGraph": "",
+"GameGraphDialogLine": "",
+"GameGraphDialogNode": "",
+"GameGraphEditor": "",
+"GameGraphNode": "",
+"GameGraphPlugin": ""
+}
+
+[application]
+
+config/name="story_editor"
+run/main_scene="res://addons/game_graph/GameGraphEditor.tscn"
+config/icon="res://icon.png"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "game_graph" )
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
