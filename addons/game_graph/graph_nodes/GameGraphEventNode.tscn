@@ -8,12 +8,12 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 title = "Emit signal"
 show_close = true
-slot/0/left_enabled = false
-slot/0/left_type = 0
-slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/left_enabled = true
+slot/0/left_type = 1
+slot/0/left_color = Color( 1, 1, 0, 1 )
 slot/0/right_enabled = false
 slot/0/right_type = 0
-slot/0/right_color = Color( 1, 1, 1, 1 )
+slot/0/right_color = Color( 0, 0, 1, 1 )
 script = ExtResource( 1 )
 
 [node name="TextEdit" type="LineEdit" parent="."]

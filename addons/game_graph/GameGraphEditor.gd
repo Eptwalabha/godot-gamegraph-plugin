@@ -24,43 +24,21 @@ func _ready() -> void:
 	graph.add_valid_connection_type(0, 1)
 	graph.add_valid_connection_type(1, 0)
 
-func _on_GraphEdit_connection_request(from: String, from_slot: int, to: String, to_slot: int) -> void:
-	connect_node(from, from_slot, to, to_slot)
-
 func connect_node(from: String, from_slot: int, to: String, to_slot: int) -> void:
-	if from == start.name:
+	var from_type = get_output_slot_type(from, from_slot)
+	var to_type = get_input_slot_type(to, to_slot)
+	if from_type == to_type and to_type == 0:
 		for connection in graph.get_connection_list():
-			if connection.from == start.name:
-				graph.disconnect_node(connection.from, connection.from_port, connection.to, connection.to_port)
+			if connection.from == from and connection.from_port == from_slot:
+				if get_input_slot_type(connection.to, connection.to_port) == 0:
+					graph.disconnect_node(connection.from, connection.from_port, connection.to, connection.to_port)
 	graph.connect_node(from, from_slot, to, to_slot)
 
-func _on_GraphEdit_disconnection_request(from: String, from_slot: int, to: String, to_slot: int) -> void:
-	graph.disconnect_node(from, from_slot, to, to_slot)
-
-
-func _on_GraphEdit_connection_to_empty(from: String, from_slot: int, release_position: Vector2) -> void:
-	popup_menu.rect_position = release_position + graph.rect_global_position
-	last_slot = {
-		"from": from,
-		"from_slot": from_slot,
-		"position": release_position
-	}
-	var a = graph.get_node(from).get_connection_output_type(from_slot)
-	match a:
-		0:
-			popup_menu.show()
-			popup_menu.grab_focus()
-		1:
-			add_event_emiter_node()
-
-func _on_Dialog_pressed() -> void:
-	add_dialog_node()
-
-func _on_Choice_pressed() -> void:
-	add_choice_node()
-
-func _on_Event_pressed() -> void:
-	add_event_emiter_node()
+func get_input_slot_type(from, from_slot) -> int:
+	return graph.get_node(from).get_connection_input_type(from_slot)
+	
+func get_output_slot_type(from, from_slot) -> int:
+	return graph.get_node(from).get_connection_output_type(from_slot)
 
 func add_event_emiter_node() -> void:
 	var event_emiter = preload("graph_nodes/GameGraphEventNode.tscn").instance()
@@ -86,6 +64,54 @@ func add_node_to_graph(node) -> void:
 			connect_node(last_slot["from"], last_slot["from_slot"], node.name, 0)
 		last_slot = null
 
+func shift_connection_up(from, slot_port) -> void:
+	var connections = []
+	for c in graph.get_connection_list():
+		if c.from == from and c.from_port + 1 >= slot_port:
+			if c.from_port + 1 != slot_port:
+				connections.push_back(c)
+			graph.disconnect_node(c.from, c.from_port, c.to, c.to_port)
+	for c in connections:
+		graph.connect_node(c.from, c.from_port - 1, c.to, c.to_port)
+
+func shift_connection_down(from, slot_port) -> void:
+	var connections = []
+	for c in graph.get_connection_list():
+		if c.from == from and c.from_port >= slot_port:
+			connections.push_back(c)
+			graph.disconnect_node(c.from, c.from_port, c.to, c.to_port)
+	for c in connections:
+		graph.connect_node(c.from, c.from_port + 1, c.to, c.to_port)
+
+func _on_GraphEdit_connection_request(from: String, from_slot: int, to: String, to_slot: int) -> void:
+	connect_node(from, from_slot, to, to_slot)
+
+func _on_GraphEdit_disconnection_request(from: String, from_slot: int, to: String, to_slot: int) -> void:
+	graph.disconnect_node(from, from_slot, to, to_slot)
+
+func _on_GraphEdit_connection_to_empty(from: String, from_slot: int, release_position: Vector2) -> void:
+	popup_menu.rect_position = release_position + graph.rect_global_position
+	last_slot = {
+		"from": from,
+		"from_slot": from_slot,
+		"position": release_position
+	}
+	match get_output_slot_type(from, from_slot):
+		0:
+			popup_menu.show()
+			popup_menu.grab_focus()
+		1:
+			add_event_emiter_node()
+
+func _on_Dialog_pressed() -> void:
+	add_dialog_node()
+
+func _on_Choice_pressed() -> void:
+	add_choice_node()
+
+func _on_Event_pressed() -> void:
+	add_event_emiter_node()
+
 func _on_PopupMenu_id_pressed(ID: int) -> void:
 	match ID:
 		POPUPMENU.DIALOG:
@@ -109,25 +135,6 @@ func _on_slot_inserted(slot_port: int, dialog: GameGraphNode) -> void:
 	
 func _on_slot_removed(slot_port: int, dialog: GameGraphNode) -> void:
 	shift_connection_up(dialog.name, slot_port)
-	
-func shift_connection_up(from, slot_port) -> void:
-	var connections = []
-	for c in graph.get_connection_list():
-		if c.from == from and c.from_port + 1 >= slot_port:
-			if c.from_port + 1 != slot_port:
-				connections.push_back(c)
-			graph.disconnect_node(c.from, c.from_port, c.to, c.to_port)
-	for c in connections:
-		graph.connect_node(c.from, c.from_port - 1, c.to, c.to_port)
-
-func shift_connection_down(from, slot_port) -> void:
-	var connections = []
-	for c in graph.get_connection_list():
-		if c.from == from and c.from_port >= slot_port:
-			connections.push_back(c)
-			graph.disconnect_node(c.from, c.from_port, c.to, c.to_port)
-	for c in connections:
-		graph.connect_node(c.from, c.from_port + 1, c.to, c.to_port)
 
 func _on_GraphEdit_popup_request(position: Vector2) -> void:
 	popup_menu.rect_position = position
