@@ -7,8 +7,11 @@ onready var graph := $HSplitContainer/Container2/GraphEdit as GraphEdit
 onready var popup_menu := $PopupMenu as PopupMenu
 onready var event_menu := $HSplitContainer/Container2/Menu/HBoxContainer/HBoxContainer/Event as MenuButton
 onready var start := $HSplitContainer/Container2/GraphEdit/Start as GraphNode
+onready var file_dialog := $FileDialog as FileDialog
 
 var last_slot = null
+var dialog_data : Resource
+var resource_path := ''
 
 enum POPUPMENU {
 	DIALOG = 1,
@@ -23,6 +26,14 @@ func _ready() -> void:
 	popup_menu.add_item("event", POPUPMENU.EVENT)
 	graph.add_valid_connection_type(0, 1)
 	graph.add_valid_connection_type(1, 0)
+
+func console(text) -> void:
+	var c = $HSplitContainer/Console
+	c.set_text(c.text + text + "\n")
+
+func reload_interface() -> void:
+	if dialog_data is GameGraphResource:
+		console("ok")
 
 func connect_node(from: String, from_slot: int, to: String, to_slot: int) -> void:
 	var from_type = get_output_slot_type(from, from_slot)
@@ -150,3 +161,19 @@ func _on_GameGraphNode_close_request(node: GameGraphNode) -> void:
 		if c.from == node.name or c.to == node.name:
 			graph.disconnect_node(c.from, c.from_port, c.to, c.to_port)
 	node.queue_free()
+
+func _on_Save_resource_pressed() -> void:
+	$SaveDialog.show()
+	
+func _on_Load_resource_pressed() -> void:
+	$LoadDialog.show()
+
+func _on_LoadDialog_file_selected(file: String) -> void:
+	var data = ResourceLoader.load(file)
+	if data is GameGraphResource:
+		resource_path = file
+		dialog_data = data
+		reload_interface()
+
+func _on_SaveDialog_file_selected(file: String) -> void:
+	console("save at %s" % file)

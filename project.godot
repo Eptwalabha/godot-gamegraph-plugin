@@ -48,6 +48,11 @@ _global_script_classes=[ {
 "class": "GameGraphPlugin",
 "language": "GDScript",
 "path": "res://addons/game_graph/GameGraphPlugin.gd"
+}, {
+"base": "Resource",
+"class": "GameGraphResource",
+"language": "GDScript",
+"path": "res://addons/game_graph/GameGraphResource.gd"
 } ]
 _global_script_class_icons={
 "GameGraph": "",
@@ -57,7 +62,8 @@ _global_script_class_icons={
 "GameGraphDialogNode": "",
 "GameGraphEditor": "",
 "GameGraphNode": "",
-"GameGraphPlugin": ""
+"GameGraphPlugin": "",
+"GameGraphResource": ""
 }
 
 [application]
