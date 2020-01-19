@@ -19,7 +19,7 @@ func insert_new_choice_line() -> void:
 	var choice_line = line.instance()
 	add_child(choice_line)
 	var slot_port = choice_line.get_index()
-	set_slot(slot_port, false, 0, Color(), true, 0, Color(0, 0, 1))
+	set_slot(slot_port, false, 0, Color(), true, 0, Color(0, 1, 0))
 	choice_line.connect("delete_pressed", self, "_on_ChoiceLine_deleted", [choice_line])
 	emit_signal("slot_inserted", slot_port)
 

@@ -7,7 +7,7 @@ var line = preload("res://addons/game_graph/graph_nodes/GameGraphDialogLine.tscn
 
 func _ready() -> void:
 	._ready()
-	set_slot(0, true, 0, Color(0, 0, 1), true, 0, Color(0, 0, 1))
+	set_slot(0, true, 0, Color(0, 0, 1), true, 0, Color(0, 1, 0))
 
 func delete_dialog_line(dialog_line: GameGraphDialogLine) -> void:
 	var slot_port = dialog_line.get_index()

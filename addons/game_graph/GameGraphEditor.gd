@@ -15,20 +15,14 @@ enum POPUPMENU {
 	CHOICE = 2,
 	EVENT = 3
 	}
-enum EVENTTYPE {
-	EMITER = 1,
-	RECEIVER = 2
-	}
 
 func _ready() -> void:
 	popup_menu.clear()
 	popup_menu.add_item("dialog", POPUPMENU.DIALOG)
 	popup_menu.add_item("choice", POPUPMENU.CHOICE)
 	popup_menu.add_item("event", POPUPMENU.EVENT)
-	event_menu.get_popup().clear()
-	event_menu.get_popup().add_item("emiter", EVENTTYPE.EMITER)
-	event_menu.get_popup().add_item("receiver", EVENTTYPE.RECEIVER)
-	event_menu.get_popup().connect("id_pressed", self, "_on_EventMenu_pressed")
+	graph.add_valid_connection_type(0, 1)
+	graph.add_valid_connection_type(1, 0)
 
 func _on_GraphEdit_connection_request(from: String, from_slot: int, to: String, to_slot: int) -> void:
 	connect_node(from, from_slot, to, to_slot)
@@ -61,6 +55,12 @@ func _on_GraphEdit_connection_to_empty(from: String, from_slot: int, release_pos
 
 func _on_Dialog_pressed() -> void:
 	add_dialog_node()
+
+func _on_Choice_pressed() -> void:
+	add_choice_node()
+
+func _on_Event_pressed() -> void:
+	add_event_emiter_node()
 
 func add_event_emiter_node() -> void:
 	var event_emiter = preload("graph_nodes/GameGraphEventNode.tscn").instance()
@@ -101,12 +101,8 @@ func _on_PopupMenu_focus_exited() -> void:
 	popup_menu.hide()
 	last_slot = null
 
-func _on_EventMenu_pressed(ID: int) -> void:
-	match ID:
-		EVENTTYPE.EMITER:
-			add_event_emiter_node()
-		EVENTTYPE.RECEIVER:
-			print("receiver")
+func _on_EventMenu_pressed() -> void:
+	add_event_emiter_node()
 
 func _on_slot_inserted(slot_port: int, dialog: GameGraphNode) -> void:
 	shift_connection_down(dialog.name, slot_port)
