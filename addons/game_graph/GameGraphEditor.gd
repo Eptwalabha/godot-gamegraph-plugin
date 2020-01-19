@@ -52,7 +52,6 @@ func _on_GraphEdit_connection_to_empty(from: String, from_slot: int, release_pos
 		"position": release_position
 	}
 	var a = graph.get_node(from).get_connection_output_type(from_slot)
-	print("super %s, %s" % [from_slot, a])
 	match a:
 		0:
 			popup_menu.show()
@@ -65,23 +64,26 @@ func _on_Dialog_pressed() -> void:
 
 func add_event_emiter_node() -> void:
 	var event_emiter = preload("graph_nodes/GameGraphEventNode.tscn").instance()
-	graph.add_child(event_emiter)
-	if last_slot:
-		event_emiter.offset = last_slot["position"] + graph.scroll_offset
-		if last_slot.has("from") and last_slot.has("from_slot"):
-			connect_node(last_slot.from, last_slot.from_slot, event_emiter.name, 0)
-		last_slot = null
-
+	add_node_to_graph(event_emiter)
 
 func add_dialog_node() -> void:
 	var dialog = preload("graph_nodes/GameGraphDialogNode.tscn").instance()
 	dialog.connect("slot_inserted", self, "_on_slot_inserted", [dialog])
 	dialog.connect("slot_removed", self, "_on_slot_removed", [dialog])
-	graph.add_child(dialog)
+	add_node_to_graph(dialog)
+
+func add_choice_node() -> void:
+	var choice = preload("graph_nodes/GameGraphChoiceNode.tscn").instance()
+	choice.connect("slot_inserted", self, "_on_slot_inserted", [choice])
+	choice.connect("slot_removed", self, "_on_slot_removed", [choice])
+	add_node_to_graph(choice)
+
+func add_node_to_graph(node) -> void:
+	graph.add_child(node)
 	if last_slot:
-		dialog.offset = last_slot["position"] + graph.scroll_offset
+		node.offset = last_slot["position"] + graph.scroll_offset
 		if last_slot.has("from") and last_slot.has("from_slot"):
-			connect_node(last_slot["from"], last_slot["from_slot"], dialog.name, 0)
+			connect_node(last_slot["from"], last_slot["from_slot"], node.name, 0)
 		last_slot = null
 
 func _on_PopupMenu_id_pressed(ID: int) -> void:
@@ -90,6 +92,8 @@ func _on_PopupMenu_id_pressed(ID: int) -> void:
 			add_dialog_node()
 		POPUPMENU.EVENT:
 			add_event_emiter_node()
+		POPUPMENU.CHOICE:
+			add_choice_node()
 		_:
 			pass
 

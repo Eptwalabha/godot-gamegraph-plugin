@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://addons/game_graph/graph_nodes/GameGraphDialogNode.gd" type="Script" id=1]
+[ext_resource path="res://addons/game_graph/assets/ui-plus.svg" type="Texture" id=2]
 
 [node name="GameGraphDialogNode" type="GraphNode"]
 rect_min_size = Vector2( 150, 100 )
@@ -12,7 +13,7 @@ slot/0/left_type = 0
 slot/0/left_color = Color( 0, 0, 1, 1 )
 slot/0/right_enabled = true
 slot/0/right_type = 0
-slot/0/right_color = Color( 1, 0, 0, 1 )
+slot/0/right_color = Color( 0, 0, 1, 1 )
 slot/1/left_enabled = false
 slot/1/left_type = 0
 slot/1/left_color = Color( 1, 1, 1, 1 )
@@ -46,10 +47,10 @@ align = 2
 margin_left = 16.0
 margin_top = 38.0
 margin_right = 134.0
-margin_bottom = 58.0
+margin_bottom = 59.0
 
 [node name="Button" type="Button" parent="Control"]
-margin_right = 38.0
-margin_bottom = 20.0
-text = "new"
+margin_right = 27.0
+margin_bottom = 21.0
+icon = ExtResource( 2 )
 [connection signal="pressed" from="Control/Button" to="." method="_on_Button_pressed"]

@@ -15,6 +15,16 @@ _global_script_classes=[ {
 "path": "res://addons/game_graph/GameGraph.gd"
 }, {
 "base": "MarginContainer",
+"class": "GameGraphChoiceLine",
+"language": "GDScript",
+"path": "res://addons/game_graph/graph_nodes/GameGraphChoiceLine.gd"
+}, {
+"base": "GraphNode",
+"class": "GameGraphChoiceNode",
+"language": "GDScript",
+"path": "res://addons/game_graph/graph_nodes/GameGraphChoiceNode.gd"
+}, {
+"base": "MarginContainer",
 "class": "GameGraphDialogLine",
 "language": "GDScript",
 "path": "res://addons/game_graph/graph_nodes/GameGraphDialogLine.gd"
@@ -41,6 +51,8 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "GameGraph": "",
+"GameGraphChoiceLine": "",
+"GameGraphChoiceNode": "",
 "GameGraphDialogLine": "",
 "GameGraphDialogNode": "",
 "GameGraphEditor": "",
