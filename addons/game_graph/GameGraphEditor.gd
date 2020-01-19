@@ -56,8 +56,9 @@ func add_choice_node() -> void:
 	choice.connect("slot_removed", self, "_on_slot_removed", [choice])
 	add_node_to_graph(choice)
 
-func add_node_to_graph(node) -> void:
+func add_node_to_graph(node: GameGraphNode) -> void:
 	graph.add_child(node)
+	node.connect("close_request", self, "_on_GameGraphNode_close_request", [node])
 	if last_slot:
 		node.offset = last_slot["position"] + graph.scroll_offset
 		if last_slot.has("from") and last_slot.has("from_slot"):
@@ -143,3 +144,9 @@ func _on_GraphEdit_popup_request(position: Vector2) -> void:
 	}
 	popup_menu.show()
 	popup_menu.grab_focus()
+
+func _on_GameGraphNode_close_request(node: GameGraphNode) -> void:
+	for c in graph.get_connection_list():
+		if c.from == node.name or c.to == node.name:
+			graph.disconnect_node(c.from, c.from_port, c.to, c.to_port)
+	node.queue_free()
