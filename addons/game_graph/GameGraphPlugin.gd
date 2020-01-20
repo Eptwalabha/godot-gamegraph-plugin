@@ -13,7 +13,7 @@ func _enter_tree() -> void:
 func _exit_tree() -> void:
 	remove_control_from_bottom_panel(editor)
 	remove_custom_type("GameGraph")
-	editor.queue_free()
+	editor.free()
 
 func get_plugin_name() -> String:
 	return "GameGraph"
