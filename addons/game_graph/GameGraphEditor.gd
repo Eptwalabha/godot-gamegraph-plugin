@@ -7,8 +7,8 @@ onready var graph := $HSplitContainer/Container2/GraphEdit as GraphEdit
 onready var popup_menu := $PopupMenu as PopupMenu
 onready var event_menu := $HSplitContainer/Container2/Menu/HBoxContainer/HBoxContainer/Event as MenuButton
 onready var start := $HSplitContainer/Container2/GraphEdit/Start as GraphNode
-onready var file_dialog := $FileDialog as FileDialog
 
+var game_graph_resource = preload("GameGraphResource.gd")
 var last_slot = null
 var dialog_data : Resource
 var resource_path := ''
@@ -28,12 +28,8 @@ func _ready() -> void:
 	graph.add_valid_connection_type(1, 0)
 
 func console(text) -> void:
-	var c = $HSplitContainer/Console
+	var c = $HSplitContainer/Container2/Console
 	c.set_text(c.text + text + "\n")
-
-func reload_interface() -> void:
-	if dialog_data is GameGraphResource:
-		console("ok")
 
 func connect_node(from: String, from_slot: int, to: String, to_slot: int) -> void:
 	var from_type = get_output_slot_type(from, from_slot)
@@ -51,21 +47,24 @@ func get_input_slot_type(from, from_slot) -> int:
 func get_output_slot_type(from, from_slot) -> int:
 	return graph.get_node(from).get_connection_output_type(from_slot)
 
-func add_event_emiter_node() -> void:
+func add_event_emiter_node() -> GameGraphEventNode:
 	var event_emiter = preload("graph_nodes/GameGraphEventNode.tscn").instance()
 	add_node_to_graph(event_emiter)
+	return event_emiter
 
-func add_dialog_node() -> void:
+func add_dialog_node() -> GameGraphDialogNode:
 	var dialog = preload("graph_nodes/GameGraphDialogNode.tscn").instance()
 	dialog.connect("slot_inserted", self, "_on_slot_inserted", [dialog])
 	dialog.connect("slot_removed", self, "_on_slot_removed", [dialog])
 	add_node_to_graph(dialog)
+	return dialog
 
-func add_choice_node() -> void:
+func add_choice_node() -> GameGraphChoiceNode:
 	var choice = preload("graph_nodes/GameGraphChoiceNode.tscn").instance()
 	choice.connect("slot_inserted", self, "_on_slot_inserted", [choice])
 	choice.connect("slot_removed", self, "_on_slot_removed", [choice])
 	add_node_to_graph(choice)
+	return choice
 
 func add_node_to_graph(node: GameGraphNode) -> void:
 	graph.add_child(node)
@@ -94,6 +93,61 @@ func shift_connection_down(from, slot_port) -> void:
 			graph.disconnect_node(c.from, c.from_port, c.to, c.to_port)
 	for c in connections:
 		graph.connect_node(c.from, c.from_port + 1, c.to, c.to_port)
+
+func make_resource() -> GameGraphResource:
+	var resource : GameGraphResource = game_graph_resource.new()
+	var dialogs = []
+	var all_nodes = []
+	for n in graph.get_children():
+		if not n is GameGraphNode:
+			continue
+		var node = {
+			'name': n.name,
+			'type': n.get_type(),
+			'offset': n.offset,
+			'rect': n.rect_size
+		}
+		all_nodes.push_front(node)
+	var dialog = {
+		'name': "super dialog",
+		'graph': {
+			'connections': graph.get_connection_list(),
+			'nodes': all_nodes
+		}
+	}
+	dialogs.push_front(dialog)
+	resource.data = {
+		'dialogs': dialogs
+	}
+	return resource
+
+func reload_interface(resource: GameGraphResource) -> void:
+	clear_graph()
+	var data = resource.data
+	var dialog = data.dialogs[0]
+	var g = dialog.graph
+	for node in g.nodes:
+		var n = null
+		match node.type:
+			"dialog":
+				n = add_dialog_node()
+			"choice":
+				n = add_choice_node()
+			"event_emiter":
+				n = add_event_emiter_node()
+		n.name = node.name
+		n.offset = node.offset
+		n.rect_size = node.rect
+	for c in g.connections:
+		graph.connect_node(c.from, c.from_port, c.to, c.to_port)
+	console("ok")
+
+func clear_graph() -> void:
+	for c in graph.get_connection_list():
+		graph.disconnect_node(c.from, c.from_port, c.to, c.to_port)
+	for n in graph.get_children():
+		if n is GameGraphNode:
+			n.queue_free()
 
 func _on_GraphEdit_connection_request(from: String, from_slot: int, to: String, to_slot: int) -> void:
 	connect_node(from, from_slot, to, to_slot)
@@ -173,7 +227,13 @@ func _on_LoadDialog_file_selected(file: String) -> void:
 	if data is GameGraphResource:
 		resource_path = file
 		dialog_data = data
-		reload_interface()
+		reload_interface(data)
 
 func _on_SaveDialog_file_selected(file: String) -> void:
-	console("save at %s" % file)
+	var data = make_resource()
+	data.plugin_version = "0.0.1"
+	var error = ResourceSaver.save(file, data)
+	if error:
+		console("error while saving")
+	else:
+		console("save at %s v=%s" % [file, data.plugin_version])

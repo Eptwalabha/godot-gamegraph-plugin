@@ -9,6 +9,9 @@ func _ready() -> void:
 	._ready()
 	set_slot(0, true, 0, Color(0, 0, 1), false, 0, Color(0, 0, 1))
 
+func get_type() -> String:
+	return "choice"
+
 func delete_choice_line(choice_line: GameGraphChoiceLine) -> void:
 	var slot_port = choice_line.get_index()
 	emit_signal("slot_removed", slot_port)

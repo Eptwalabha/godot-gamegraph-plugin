@@ -12,13 +12,13 @@ script = ExtResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Console" type="TextEdit" parent="HSplitContainer"]
-margin_right = 200.0
+[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer"]
 margin_bottom = 600.0
-rect_min_size = Vector2( 200, 0 )
+
+[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer/VBoxContainer"]
 
 [node name="Container2" type="VBoxContainer" parent="HSplitContainer"]
-margin_left = 212.0
+margin_left = 12.0
 margin_right = 1024.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 200, 0 )
@@ -26,7 +26,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Menu" type="MarginContainer" parent="HSplitContainer/Container2"]
-margin_right = 812.0
+editor/display_folded = true
+margin_right = 1012.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
 custom_constants/margin_right = 5
@@ -37,12 +38,12 @@ custom_constants/margin_bottom = 5
 [node name="HBoxContainer" type="HBoxContainer" parent="HSplitContainer/Container2/Menu"]
 margin_left = 5.0
 margin_top = 5.0
-margin_right = 807.0
+margin_right = 1007.0
 margin_bottom = 27.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HSplitContainer/Container2/Menu/HBoxContainer"]
-margin_right = 693.0
+margin_right = 893.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 
@@ -64,8 +65,8 @@ margin_bottom = 22.0
 text = "Event"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="HSplitContainer/Container2/Menu/HBoxContainer"]
-margin_left = 697.0
-margin_right = 802.0
+margin_left = 897.0
+margin_right = 1002.0
 margin_bottom = 22.0
 
 [node name="Load" type="Button" parent="HSplitContainer/Container2/Menu/HBoxContainer/HBoxContainer2"]
@@ -81,18 +82,19 @@ text = "Save as"
 
 [node name="GraphEdit" type="GraphEdit" parent="HSplitContainer/Container2"]
 margin_top = 36.0
-margin_right = 812.0
-margin_bottom = 600.0
+margin_right = 1012.0
+margin_bottom = 496.0
 size_flags_vertical = 3
 right_disconnects = true
-scroll_offset = Vector2( -20, -60 )
+scroll_offset = Vector2( -79, -113 )
 snap_distance = 10
 
 [node name="Start" type="GraphNode" parent="HSplitContainer/Container2/GraphEdit"]
-margin_left = 20.0
-margin_top = 60.0
-margin_right = 91.0
-margin_bottom = 97.0
+editor/display_folded = true
+margin_left = 79.0
+margin_top = 113.0
+margin_right = 150.0
+margin_bottom = 150.0
 mouse_filter = 1
 title = "Start"
 comment = true
@@ -108,6 +110,12 @@ margin_left = 16.0
 margin_top = 24.0
 margin_right = 55.0
 margin_bottom = 24.0
+
+[node name="Console" type="TextEdit" parent="HSplitContainer/Container2"]
+margin_top = 500.0
+margin_right = 1012.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 0, 100 )
 
 [node name="PopupMenu" type="PopupMenu" parent="."]
 margin_right = 20.0

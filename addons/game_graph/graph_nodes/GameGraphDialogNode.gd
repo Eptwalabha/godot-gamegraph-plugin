@@ -9,6 +9,9 @@ func _ready() -> void:
 	._ready()
 	set_slot(0, true, 0, Color(0, 0, 1), true, 0, Color(0, 1, 0))
 
+func get_type() -> String:
+	return "dialog"
+
 func delete_dialog_line(dialog_line: GameGraphDialogLine) -> void:
 	var slot_port = dialog_line.get_index()
 	emit_signal("slot_removed", slot_port)
