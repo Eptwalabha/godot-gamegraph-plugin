@@ -217,10 +217,10 @@ func _on_GameGraphNode_close_request(node: GameGraphNode) -> void:
 	node.queue_free()
 
 func _on_Save_resource_pressed() -> void:
-	$SaveDialog.show()
+	$SaveDialog.popup_centered()
 	
 func _on_Load_resource_pressed() -> void:
-	$LoadDialog.show()
+	$LoadDialog.popup_centered()
 
 func _on_LoadDialog_file_selected(file: String) -> void:
 	var data = ResourceLoader.load(file)
