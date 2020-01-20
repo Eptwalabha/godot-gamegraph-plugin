@@ -27,7 +27,7 @@ margin_right = 961.0
 margin_bottom = 596.0
 rect_min_size = Vector2( 150, 0 )
 size_flags_horizontal = 3
-text = "No dialog yet"
+placeholder_text = "your dialog key"
 caret_blink = true
 
 [node name="Edit" type="Button" parent="Line"]

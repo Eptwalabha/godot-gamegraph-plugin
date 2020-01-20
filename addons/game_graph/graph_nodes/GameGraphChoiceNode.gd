@@ -9,8 +9,19 @@ func _ready() -> void:
 	._ready()
 	set_slot(0, true, 0, Color(0, 0, 1), false, 0, Color(0, 0, 1))
 
-func get_type() -> String:
-	return "choice"
+func save() -> Resource:
+	var resource = preload("../resources/GameGraphNodeChoiceResource.gd").new()
+	resource.name = name
+	resource.offset = offset
+	resource.rect_size = rect_size
+	resource.type = "choice"
+	resource.question = $HBoxContainer/Question.text
+	resource.choices = []
+	for node in get_children():
+		if not node is GameGraphChoiceLine:
+			continue
+		resource.choices.push_back(node.save())
+	return resource
 
 func delete_choice_line(choice_line: GameGraphChoiceLine) -> void:
 	var slot_port = choice_line.get_index()

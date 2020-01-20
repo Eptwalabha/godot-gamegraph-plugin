@@ -98,16 +98,12 @@ func make_resource() -> GameGraphResource:
 	var resource : GameGraphResource = game_graph_resource.new()
 	var dialogs = []
 	var all_nodes = []
-	for n in graph.get_children():
-		if not n is GameGraphNode:
+	for node in graph.get_children():
+		if not node is GameGraphNode:
 			continue
-		var node = {
-			'name': n.name,
-			'type': n.get_type(),
-			'offset': n.offset,
-			'rect': n.rect_size
-		}
-		all_nodes.push_front(node)
+		var n = node.save()
+		if n is GameGraphNodeResource:
+			all_nodes.push_front(n)
 	var dialog = {
 		'name': "super dialog",
 		'graph': {
@@ -137,7 +133,7 @@ func reload_interface(resource: GameGraphResource) -> void:
 				n = add_event_emiter_node()
 		n.name = node.name
 		n.offset = node.offset
-		n.rect_size = node.rect
+		n.rect_size = node.rect_size
 	for c in g.connections:
 		graph.connect_node(c.from, c.from_port, c.to, c.to_port)
 	console("ok")

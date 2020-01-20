@@ -11,3 +11,8 @@ func _ready() -> void:
 
 func _on_Delete_pressed() -> void:
 	emit_signal("delete_pressed")
+
+func save() -> Resource:
+	var resource = preload("../resources/GameGraphNodeChoiceLineResource.gd").new()
+	resource.text = $Line/Choice.text
+	return resource

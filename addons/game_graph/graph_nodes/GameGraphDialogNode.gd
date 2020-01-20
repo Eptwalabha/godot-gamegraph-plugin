@@ -9,8 +9,18 @@ func _ready() -> void:
 	._ready()
 	set_slot(0, true, 0, Color(0, 0, 1), true, 0, Color(0, 1, 0))
 
-func get_type() -> String:
-	return "dialog"
+func save() -> Resource:
+	var resource = preload("../resources/GameGraphNodeDialogResource.gd").new()
+	resource.name = name
+	resource.offset = offset
+	resource.rect_size = rect_size
+	resource.type = "dialog"
+	resource.dialog_lines = []
+	for node in get_children():
+		if not node is GameGraphDialogLine:
+			continue
+		resource.dialog_lines.push_back(node.save())
+	return resource
 
 func delete_dialog_line(dialog_line: GameGraphDialogLine) -> void:
 	var slot_port = dialog_line.get_index()

@@ -34,12 +34,13 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 text = "start"
 
-[node name="End" type="LineEdit" parent="HBoxContainer"]
+[node name="Question" type="LineEdit" parent="HBoxContainer"]
 margin_top = 18.0
 margin_right = 150.0
 margin_bottom = 42.0
 rect_min_size = Vector2( 150, 0 )
 size_flags_horizontal = 3
+placeholder_text = "your choice"
 
 [node name="Control" type="HBoxContainer" parent="."]
 margin_left = 16.0

@@ -52,42 +52,42 @@ data = {
 "nodes": [ {
 "name": "GameGraphEventNode2",
 "offset": Vector2( 240, 160 ),
-"rect": Vector2( 150, 55 ),
+"rect_size": Vector2( 150, 55 ),
 "type": "event_emiter"
 }, {
 "name": "GameGraphEventNode4",
 "offset": Vector2( 480, 160 ),
-"rect": Vector2( 150, 55 ),
+"rect_size": Vector2( 150, 55 ),
 "type": "event_emiter"
 }, {
 "name": "GameGraphDialogNode",
 "offset": Vector2( 280, 10 ),
-"rect": Vector2( 150, 100 ),
+"rect_size": Vector2( 150, 100 ),
 "type": "dialog"
 }, {
 "name": "GameGraphDialogNode2",
 "offset": Vector2( 715, 31 ),
-"rect": Vector2( 150, 100 ),
+"rect_size": Vector2( 150, 100 ),
 "type": "dialog"
 }, {
 "name": "GameGraphEventNode3",
 "offset": Vector2( 28, 141 ),
-"rect": Vector2( 150, 55 ),
+"rect_size": Vector2( 150, 55 ),
 "type": "event_emiter"
 }, {
 "name": "GameGraphChoiceNode",
 "offset": Vector2( 566, 346 ),
-"rect": Vector2( 206, 112 ),
+"rect_size": Vector2( 206, 112 ),
 "type": "choice"
 }, {
 "name": "GameGraphEventNode5",
 "offset": Vector2( 836, 205 ),
-"rect": Vector2( 150, 55 ),
+"rect_size": Vector2( 150, 55 ),
 "type": "event_emiter"
 }, {
 "name": "GameGraphEventNode",
 "offset": Vector2( 600, -40 ),
-"rect": Vector2( 150, 55 ),
+"rect_size": Vector2( 150, 55 ),
 "type": "event_emiter"
 } ]
 },
