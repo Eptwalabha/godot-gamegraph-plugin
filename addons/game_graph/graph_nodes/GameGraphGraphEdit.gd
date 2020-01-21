@@ -55,11 +55,11 @@ func _make_node_instance(type: String) -> GameGraphNode:
 	if node is GameGraphNode:
 		node.connect("slot_inserted", self, "_on_slot_inserted", [node])
 		node.connect("slot_removed", self, "_on_slot_removed", [node])
+	node.connect("close_request", self, "_on_GameGraphNode_close_request", [node])
 	return node
 
 func add_node_to_graph(node: GameGraphNode, slot_data = null) -> void:
 	add_child(node)
-	node.connect("close_request", self, "_on_GameGraphNode_close_request", [node])
 	if slot_data:
 		node.offset = slot_data["position"] + scroll_offset
 		if slot_data.has("from") and slot_data.has("from_slot"):

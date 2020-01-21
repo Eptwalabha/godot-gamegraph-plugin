@@ -1,0 +1,71 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/game_graph/editor/DialogList.gd" type="Script" id=1]
+[ext_resource path="res://addons/game_graph/game_graph.png" type="Texture" id=2]
+
+[node name="DialogList" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 200, 0 )
+script = ExtResource( 1 )
+
+[node name="Filter" type="MarginContainer" parent="."]
+margin_right = 1024.0
+margin_bottom = 52.0
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+
+[node name="Container" type="VBoxContainer" parent="Filter"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 1019.0
+margin_bottom = 47.0
+
+[node name="Label" type="Label" parent="Filter/Container"]
+margin_right = 1014.0
+margin_bottom = 14.0
+text = "Dialogs"
+
+[node name="Filter" type="LineEdit" parent="Filter/Container"]
+margin_top = 18.0
+margin_right = 1014.0
+margin_bottom = 42.0
+clear_button_enabled = true
+placeholder_text = "Filter"
+
+[node name="Magnifier" type="TextureRect" parent="Filter/Container/Filter"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -32.0
+margin_top = -16.0
+margin_bottom = 16.0
+texture = ExtResource( 2 )
+stretch_mode = 4
+
+[node name="Scroll" type="ScrollContainer" parent="."]
+margin_top = 56.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_vertical = 3
+
+[node name="Margin" type="MarginContainer" parent="Scroll"]
+margin_right = 1024.0
+margin_bottom = 544.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+
+[node name="DialogsList" type="VBoxContainer" parent="Scroll/Margin"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 1019.0
+margin_bottom = 539.0
+custom_constants/separation = 0
+[connection signal="text_changed" from="Filter/Container/Filter" to="." method="_on_Filter_text_changed"]

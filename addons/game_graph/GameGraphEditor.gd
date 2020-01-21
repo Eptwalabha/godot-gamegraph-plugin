@@ -3,10 +3,11 @@ extends Control
 
 class_name GameGraphEditor
 
-onready var graph := $HSplitContainer/Container2/GraphEdit as GameGraphGraphEdit
+onready var graph := $TabContainer/Dialogs/Container2/GraphEdit as GameGraphGraphEdit
 onready var popup_menu := $PopupMenu as PopupMenu
-onready var event_menu := $HSplitContainer/Container2/Menu/HBoxContainer/HBoxContainer/Event as MenuButton
-onready var start := $HSplitContainer/Container2/GraphEdit/Start as GraphNode
+onready var event_menu := $TabContainer/Dialogs/Container2/Menu/HBoxContainer/HBoxContainer/Event as MenuButton
+onready var start := $TabContainer/Dialogs/Container2/GraphEdit/Start as GraphNode
+onready var dialog_list := $TabContainer/Dialogs/DialogList as DialogList
 
 var game_graph_resource = preload("GameGraphResource.gd")
 var last_slot = null
@@ -28,7 +29,8 @@ func _ready() -> void:
 	graph.add_valid_connection_type(1, 0)
 
 func console(text) -> void:
-	var c = $HSplitContainer/Container2/Console
+	var c = $TabContainer/Console
+	c.text = "%s%s\n" % [c.text, text]
 
 func make_resource() -> GameGraphResource:
 	var resource : GameGraphResource = game_graph_resource.new()
@@ -39,10 +41,16 @@ func make_resource() -> GameGraphResource:
 	return resource
 
 func reload_interface(resource: GameGraphResource) -> void:
-	var dialog = resource.dialogs[0]
-	if dialog is GameGraphDialogResource:
-		graph.from_resource(dialog.graph)
-	console("resource loaded")
+	dialog_list.clear_items()
+	for dialog_index in range(len(resource.dialogs)):
+		var dialog = resource.dialogs[dialog_index]
+		if dialog is GameGraphDialogResource:
+			var id = "dialog-%s" % dialog_index
+			dialog_list.add_item(id, dialog.label)
+			if dialog_index > 0:
+				continue
+			graph.from_resource(dialog.graph)
+			console("resource loaded")
 
 func _on_GraphEdit_connection_to_empty(from: String, from_slot: int, release_position: Vector2) -> void:
 	popup_menu.rect_position = release_position + graph.rect_global_position
@@ -115,3 +123,6 @@ func _on_SaveDialog_file_selected(file: String) -> void:
 		console("error while saving")
 	else:
 		console("save at %s v=%s" % [file, data.plugin_version])
+
+func _on_DialogList_dialog_selected(dialog_name) -> void:
+	print("new dialog selected '%s'" % dialog_name)
