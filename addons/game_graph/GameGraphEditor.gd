@@ -47,10 +47,10 @@ func get_input_slot_type(from, from_slot) -> int:
 func get_output_slot_type(from, from_slot) -> int:
 	return graph.get_node(from).get_connection_output_type(from_slot)
 
-func add_event_emiter_node() -> GameGraphEventNode:
-	var event_emiter = preload("graph_nodes/GameGraphEventNode.tscn").instance()
-	add_node_to_graph(event_emiter)
-	return event_emiter
+func add_event_emitter_node() -> GameGraphEventNode:
+	var event_emitter = preload("graph_nodes/GameGraphEventNode.tscn").instance()
+	add_node_to_graph(event_emitter)
+	return event_emitter
 
 func add_dialog_node() -> GameGraphDialogNode:
 	var dialog = preload("graph_nodes/GameGraphDialogNode.tscn").instance()
@@ -129,8 +129,8 @@ func reload_interface(resource: GameGraphResource) -> void:
 				n = add_dialog_node()
 			"choice":
 				n = add_choice_node()
-			"event_emiter":
-				n = add_event_emiter_node()
+			"event_emitter":
+				n = add_event_emitter_node()
 		n.name = node.name
 		n.offset = node.offset
 		n.rect_size = node.rect_size
@@ -163,7 +163,7 @@ func _on_GraphEdit_connection_to_empty(from: String, from_slot: int, release_pos
 			popup_menu.show()
 			popup_menu.grab_focus()
 		1:
-			add_event_emiter_node()
+			add_event_emitter_node()
 
 func _on_Dialog_pressed() -> void:
 	add_dialog_node()
@@ -172,14 +172,14 @@ func _on_Choice_pressed() -> void:
 	add_choice_node()
 
 func _on_Event_pressed() -> void:
-	add_event_emiter_node()
+	add_event_emitter_node()
 
 func _on_PopupMenu_id_pressed(ID: int) -> void:
 	match ID:
 		POPUPMENU.DIALOG:
 			add_dialog_node()
 		POPUPMENU.EVENT:
-			add_event_emiter_node()
+			add_event_emitter_node()
 		POPUPMENU.CHOICE:
 			add_choice_node()
 		_:
@@ -190,7 +190,7 @@ func _on_PopupMenu_focus_exited() -> void:
 	last_slot = null
 
 func _on_EventMenu_pressed() -> void:
-	add_event_emiter_node()
+	add_event_emitter_node()
 
 func _on_slot_inserted(slot_port: int, dialog: GameGraphNode) -> void:
 	shift_connection_down(dialog.name, slot_port)
