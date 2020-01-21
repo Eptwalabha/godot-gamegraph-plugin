@@ -9,5 +9,5 @@ export_presets.cfg
 
 *.swp
 Test.tscn
-default_env.tres
 icon.png*
+*.tres
