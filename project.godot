@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/game_graph/graph_nodes/GameGraphDialogNode.gd"
 }, {
+"base": "Resource",
+"class": "GameGraphDialogResource",
+"language": "GDScript",
+"path": "res://addons/game_graph/resources/GameGraphDialogResource.gd"
+}, {
 "base": "Control",
 "class": "GameGraphEditor",
 "language": "GDScript",
@@ -43,6 +48,16 @@ _global_script_classes=[ {
 "class": "GameGraphEventNode",
 "language": "GDScript",
 "path": "res://addons/game_graph/graph_nodes/GameGraphEventNode.gd"
+}, {
+"base": "GraphEdit",
+"class": "GameGraphGraphEdit",
+"language": "GDScript",
+"path": "res://addons/game_graph/graph_nodes/GameGraphGraphEdit.gd"
+}, {
+"base": "Resource",
+"class": "GameGraphGraphResource",
+"language": "GDScript",
+"path": "res://addons/game_graph/resources/GameGraphGraphResource.gd"
 }, {
 "base": "GraphNode",
 "class": "GameGraphNode",
@@ -80,14 +95,17 @@ _global_script_class_icons={
 "GameGraphChoiceNode": "",
 "GameGraphDialogLine": "",
 "GameGraphDialogNode": "",
+"GameGraphDialogResource": "",
 "GameGraphEditor": "",
 "GameGraphEventNode": "",
+"GameGraphGraphEdit": "",
+"GameGraphGraphResource": "",
 "GameGraphNode": "",
 "GameGraphNodeChoiceLineResource": "",
 "GameGraphNodeDialogLineResource": "",
 "GameGraphNodeResource": "",
 "GameGraphPlugin": "",
-"GameGraphResource": ""
+"GameGraphResource": "res://addons/game_graph/game_graph.png"
 }
 
 [application]

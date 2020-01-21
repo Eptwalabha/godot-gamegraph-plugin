@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://addons/game_graph/GameGraphEditor.gd" type="Script" id=1]
+[ext_resource path="res://addons/game_graph/graph_nodes/GameGraphGraphEdit.tscn" type="PackedScene" id=2]
 
 [node name="GameGraphEditor" type="Control"]
 anchor_right = 1.0
@@ -13,12 +14,21 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer"]
+editor/display_folded = true
+margin_right = 100.0
 margin_bottom = 600.0
+rect_min_size = Vector2( 100, 0 )
 
-[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer/VBoxContainer"]
+[node name="DialogsContainer" type="MarginContainer" parent="HSplitContainer/VBoxContainer"]
+margin_right = 100.0
+
+[node name="CharactersContainers" type="MarginContainer" parent="HSplitContainer/VBoxContainer"]
+margin_top = 4.0
+margin_right = 100.0
+margin_bottom = 4.0
 
 [node name="Container2" type="VBoxContainer" parent="HSplitContainer"]
-margin_left = 12.0
+margin_left = 112.0
 margin_right = 1024.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 200, 0 )
@@ -27,7 +37,7 @@ size_flags_vertical = 3
 
 [node name="Menu" type="MarginContainer" parent="HSplitContainer/Container2"]
 editor/display_folded = true
-margin_right = 1012.0
+margin_right = 912.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
 custom_constants/margin_right = 5
@@ -38,12 +48,12 @@ custom_constants/margin_bottom = 5
 [node name="HBoxContainer" type="HBoxContainer" parent="HSplitContainer/Container2/Menu"]
 margin_left = 5.0
 margin_top = 5.0
-margin_right = 1007.0
+margin_right = 907.0
 margin_bottom = 27.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HSplitContainer/Container2/Menu/HBoxContainer"]
-margin_right = 893.0
+margin_right = 793.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 
@@ -65,8 +75,8 @@ margin_bottom = 22.0
 text = "Event"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="HSplitContainer/Container2/Menu/HBoxContainer"]
-margin_left = 897.0
-margin_right = 1002.0
+margin_left = 797.0
+margin_right = 902.0
 margin_bottom = 22.0
 
 [node name="Load" type="Button" parent="HSplitContainer/Container2/Menu/HBoxContainer/HBoxContainer2"]
@@ -80,40 +90,11 @@ margin_right = 105.0
 margin_bottom = 22.0
 text = "Save as"
 
-[node name="GraphEdit" type="GraphEdit" parent="HSplitContainer/Container2"]
-margin_top = 36.0
-margin_right = 1012.0
-margin_bottom = 496.0
-size_flags_vertical = 3
-right_disconnects = true
-scroll_offset = Vector2( -79, -113 )
-snap_distance = 10
-
-[node name="Start" type="GraphNode" parent="HSplitContainer/Container2/GraphEdit"]
-editor/display_folded = true
-margin_left = 79.0
-margin_top = 113.0
-margin_right = 150.0
-margin_bottom = 150.0
-mouse_filter = 1
-title = "Start"
-comment = true
-slot/0/left_enabled = false
-slot/0/left_type = 0
-slot/0/left_color = Color( 1, 1, 1, 1 )
-slot/0/right_enabled = true
-slot/0/right_type = 0
-slot/0/right_color = Color( 0, 0, 1, 1 )
-
-[node name="Label" type="Control" parent="HSplitContainer/Container2/GraphEdit/Start"]
-margin_left = 16.0
-margin_top = 24.0
-margin_right = 55.0
-margin_bottom = 24.0
+[node name="GraphEdit" parent="HSplitContainer/Container2" instance=ExtResource( 2 )]
 
 [node name="Console" type="TextEdit" parent="HSplitContainer/Container2"]
 margin_top = 500.0
-margin_right = 1012.0
+margin_right = 912.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 0, 100 )
 
@@ -145,9 +126,7 @@ filters = PoolStringArray( "*.tres ; Resource" )
 [connection signal="pressed" from="HSplitContainer/Container2/Menu/HBoxContainer/HBoxContainer/Event" to="." method="_on_Event_pressed"]
 [connection signal="pressed" from="HSplitContainer/Container2/Menu/HBoxContainer/HBoxContainer2/Load" to="." method="_on_Load_resource_pressed"]
 [connection signal="pressed" from="HSplitContainer/Container2/Menu/HBoxContainer/HBoxContainer2/Save" to="." method="_on_Save_resource_pressed"]
-[connection signal="connection_request" from="HSplitContainer/Container2/GraphEdit" to="." method="_on_GraphEdit_connection_request"]
 [connection signal="connection_to_empty" from="HSplitContainer/Container2/GraphEdit" to="." method="_on_GraphEdit_connection_to_empty"]
-[connection signal="disconnection_request" from="HSplitContainer/Container2/GraphEdit" to="." method="_on_GraphEdit_disconnection_request"]
 [connection signal="popup_request" from="HSplitContainer/Container2/GraphEdit" to="." method="_on_GraphEdit_popup_request"]
 [connection signal="focus_exited" from="PopupMenu" to="." method="_on_PopupMenu_focus_exited"]
 [connection signal="id_pressed" from="PopupMenu" to="." method="_on_PopupMenu_id_pressed"]
