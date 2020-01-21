@@ -12,7 +12,10 @@ func _ready() -> void:
 func _on_Delete_pressed() -> void:
 	emit_signal("delete_pressed")
 
+func set_choice_key(choice_key: String) -> void:
+	$Line/Choice.text = choice_key
+
 func save() -> Resource:
 	var resource = preload("../resources/GameGraphNodeChoiceLineResource.gd").new()
-	resource.text = $Line/Choice.text
+	resource.choice_key = $Line/Choice.text
 	return resource

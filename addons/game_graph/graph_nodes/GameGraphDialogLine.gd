@@ -16,6 +16,9 @@ func _on_Edit_pressed() -> void:
 func _on_Delete_pressed() -> void:
 	emit_signal("delete_pressed")
 
+func set_dialog_key(key: String) -> void:
+	$Line/Dialog.text = key
+
 func save() -> Resource:
 	var resource = preload("../resources/GameGraphNodeDialogLineResource.gd").new()
 	resource.dialog_key = $Line/Dialog.text

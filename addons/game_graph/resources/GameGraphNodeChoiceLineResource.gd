@@ -3,4 +3,4 @@ extends Resource
 
 class_name GameGraphNodeChoiceLineResource
 
-export(String) var text
+export(String) var choice_key

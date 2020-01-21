@@ -39,25 +39,10 @@ func make_resource() -> GameGraphResource:
 	return resource
 
 func reload_interface(resource: GameGraphResource) -> void:
-	graph.clear_graph()
-	var data = resource.data
-	var dialog = data.dialogs[0]
-	var g = dialog.graph
-	for node in g.nodes:
-		var n = null
-		match node.type:
-			"dialog":
-				n = graph.add_dialog_node()
-			"choice":
-				n = graph.add_choice_node()
-			"event_emitter":
-				n = graph.add_event_emitter_node()
-		n.name = node.name
-		n.offset = node.offset
-		n.rect_size = node.rect_size
-	for c in g.connections:
-		graph.connect_node(c.from, c.from_port, c.to, c.to_port)
-	console("ok")
+	var dialog = resource.dialogs[0]
+	if dialog is GameGraphDialogResource:
+		graph.from_resource(dialog.graph)
+	console("resource loaded")
 
 func _on_GraphEdit_connection_to_empty(from: String, from_slot: int, release_position: Vector2) -> void:
 	popup_menu.rect_position = release_position + graph.rect_global_position

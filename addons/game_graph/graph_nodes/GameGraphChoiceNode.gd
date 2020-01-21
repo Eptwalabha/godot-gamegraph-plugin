@@ -14,7 +14,6 @@ func save() -> Resource:
 	resource.name = name
 	resource.offset = offset
 	resource.rect_size = rect_size
-	resource.type = "choice"
 	resource.question = $HBoxContainer/Question.text
 	resource.choices = []
 	for node in get_children():
@@ -23,6 +22,14 @@ func save() -> Resource:
 		resource.choices.push_back(node.save())
 	return resource
 
+func from_resource(resource: Resource) -> void:
+	.from_resource(resource)
+	if resource is GameGraphNodeChoiceResource:
+		$HBoxContainer/Question.text = resource.question
+		for choice_line_resource in resource.choices:
+			var choice_line = _new_choice_line()
+			choice_line.set_choice_key(choice_line_resource.choice_key)
+
 func delete_choice_line(choice_line: GameGraphChoiceLine) -> void:
 	var slot_port = choice_line.get_index()
 	emit_signal("slot_removed", slot_port)
@@ -30,12 +37,17 @@ func delete_choice_line(choice_line: GameGraphChoiceLine) -> void:
 	choice_line.queue_free()
 	
 func insert_new_choice_line() -> void:
+	var choice_line = _new_choice_line()
+	var slot_port = choice_line.get_index()
+	emit_signal("slot_inserted", slot_port)
+
+func _new_choice_line() -> GameGraphChoiceLine:
 	var choice_line = line.instance()
 	add_child(choice_line)
 	var slot_port = choice_line.get_index()
 	set_slot(slot_port, false, 0, Color(), true, 0, Color(0, 1, 0))
 	choice_line.connect("delete_pressed", self, "_on_ChoiceLine_deleted", [choice_line])
-	emit_signal("slot_inserted", slot_port)
+	return choice_line
 
 func _on_Button_pressed() -> void:
 	insert_new_choice_line()

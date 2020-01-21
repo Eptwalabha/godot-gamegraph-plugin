@@ -3,37 +3,59 @@ extends GraphEdit
 
 class_name GameGraphGraphEdit
 
+var NodeDialog = preload("GameGraphDialogNode.tscn")
+var NodeEventEmitter = preload("GameGraphEventNode.tscn")
+var NodeChoice = preload("GameGraphChoiceNode.tscn")
+
 func save() -> Resource:
-	var resource = preload("../resources/GameGraphGraphResource.gd").new()
+	var resource : GameGraphGraphResource = preload("../resources/GameGraphGraphResource.gd").new()
 	resource.nodes = _get_node_resources()
 	resource.connections = _get_connections()
 	return resource
 
+func from_resource(resource: GameGraphGraphResource) -> void:
+	clear_graph()
+	for node_resource in resource.nodes:
+		var node : GameGraphNode = _make_node_instance(node_resource.get_type())
+		add_child(node)
+		node.from_resource(node_resource)
+	for connection in resource.connections:
+		connect_node(connection.from, connection.from_port, connection.to, connection.to_port)
+
 func clear_graph() -> void:
-	for c in get_connection_list():
-		disconnect_node(c.from, c.from_port, c.to, c.to_port)
-	for n in get_children():
-		if n is GameGraphNode:
-			n.queue_free()
+	clear_connections()
+	for node in get_children():
+		if node is GameGraphNode:
+			node.queue_free()
 
 func add_event_emitter_node(slot_data = null) -> GameGraphEventNode:
-	var event_emitter = preload("GameGraphEventNode.tscn").instance()
-	add_node_to_graph(event_emitter, slot_data)
-	return event_emitter
+	var event = _make_node_instance("event_emitter") as GameGraphEventNode
+	add_node_to_graph(event, slot_data)
+	return event
 
 func add_dialog_node(slot_data = null) -> GameGraphDialogNode:
-	var dialog = preload("GameGraphDialogNode.tscn").instance()
-	dialog.connect("slot_inserted", self, "_on_slot_inserted", [dialog])
-	dialog.connect("slot_removed", self, "_on_slot_removed", [dialog])
+	var dialog = _make_node_instance("dialog") as GameGraphDialogNode
 	add_node_to_graph(dialog, slot_data)
 	return dialog
 
 func add_choice_node(slot_data = null) -> GameGraphChoiceNode:
-	var choice = preload("GameGraphChoiceNode.tscn").instance()
-	choice.connect("slot_inserted", self, "_on_slot_inserted", [choice])
-	choice.connect("slot_removed", self, "_on_slot_removed", [choice])
+	var choice = _make_node_instance("choice") as GameGraphChoiceNode
 	add_node_to_graph(choice, slot_data)
 	return choice
+
+func _make_node_instance(type: String) -> GameGraphNode:
+	var node = null
+	match type:
+		"choice":
+			node = NodeChoice.instance()
+		"dialog":
+			node = NodeDialog.instance()
+		"event_emitter":
+			node = NodeEventEmitter.instance()
+	if node is GameGraphNode:
+		node.connect("slot_inserted", self, "_on_slot_inserted", [node])
+		node.connect("slot_removed", self, "_on_slot_removed", [node])
+	return node
 
 func add_node_to_graph(node: GameGraphNode, slot_data = null) -> void:
 	add_child(node)

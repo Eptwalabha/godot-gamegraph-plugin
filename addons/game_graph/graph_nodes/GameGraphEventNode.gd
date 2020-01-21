@@ -12,6 +12,10 @@ func save() -> Resource:
 	resource.name = name
 	resource.offset = offset
 	resource.rect_size = rect_size
-	resource.type = "event_emitter"
 	resource.event_name = $EventName.text
 	return resource
+
+func from_resource(resource: Resource) -> void:
+	.from_resource(resource)
+	if resource is GameGraphNodeEventResource:
+		$EventName.text = resource.event_name
