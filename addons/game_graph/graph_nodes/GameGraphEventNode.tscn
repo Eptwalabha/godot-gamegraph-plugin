@@ -22,3 +22,4 @@ margin_top = 24.0
 margin_right = 134.0
 margin_bottom = 48.0
 size_flags_horizontal = 3
+placeholder_text = "your event name"
