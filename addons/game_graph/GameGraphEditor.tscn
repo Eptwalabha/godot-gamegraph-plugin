@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://addons/game_graph/GameGraphEditor.gd" type="Script" id=1]
-[ext_resource path="res://addons/game_graph/editor/DialogList.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/game_graph/editor/dialog_list/GameGraphEditorDialogList.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/game_graph/graph_nodes/GameGraphGraphEdit.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/game_graph/editor/dialogs/GameGraphWindowDialogNewDialog.tscn" type="PackedScene" id=4]
 
 [node name="GameGraphEditor" type="Control"]
 anchor_right = 1.0
@@ -36,11 +37,12 @@ margin_bottom = 564.0
 rect_min_size = Vector2( 200, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/separation = 0
 
 [node name="Menu" type="MarginContainer" parent="TabContainer/Dialogs/Container2"]
 margin_right = 804.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 0, 32 )
+margin_bottom = 30.0
+rect_min_size = Vector2( 0, 24 )
 custom_constants/margin_right = 5
 custom_constants/margin_top = 5
 custom_constants/margin_left = 5
@@ -50,48 +52,49 @@ custom_constants/margin_bottom = 5
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 799.0
-margin_bottom = 27.0
+margin_bottom = 25.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Dialogs/Container2/Menu/HBoxContainer"]
 margin_right = 685.0
-margin_bottom = 22.0
+margin_bottom = 20.0
 size_flags_horizontal = 3
 
 [node name="Dialog" type="Button" parent="TabContainer/Dialogs/Container2/Menu/HBoxContainer/HBoxContainer"]
 margin_right = 52.0
-margin_bottom = 22.0
+margin_bottom = 20.0
 text = "Dialog"
 
 [node name="Choice" type="Button" parent="TabContainer/Dialogs/Container2/Menu/HBoxContainer/HBoxContainer"]
 margin_left = 56.0
 margin_right = 111.0
-margin_bottom = 22.0
+margin_bottom = 20.0
 text = "Choice"
 
 [node name="Event" type="Button" parent="TabContainer/Dialogs/Container2/Menu/HBoxContainer/HBoxContainer"]
 margin_left = 115.0
 margin_right = 162.0
-margin_bottom = 22.0
+margin_bottom = 20.0
 text = "Event"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/Dialogs/Container2/Menu/HBoxContainer"]
 margin_left = 689.0
 margin_right = 794.0
-margin_bottom = 22.0
+margin_bottom = 20.0
 
 [node name="Load" type="Button" parent="TabContainer/Dialogs/Container2/Menu/HBoxContainer/HBoxContainer2"]
 margin_right = 42.0
-margin_bottom = 22.0
+margin_bottom = 20.0
 text = "Load"
 
 [node name="Save" type="Button" parent="TabContainer/Dialogs/Container2/Menu/HBoxContainer/HBoxContainer2"]
 margin_left = 46.0
 margin_right = 105.0
-margin_bottom = 22.0
+margin_bottom = 20.0
 text = "Save as"
 
 [node name="GraphEdit" parent="TabContainer/Dialogs/Container2" instance=ExtResource( 3 )]
+margin_top = 30.0
 margin_right = 804.0
 margin_bottom = 564.0
 
@@ -142,7 +145,11 @@ window_title = "Open a File"
 resizable = true
 mode = 0
 filters = PoolStringArray( "*.tres ; Resource" )
+
+[node name="WindowDialog" parent="." instance=ExtResource( 4 )]
+[connection signal="dialog_deleted" from="TabContainer/Dialogs/DialogList" to="." method="_on_DialogList_dialog_deleted"]
 [connection signal="dialog_selected" from="TabContainer/Dialogs/DialogList" to="." method="_on_DialogList_dialog_selected"]
+[connection signal="new_dialog_requested" from="TabContainer/Dialogs/DialogList" to="." method="_on_DialogList_new_dialog_requested"]
 [connection signal="pressed" from="TabContainer/Dialogs/Container2/Menu/HBoxContainer/HBoxContainer/Dialog" to="." method="_on_Dialog_pressed"]
 [connection signal="pressed" from="TabContainer/Dialogs/Container2/Menu/HBoxContainer/HBoxContainer/Choice" to="." method="_on_Choice_pressed"]
 [connection signal="pressed" from="TabContainer/Dialogs/Container2/Menu/HBoxContainer/HBoxContainer/Event" to="." method="_on_Event_pressed"]
@@ -154,3 +161,5 @@ filters = PoolStringArray( "*.tres ; Resource" )
 [connection signal="id_pressed" from="PopupMenu" to="." method="_on_PopupMenu_id_pressed"]
 [connection signal="file_selected" from="SaveDialog" to="." method="_on_SaveDialog_file_selected"]
 [connection signal="file_selected" from="LoadDialog" to="." method="_on_LoadDialog_file_selected"]
+[connection signal="key_requested" from="WindowDialog" to="." method="_on_WindowDialog_key_requested"]
+[connection signal="new_dialog_submitted" from="WindowDialog" to="." method="_on_WindowDialog_new_dialog_submitted"]

@@ -1,29 +1,25 @@
 tool
 extends VBoxContainer
 
-class_name DialogList
+class_name GameGraphEditorDialogList
 
-signal dialog_selected(dialog_name)
+signal dialog_selected(dialog_key)
+signal dialog_deleted(dialog_key)
+signal new_dialog_requested
 
 onready var list_container := $Scroll/Margin/DialogsList as VBoxContainer
 onready var filter := $Filter/Container/Filter as LineEdit
 onready var search_icon := $Filter/Container/Filter/Magnifier as TextureRect
 
-func _ready() -> void:
-	pass
+var DialogListLine = preload("GameGraphEditorDialogListLine.tscn")
 
 func add_item(dialog_key: String, dialog_name: String) -> void:
-	var dialog_button = Button.new()
-	dialog_button.text = dialog_name
-	dialog_button.align = Button.ALIGN_LEFT
-	dialog_button.clip_text = true
-	dialog_button.connect("pressed", self, "_on_DialogButton_pressed", [dialog_key])
-	list_container.add_child(dialog_button)
-
-func remove_item(dialog_name: String) -> void:
-	for dialog_button in list_container.get_children():
-		if dialog_button.text == dialog_name:
-			dialog_button.queue_free()
+	var dialog_line : GameGraphEditorDialogListLine = DialogListLine.instance()
+	list_container.add_child(dialog_line)
+	dialog_line.key = dialog_key
+	dialog_line.label = dialog_name
+	dialog_line.connect("dialog_selected", self, "_on_dialog_selected", [dialog_key])
+	dialog_line.connect("dialog_deleted", self, "_on_dialog_deleted", [dialog_key])
 
 func clear_items() -> void:
 	for dialog_button in list_container.get_children():
@@ -48,5 +44,11 @@ func _on_Filter_text_changed(new_text: String) -> void:
 		search_icon.show()
 	_filter_items(new_text)
 
-func _on_DialogButton_pressed(dialog_key: String) -> void:
+func _on_dialog_deleted(dialog_key: String) -> void:
+	emit_signal("dialog_deleted", dialog_key)
+
+func _on_dialog_selected(dialog_key: String) -> void:
 	emit_signal("dialog_selected", dialog_key)
+
+func _on_New_pressed() -> void:
+	emit_signal("new_dialog_requested")

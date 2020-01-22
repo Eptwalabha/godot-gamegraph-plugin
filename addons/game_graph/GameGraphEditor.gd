@@ -7,7 +7,7 @@ onready var graph := $TabContainer/Dialogs/Container2/GraphEdit as GameGraphGrap
 onready var popup_menu := $PopupMenu as PopupMenu
 onready var event_menu := $TabContainer/Dialogs/Container2/Menu/HBoxContainer/HBoxContainer/Event as MenuButton
 onready var start := $TabContainer/Dialogs/Container2/GraphEdit/Start as GraphNode
-onready var dialog_list := $TabContainer/Dialogs/DialogList as DialogList
+onready var dialog_list := $TabContainer/Dialogs/DialogList as GameGraphEditorDialogList
 
 var game_graph_resource = preload("GameGraphResource.gd")
 var last_slot = null
@@ -125,4 +125,18 @@ func _on_SaveDialog_file_selected(file: String) -> void:
 		console("save at %s v=%s" % [file, data.plugin_version])
 
 func _on_DialogList_dialog_selected(dialog_name) -> void:
-	print("new dialog selected '%s'" % dialog_name)
+	console("dialog selected '%s'" % dialog_name)
+
+func _on_DialogList_new_dialog_requested() -> void:
+	$WindowDialog.popup()
+
+func _on_DialogList_dialog_deleted(dialog_key) -> void:
+	console("dialog to delete %s" % dialog_key)
+
+func _on_WindowDialog_new_dialog_submitted(key, label) -> void:
+	dialog_list.add_item(key, label)
+	$WindowDialog.hide()
+
+func _on_WindowDialog_key_requested(key) -> void:
+	var already_used = len(key) > 10
+	$WindowDialog.show_key_unicity_warning(already_used)

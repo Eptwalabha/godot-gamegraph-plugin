@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "VBoxContainer",
-"class": "DialogList",
-"language": "GDScript",
-"path": "res://addons/game_graph/editor/DialogList.gd"
-}, {
 "base": "Node",
 "class": "GameGraph",
 "language": "GDScript",
@@ -48,6 +43,16 @@ _global_script_classes=[ {
 "class": "GameGraphEditor",
 "language": "GDScript",
 "path": "res://addons/game_graph/GameGraphEditor.gd"
+}, {
+"base": "VBoxContainer",
+"class": "GameGraphEditorDialogList",
+"language": "GDScript",
+"path": "res://addons/game_graph/editor/dialog_list/GameGraphEditorDialogList.gd"
+}, {
+"base": "Button",
+"class": "GameGraphEditorDialogListLine",
+"language": "GDScript",
+"path": "res://addons/game_graph/editor/dialog_list/GameGraphEditorDialogListLine.gd"
 }, {
 "base": "GraphNode",
 "class": "GameGraphEventNode",
@@ -108,9 +113,13 @@ _global_script_classes=[ {
 "class": "GameGraphResource",
 "language": "GDScript",
 "path": "res://addons/game_graph/GameGraphResource.gd"
+}, {
+"base": "WindowDialog",
+"class": "GameGraphWindowDialogNewDialog",
+"language": "GDScript",
+"path": "res://addons/game_graph/editor/dialogs/GameGraphWindowDialogNewDialog.gd"
 } ]
 _global_script_class_icons={
-"DialogList": "",
 "GameGraph": "",
 "GameGraphChoiceLine": "",
 "GameGraphChoiceNode": "",
@@ -118,6 +127,8 @@ _global_script_class_icons={
 "GameGraphDialogNode": "",
 "GameGraphDialogResource": "",
 "GameGraphEditor": "",
+"GameGraphEditorDialogList": "",
+"GameGraphEditorDialogListLine": "",
 "GameGraphEventNode": "",
 "GameGraphGraphEdit": "",
 "GameGraphGraphResource": "",
@@ -129,7 +140,8 @@ _global_script_class_icons={
 "GameGraphNodeEventResource": "",
 "GameGraphNodeResource": "",
 "GameGraphPlugin": "",
-"GameGraphResource": "res://addons/game_graph/game_graph.png"
+"GameGraphResource": "res://addons/game_graph/game_graph.png",
+"GameGraphWindowDialogNewDialog": ""
 }
 
 [application]

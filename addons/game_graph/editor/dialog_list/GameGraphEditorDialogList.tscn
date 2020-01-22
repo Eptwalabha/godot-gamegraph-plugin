@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://addons/game_graph/editor/DialogList.gd" type="Script" id=1]
+[ext_resource path="res://addons/game_graph/editor/dialog_list/GameGraphEditorDialogList.gd" type="Script" id=1]
 [ext_resource path="res://addons/game_graph/game_graph.png" type="Texture" id=2]
 
 [node name="DialogList" type="VBoxContainer"]
@@ -11,27 +11,28 @@ script = ExtResource( 1 )
 
 [node name="Filter" type="MarginContainer" parent="."]
 margin_right = 1024.0
-margin_bottom = 52.0
+margin_bottom = 34.0
 custom_constants/margin_right = 5
 custom_constants/margin_top = 5
 custom_constants/margin_left = 5
 custom_constants/margin_bottom = 5
 
-[node name="Container" type="VBoxContainer" parent="Filter"]
+[node name="Container" type="HBoxContainer" parent="Filter"]
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 1019.0
-margin_bottom = 47.0
+margin_bottom = 29.0
 
-[node name="Label" type="Label" parent="Filter/Container"]
-margin_right = 1014.0
-margin_bottom = 14.0
-text = "Dialogs"
+[node name="New" type="ToolButton" parent="Filter/Container"]
+margin_right = 40.0
+margin_bottom = 24.0
+text = "New"
 
 [node name="Filter" type="LineEdit" parent="Filter/Container"]
-margin_top = 18.0
+margin_left = 44.0
 margin_right = 1014.0
-margin_bottom = 42.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
 clear_button_enabled = true
 placeholder_text = "Filter"
 
@@ -47,14 +48,14 @@ texture = ExtResource( 2 )
 stretch_mode = 4
 
 [node name="Scroll" type="ScrollContainer" parent="."]
-margin_top = 56.0
+margin_top = 38.0
 margin_right = 1024.0
 margin_bottom = 600.0
 size_flags_vertical = 3
 
 [node name="Margin" type="MarginContainer" parent="Scroll"]
 margin_right = 1024.0
-margin_bottom = 544.0
+margin_bottom = 562.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 5
@@ -66,6 +67,11 @@ custom_constants/margin_bottom = 5
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 1019.0
-margin_bottom = 539.0
+margin_bottom = 101.0
+size_flags_vertical = 0
 custom_constants/separation = 0
+[connection signal="pressed" from="Filter/Container/New" to="." method="_on_New_pressed"]
 [connection signal="text_changed" from="Filter/Container/Filter" to="." method="_on_Filter_text_changed"]
+[connection signal="pressed" from="Scroll/Margin/DialogsList/DialogListLine" to="Scroll/Margin/DialogsList/DialogListLine" method="_on_DialogListLine_pressed"]
+[connection signal="pressed" from="Scroll/Margin/DialogsList/DialogListLine2" to="Scroll/Margin/DialogsList/DialogListLine2" method="_on_DialogListLine_pressed"]
+[connection signal="pressed" from="Scroll/Margin/DialogsList/DialogListLine3" to="Scroll/Margin/DialogsList/DialogListLine3" method="_on_DialogListLine_pressed"]
