@@ -3,15 +3,17 @@ extends Control
 
 class_name GameGraphEditor
 
-onready var graph := $TabContainer/Dialogs/Container2/GraphEdit as GameGraphGraphEdit
+onready var graph := $TabContainer/Dialogs/MainContainer/GraphEdit as GameGraphGraphEdit
+onready var no_dialog_container := $TabContainer/Dialogs/MainContainer/NoDialog as CenterContainer
 onready var popup_menu := $PopupMenu as PopupMenu
-onready var event_menu := $TabContainer/Dialogs/Container2/Menu/HBoxContainer/HBoxContainer/Event as MenuButton
-onready var start := $TabContainer/Dialogs/Container2/GraphEdit/Start as GraphNode
+onready var start := $TabContainer/Dialogs/MainContainer/GraphEdit/Start as GraphNode
 onready var dialog_list := $TabContainer/Dialogs/DialogList as GameGraphEditorDialogList
 
-var game_graph_resource = preload("GameGraphResource.gd")
+var GameGraphResource = preload("GameGraphResource.gd")
+var GameGraphGraphResource = preload("resources/GameGraphGraphResource.gd")
 var last_slot = null
-var dialog_data : Resource
+var current_dialog_key : String = ''
+var dialogs : Dictionary = {}
 var resource_path := ''
 
 enum POPUPMENU {
@@ -27,30 +29,52 @@ func _ready() -> void:
 	popup_menu.add_item("event", POPUPMENU.EVENT)
 	graph.add_valid_connection_type(0, 1)
 	graph.add_valid_connection_type(1, 0)
+	set_graph_visibility(false)
 
 func console(text) -> void:
 	var c = $TabContainer/Console
 	c.text = "%s%s\n" % [c.text, text]
 
-func make_resource() -> GameGraphResource:
-	var resource : GameGraphResource = game_graph_resource.new()
-	var dialog : GameGraphDialogResource = preload("resources/GameGraphDialogResource.gd").new()
-	dialog.graph = graph.save()
-	resource.dialogs = [dialog]
+func commit_current() -> void:
+	if current_dialog_key != '':
+		dialogs[current_dialog_key].graph = graph.save()
+
+func save_resource() -> GameGraphResource:
+	var resource : GameGraphResource = GameGraphResource.new()
+	resource.dialogs = []
+	for dialog_key in dialogs:
+		var dialog = dialogs[dialog_key]
+		resource.dialogs.push_back(dialog)
 	resource.characters = []
 	return resource
 
 func reload_interface(resource: GameGraphResource) -> void:
+	current_dialog_key = ''
 	dialog_list.clear_items()
-	for dialog_index in range(len(resource.dialogs)):
-		var dialog = resource.dialogs[dialog_index]
+	dialogs = {}
+	for i in range(len(resource.dialogs)):
+		var dialog = resource.dialogs[i]
 		if dialog is GameGraphDialogResource:
-			var id = "dialog-%s" % dialog_index
-			dialog_list.add_item(id, dialog.label)
-			if dialog_index > 0:
-				continue
-			graph.from_resource(dialog.graph)
-			console("resource loaded")
+			dialogs[dialog.dialog_key] = dialog
+			dialog_list.add_item(dialog.dialog_key, dialog.label)
+	var has_at_least_one_dialog = len(dialogs.keys()) > 1
+	set_graph_visibility(has_at_least_one_dialog)
+	if has_at_least_one_dialog:
+		current_dialog_key = dialogs.keys()[0]
+		graph.from_resource(dialogs[current_dialog_key].graph)
+		console("resource loaded")
+
+func load_current_dialog(dialog_key: String) -> void:
+	if dialog_key == current_dialog_key:
+		return
+	commit_current()
+	current_dialog_key = dialog_key
+	graph.clear_graph()
+	graph.from_resource(dialogs[current_dialog_key].graph)
+
+func set_graph_visibility(visible: bool) -> void:
+	graph.visible = visible
+	no_dialog_container.visible = not visible
 
 func _on_GraphEdit_connection_to_empty(from: String, from_slot: int, release_position: Vector2) -> void:
 	popup_menu.rect_position = release_position + graph.rect_global_position
@@ -112,11 +136,10 @@ func _on_LoadDialog_file_selected(file: String) -> void:
 	var data = ResourceLoader.load(file)
 	if data is GameGraphResource:
 		resource_path = file
-		dialog_data = data
 		reload_interface(data)
 
 func _on_SaveDialog_file_selected(file: String) -> void:
-	var data = make_resource()
+	var data = save_resource()
 	data.plugin_version = "0.0.1"
 	var error = ResourceSaver.save(file, data)
 	if error:
@@ -124,8 +147,9 @@ func _on_SaveDialog_file_selected(file: String) -> void:
 	else:
 		console("save at %s v=%s" % [file, data.plugin_version])
 
-func _on_DialogList_dialog_selected(dialog_name) -> void:
-	console("dialog selected '%s'" % dialog_name)
+func _on_DialogList_dialog_selected(dialog_key) -> void:
+	console("dialog selected '%s'" % dialog_key)
+	load_current_dialog(dialog_key)
 
 func _on_DialogList_new_dialog_requested() -> void:
 	$WindowDialog.popup()
@@ -134,9 +158,16 @@ func _on_DialogList_dialog_deleted(dialog_key) -> void:
 	console("dialog to delete %s" % dialog_key)
 
 func _on_WindowDialog_new_dialog_submitted(key, label) -> void:
+	graph.clear_graph()
 	dialog_list.add_item(key, label)
+	dialogs[key] = GameGraphDialogResource.new()
+	dialogs[key].dialog_key = key
+	dialogs[key].label = label
+	dialogs[key].graph = GameGraphGraphResource.new()
+	set_graph_visibility(true)
+	load_current_dialog(key)
 	$WindowDialog.hide()
 
 func _on_WindowDialog_key_requested(key) -> void:
-	var already_used = len(key) > 10
+	var already_used = dialogs.has(key)
 	$WindowDialog.show_key_unicity_warning(already_used)
