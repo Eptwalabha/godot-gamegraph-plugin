@@ -12,6 +12,7 @@ func save() -> Resource:
 	resource.name = name
 	resource.offset = offset
 	resource.rect_size = rect_size
+	resource.node_id = node_id
 	resource.event_name = $EventName.text
 	return resource
 

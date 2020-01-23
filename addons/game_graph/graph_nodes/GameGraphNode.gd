@@ -6,6 +6,8 @@ class_name GameGraphNode
 signal slot_removed(slot_port)
 signal slot_inserted(slot_port)
 
+var node_id = 0
+
 func _ready() -> void:
 	pass
 
@@ -17,6 +19,7 @@ func from_resource(resource: Resource) -> void:
 		offset = resource.offset
 		rect_size = resource.rect_size
 		name = resource.name
+		node_id = resource.node_id
 
 func _on_GameGraphNode_resize_request(new_minsize: Vector2) -> void:
 	rect_size = new_minsize

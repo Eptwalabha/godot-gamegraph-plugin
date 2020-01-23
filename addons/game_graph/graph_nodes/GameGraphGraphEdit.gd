@@ -8,7 +8,7 @@ var NodeEventEmitter = preload("GameGraphEventNode.tscn")
 var NodeChoice = preload("GameGraphChoiceNode.tscn")
 var NodeStart = preload("GameGraphStartNode.tscn")
 
-var id_node = 0
+var node_id = 0
 
 func _ready() -> void:
 	add_valid_connection_type(0, 1)
@@ -24,6 +24,7 @@ func new_graph() -> void:
 	clear_graph()
 	var start = NodeStart.instance()
 	start.offset = Vector2(100, 100)
+	start.node_id = 0
 	add_child(start)
 
 func from_resource(resource: GameGraphGraphResource) -> void:
@@ -37,6 +38,7 @@ func from_resource(resource: GameGraphGraphResource) -> void:
 
 func clear_graph() -> void:
 	clear_connections()
+	node_id = 0
 	for node in get_children():
 		if node is GameGraphNode:
 			node.queue_free()
@@ -74,11 +76,21 @@ func _make_node_instance(type: String) -> GameGraphNode:
 	return node
 
 func add_node_to_graph(node: GameGraphNode, slot_data = null) -> void:
+	node.node_id = next_node_id()
 	add_child(node)
 	if slot_data:
 		node.offset = slot_data["position"] + scroll_offset
 		if slot_data.has("from") and slot_data.has("from_slot"):
 			do_connect_node(slot_data["from"], slot_data["from_slot"], node.name, 0)
+
+func next_node_id() -> int:
+	var max_id = node_id
+	for node in get_children():
+		if not node is GameGraphNode:
+			continue
+		max_id = node.node_id if node.node_id > max_id else max_id
+	node_id = max_id + 1
+	return node_id
 
 func do_connect_node(from: String, from_slot: int, to: String, to_slot: int) -> void:
 	var from_type = get_output_slot_type(from, from_slot)

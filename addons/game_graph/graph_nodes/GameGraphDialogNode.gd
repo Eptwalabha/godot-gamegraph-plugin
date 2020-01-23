@@ -14,6 +14,7 @@ func save() -> Resource:
 	resource.name = name
 	resource.offset = offset
 	resource.rect_size = rect_size
+	resource.node_id = node_id
 	resource.dialog_lines = []
 	for node in get_children():
 		if not node is GameGraphDialogLine:
