@@ -67,11 +67,8 @@ custom_constants/margin_bottom = 5
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 1019.0
-margin_bottom = 101.0
+margin_bottom = 5.0
 size_flags_vertical = 0
 custom_constants/separation = 0
 [connection signal="pressed" from="Filter/Container/New" to="." method="_on_New_pressed"]
 [connection signal="text_changed" from="Filter/Container/Filter" to="." method="_on_Filter_text_changed"]
-[connection signal="pressed" from="Scroll/Margin/DialogsList/DialogListLine" to="Scroll/Margin/DialogsList/DialogListLine" method="_on_DialogListLine_pressed"]
-[connection signal="pressed" from="Scroll/Margin/DialogsList/DialogListLine2" to="Scroll/Margin/DialogsList/DialogListLine2" method="_on_DialogListLine_pressed"]
-[connection signal="pressed" from="Scroll/Margin/DialogsList/DialogListLine3" to="Scroll/Margin/DialogsList/DialogListLine3" method="_on_DialogListLine_pressed"]

@@ -31,7 +31,7 @@ func _filter_items(request) -> void:
 		if request_lower == "":
 			dialog.show()
 		else:
-			var n = dialog.text
+			var n = dialog.label
 			if n.to_lower().find(request_lower) != -1:
 				dialog.show()
 			else:
