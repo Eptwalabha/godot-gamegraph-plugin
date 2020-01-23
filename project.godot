@@ -104,6 +104,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/game_graph/resources/GameGraphNodeResource.gd"
 }, {
+"base": "Resource",
+"class": "GameGraphNodeStartResource",
+"language": "GDScript",
+"path": "res://addons/game_graph/resources/GameGraphNodeStartResource.gd"
+}, {
 "base": "EditorPlugin",
 "class": "GameGraphPlugin",
 "language": "GDScript",
@@ -113,6 +118,11 @@ _global_script_classes=[ {
 "class": "GameGraphResource",
 "language": "GDScript",
 "path": "res://addons/game_graph/GameGraphResource.gd"
+}, {
+"base": "GraphNode",
+"class": "GameGraphStartNode",
+"language": "GDScript",
+"path": "res://addons/game_graph/graph_nodes/GameGraphStartNode.gd"
 }, {
 "base": "WindowDialog",
 "class": "GameGraphWindowDialogNewDialog",
@@ -139,8 +149,10 @@ _global_script_class_icons={
 "GameGraphNodeDialogResource": "",
 "GameGraphNodeEventResource": "",
 "GameGraphNodeResource": "",
+"GameGraphNodeStartResource": "",
 "GameGraphPlugin": "",
 "GameGraphResource": "res://addons/game_graph/game_graph.png",
+"GameGraphStartNode": "",
 "GameGraphWindowDialogNewDialog": ""
 }
 

@@ -40,7 +40,6 @@ size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="Menu" type="MarginContainer" parent="TabContainer/Dialogs/MainContainer"]
-editor/display_folded = true
 margin_right = 804.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 0, 24 )
@@ -74,9 +73,11 @@ text = "Save as"
 
 [node name="GraphEdit" parent="TabContainer/Dialogs/MainContainer" instance=ExtResource( 3 )]
 visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 30.0
 margin_right = 804.0
-margin_bottom = 533.0
+margin_bottom = 297.0
 
 [node name="NoDialog" type="CenterContainer" parent="TabContainer/Dialogs/MainContainer"]
 margin_top = 30.0

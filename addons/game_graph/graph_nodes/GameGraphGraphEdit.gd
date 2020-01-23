@@ -6,12 +6,25 @@ class_name GameGraphGraphEdit
 var NodeDialog = preload("GameGraphDialogNode.tscn")
 var NodeEventEmitter = preload("GameGraphEventNode.tscn")
 var NodeChoice = preload("GameGraphChoiceNode.tscn")
+var NodeStart = preload("GameGraphStartNode.tscn")
+
+var id_node = 0
+
+func _ready() -> void:
+	add_valid_connection_type(0, 1)
+	add_valid_connection_type(1, 0)
 
 func save() -> Resource:
 	var resource : GameGraphGraphResource = preload("../resources/GameGraphGraphResource.gd").new()
 	resource.nodes = _get_node_resources()
 	resource.connections = _get_connections()
 	return resource
+
+func new_graph() -> void:
+	clear_graph()
+	var start = NodeStart.instance()
+	start.offset = Vector2(100, 100)
+	add_child(start)
 
 func from_resource(resource: GameGraphGraphResource) -> void:
 	clear_graph()
@@ -52,6 +65,8 @@ func _make_node_instance(type: String) -> GameGraphNode:
 			node = NodeDialog.instance()
 		"event_emitter":
 			node = NodeEventEmitter.instance()
+		"start":
+			node = NodeStart.instance()
 	if node is GameGraphNode:
 		node.connect("slot_inserted", self, "_on_slot_inserted", [node])
 		node.connect("slot_removed", self, "_on_slot_removed", [node])

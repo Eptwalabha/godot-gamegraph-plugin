@@ -6,7 +6,6 @@ class_name GameGraphEditor
 onready var graph := $TabContainer/Dialogs/MainContainer/GraphEdit as GameGraphGraphEdit
 onready var no_dialog_container := $TabContainer/Dialogs/MainContainer/NoDialog as CenterContainer
 onready var popup_menu := $PopupMenu as PopupMenu
-onready var start := $TabContainer/Dialogs/MainContainer/GraphEdit/Start as GraphNode
 onready var dialog_list := $TabContainer/Dialogs/DialogList as GameGraphEditorDialogList
 
 var GameGraphResource = preload("GameGraphResource.gd")
@@ -27,8 +26,6 @@ func _ready() -> void:
 	popup_menu.add_item("dialog", POPUPMENU.DIALOG)
 	popup_menu.add_item("choice", POPUPMENU.CHOICE)
 	popup_menu.add_item("event", POPUPMENU.EVENT)
-	graph.add_valid_connection_type(0, 1)
-	graph.add_valid_connection_type(1, 0)
 	set_graph_visibility(false)
 
 func console(text) -> void:
@@ -40,6 +37,7 @@ func commit_current() -> void:
 		dialogs[current_dialog_key].graph = graph.save()
 
 func save_resource() -> GameGraphResource:
+	commit_current()
 	var resource : GameGraphResource = GameGraphResource.new()
 	resource.dialogs = []
 	for dialog_key in dialogs:
@@ -71,6 +69,11 @@ func load_current_dialog(dialog_key: String) -> void:
 	current_dialog_key = dialog_key
 	graph.clear_graph()
 	graph.from_resource(dialogs[current_dialog_key].graph)
+
+func load_new_dialog(dialog_key: String) -> void:
+	commit_current()
+	current_dialog_key = dialog_key
+	graph.new_graph()
 
 func set_graph_visibility(visible: bool) -> void:
 	graph.visible = visible
@@ -158,14 +161,12 @@ func _on_DialogList_dialog_deleted(dialog_key) -> void:
 	console("dialog to delete %s" % dialog_key)
 
 func _on_WindowDialog_new_dialog_submitted(key, label) -> void:
-	graph.clear_graph()
 	dialog_list.add_item(key, label)
 	dialogs[key] = GameGraphDialogResource.new()
 	dialogs[key].dialog_key = key
 	dialogs[key].label = label
-	dialogs[key].graph = GameGraphGraphResource.new()
 	set_graph_visibility(true)
-	load_current_dialog(key)
+	load_new_dialog(key)
 	$WindowDialog.hide()
 
 func _on_WindowDialog_key_requested(key) -> void:
