@@ -34,14 +34,25 @@ func from_resource(resource: GameGraphGraphResource) -> void:
 		add_child(node)
 		node.from_resource(node_resource)
 	for connection in resource.connections:
-		connect_node(connection.from, connection.from_port, connection.to, connection.to_port)
+		var name_from = find_node_name_from_id(connection[0])
+		var name_to = find_node_name_from_id(connection[2])
+		connect_node(name_from, connection[1], name_to, connection[3])
+
+func find_node_name_from_id(node_id: int) -> String:
+	for node in get_children():
+		if not node is GameGraphNode:
+			continue
+		if node.node_id == node_id and not node.removed:
+			return node.name
+	return ''
 
 func clear_graph() -> void:
-	clear_connections()
 	node_id = 0
+	clear_connections()
 	for node in get_children():
 		if node is GameGraphNode:
-			node.queue_free()
+			node.removed = true
+			remove_node(node)
 
 func add_event_emitter_node(slot_data = null) -> GameGraphEventNode:
 	var event = _make_node_instance("event_emitter") as GameGraphEventNode
@@ -127,6 +138,12 @@ func get_input_slot_type(from, from_slot) -> int:
 func get_output_slot_type(from, from_slot) -> int:
 	return get_node(from).get_connection_output_type(from_slot)
 
+func remove_node(node: GameGraphNode) -> void:
+	for c in get_connection_list():
+		if c.from == node.name or c.to == node.name:
+			disconnect_node(c.from, c.from_port, c.to, c.to_port)
+	node.queue_free()
+
 func _get_node_resources() -> Array:
 	var node_resources = []
 	for node in get_children():
@@ -138,7 +155,12 @@ func _get_node_resources() -> Array:
 	return node_resources
 
 func _get_connections() -> Array:
-	return get_connection_list()
+	var connections = []
+	for connection in get_connection_list():
+		var id_from = get_node(connection.from).node_id
+		var id_to = get_node(connection.to).node_id
+		connections.push_back([id_from, connection.from_port, id_to, connection.to_port])
+	return connections
 
 func _on_slot_inserted(slot_port: int, dialog: GameGraphNode) -> void:
 	shift_connection_down(dialog.name, slot_port)
@@ -147,10 +169,7 @@ func _on_slot_removed(slot_port: int, dialog: GameGraphNode) -> void:
 	shift_connection_up(dialog.name, slot_port)
 
 func _on_GameGraphNode_close_request(node: GameGraphNode) -> void:
-	for c in get_connection_list():
-		if c.from == node.name or c.to == node.name:
-			disconnect_node(c.from, c.from_port, c.to, c.to_port)
-	node.queue_free()
+	remove_node(node)
 
 func _on_GraphEdit_connection_request(from: String, from_slot: int, to: String, to_slot: int) -> void:
 	do_connect_node(from, from_slot, to, to_slot)

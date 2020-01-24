@@ -55,7 +55,7 @@ func reload_interface(resource: GameGraphResource) -> void:
 		if dialog is GameGraphDialogResource:
 			dialogs[dialog.dialog_key] = dialog
 			dialog_list.add_item(dialog.dialog_key, dialog.label)
-	var has_at_least_one_dialog = len(dialogs.keys()) > 1
+	var has_at_least_one_dialog = len(dialogs.keys()) > 0
 	set_graph_visibility(has_at_least_one_dialog)
 	if has_at_least_one_dialog:
 		current_dialog_key = dialogs.keys()[0]

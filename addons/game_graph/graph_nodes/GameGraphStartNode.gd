@@ -9,7 +9,6 @@ func _ready() -> void:
 
 func save() -> Resource:
 	var resource = preload("../resources/GameGraphNodeStartResource.gd").new()
-	resource.name = name
 	resource.offset = offset
 	resource.rect_size = rect_size
 	resource.node_id = 0
