@@ -93,6 +93,14 @@ func _on_GraphEdit_connection_to_empty(from: String, from_slot: int, release_pos
 		1:
 			graph.add_event_emitter_node(last_slot)
 
+func _on_GraphEdit_popup_request(position: Vector2) -> void:
+	popup_menu.rect_position = position
+	last_slot = {
+		"position": position - graph.rect_global_position
+	}
+	popup_menu.show()
+	popup_menu.grab_focus()
+
 func _on_Dialog_pressed() -> void:
 	graph.add_dialog_node()
 
@@ -120,14 +128,6 @@ func _on_PopupMenu_focus_exited() -> void:
 
 func _on_EventMenu_pressed() -> void:
 	graph.add_event_emitter_node()
-
-func _on_GraphEdit_popup_request(position: Vector2) -> void:
-	popup_menu.rect_position = position
-	last_slot = {
-		"position": position - graph.rect_global_position
-	}
-	popup_menu.show()
-	popup_menu.grab_focus()
 
 func _on_Save_resource_pressed() -> void:
 	$SaveDialog.popup_centered()

@@ -3,7 +3,7 @@ extends "res://addons/game_graph/graph_nodes/GameGraphNode.gd"
 
 class_name GameGraphChoiceNode
 
-var line = preload("res://addons/game_graph/graph_nodes/GameGraphChoiceLine.tscn")
+var line = preload("GameGraphChoiceLine.tscn")
 
 func _ready() -> void:
 	._ready()
@@ -31,7 +31,7 @@ func from_resource(resource: Resource) -> void:
 			choice_line.set_choice_key(choice_line_resource.choice_key)
 
 func delete_choice_line(choice_line: GameGraphChoiceLine) -> void:
-	var slot_port = choice_line.get_index()
+	var slot_port = _get_slot_index(choice_line)
 	emit_signal("slot_removed", slot_port)
 	choice_line.disconnect("delete_pressed", self, "_on_ChoiceLine_deleted")
 	choice_line.queue_free()
@@ -40,6 +40,16 @@ func insert_new_choice_line() -> void:
 	var choice_line = _new_choice_line()
 	var slot_port = choice_line.get_index()
 	emit_signal("slot_inserted", slot_port)
+
+func _get_slot_index(choice_line: GameGraphChoiceLine) -> int:
+	var index = get_slot_offset()
+	for node in get_children():
+		if not node is GameGraphChoiceLine:
+			continue
+		if node == choice_line:
+			return index
+		index += 1
+	return -1
 
 func _new_choice_line() -> GameGraphChoiceLine:
 	var choice_line = line.instance()

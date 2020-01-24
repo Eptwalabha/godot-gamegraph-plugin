@@ -116,8 +116,8 @@ func do_connect_node(from: String, from_slot: int, to: String, to_slot: int) -> 
 func shift_connection_up(from, slot_port) -> void:
 	var connections = []
 	for c in get_connection_list():
-		if c.from == from and c.from_port + 1 >= slot_port:
-			if c.from_port + 1 != slot_port:
+		if c.from == from and c.from_port >= slot_port:
+			if c.from_port != slot_port:
 				connections.push_back(c)
 			disconnect_node(c.from, c.from_port, c.to, c.to_port)
 	for c in connections:

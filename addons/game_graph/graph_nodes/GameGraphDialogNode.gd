@@ -21,6 +21,9 @@ func save() -> Resource:
 		resource.dialog_lines.push_back(node.save())
 	return resource
 
+func get_slot_offset() -> int:
+	return 1
+
 func from_resource(resource: Resource) -> void:
 	.from_resource(resource)
 	if resource is GameGraphNodeDialogResource:
@@ -29,7 +32,7 @@ func from_resource(resource: Resource) -> void:
 			dialog_line.set_dialog_key(dialog_line_resource.dialog_key)
 
 func delete_dialog_line(dialog_line: GameGraphDialogLine) -> void:
-	var slot_port = dialog_line.get_index()
+	var slot_port = _get_slot_index(dialog_line)
 	emit_signal("slot_removed", slot_port)
 	dialog_line.disconnect("delete_pressed", self, "_on_DialogLine_deleted")
 	dialog_line.queue_free()
@@ -38,6 +41,16 @@ func insert_new_dialog_line() -> void:
 	var dialog_line = _new_dialog_line()
 	var slot_port = dialog_line.get_index()
 	emit_signal("slot_inserted", slot_port)
+
+func _get_slot_index(dialog_line: GameGraphDialogLine) -> int:
+	var index = get_slot_offset()
+	for node in get_children():
+		if not node is GameGraphDialogLine:
+			continue
+		if node == dialog_line:
+			return index
+		index += 1
+	return -1
 
 func _new_dialog_line() -> GameGraphDialogLine:
 	var dialog_line = line.instance()

@@ -15,6 +15,9 @@ func _ready() -> void:
 func save() -> Resource:
 	return null
 
+func get_slot_offset() -> int:
+	return 0
+
 func from_resource(resource: Resource) -> void:
 	if resource is GameGraphNodeResource:
 		offset = resource.offset
