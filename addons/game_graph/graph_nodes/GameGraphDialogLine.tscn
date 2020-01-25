@@ -10,6 +10,9 @@ anchor_bottom = 1.0
 custom_constants/margin_top = 2
 custom_constants/margin_bottom = 2
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Line" type="HBoxContainer" parent="."]
 margin_top = 2.0
@@ -35,9 +38,11 @@ margin_left = 965.0
 margin_right = 993.0
 margin_bottom = 596.0
 icon = ExtResource( 2 )
+flat = true
 
 [node name="Delete" type="Button" parent="Line"]
 margin_left = 997.0
 margin_right = 1024.0
 margin_bottom = 596.0
 icon = ExtResource( 3 )
+flat = true

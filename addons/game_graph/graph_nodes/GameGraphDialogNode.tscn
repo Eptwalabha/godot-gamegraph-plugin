@@ -21,9 +21,11 @@ slot/1/right_enabled = false
 slot/1/right_type = 0
 slot/1/right_color = Color( 1, 1, 1, 1 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-editor/display_folded = true
 margin_left = 16.0
 margin_top = 24.0
 margin_right = 134.0
@@ -45,12 +47,13 @@ align = 2
 
 [node name="Control" type="HBoxContainer" parent="."]
 margin_left = 16.0
-margin_top = 38.0
+margin_top = 39.0
 margin_right = 134.0
-margin_bottom = 59.0
+margin_bottom = 60.0
 
 [node name="Button" type="Button" parent="Control"]
 margin_right = 27.0
 margin_bottom = 21.0
 icon = ExtResource( 2 )
+flat = true
 [connection signal="pressed" from="Control/Button" to="." method="_on_Button_pressed"]

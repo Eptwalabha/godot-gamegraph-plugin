@@ -9,5 +9,8 @@ size_flags_vertical = 3
 right_disconnects = true
 snap_distance = 10
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="connection_request" from="." to="." method="_on_GraphEdit_connection_request"]
 [connection signal="disconnection_request" from="." to="." method="_on_GraphEdit_disconnection_request"]

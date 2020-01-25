@@ -16,6 +16,9 @@ slot/0/right_enabled = false
 slot/0/right_type = 0
 slot/0/right_color = Color( 1, 0, 0, 1 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="."]
 margin_left = 16.0
