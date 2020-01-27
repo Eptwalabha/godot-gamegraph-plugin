@@ -9,5 +9,7 @@ export_presets.cfg
 
 *.swp
 Test.tscn
+Test.gd
 icon.png*
 *.tres
+*.res
