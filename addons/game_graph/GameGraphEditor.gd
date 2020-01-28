@@ -102,15 +102,6 @@ func _on_GraphEdit_popup_request(position: Vector2) -> void:
 	popup_menu.show()
 	popup_menu.grab_focus()
 
-func _on_Dialog_pressed() -> void:
-	graph.add_dialog_node()
-
-func _on_Choice_pressed() -> void:
-	graph.add_choice_node()
-
-func _on_Event_pressed() -> void:
-	graph.add_event_emitter_node()
-
 func _on_PopupMenu_id_pressed(ID: int) -> void:
 	match ID:
 		POPUPMENU.DIALOG:
@@ -126,9 +117,6 @@ func _on_PopupMenu_id_pressed(ID: int) -> void:
 func _on_PopupMenu_focus_exited() -> void:
 	popup_menu.hide()
 	last_slot = null
-
-func _on_EventMenu_pressed() -> void:
-	graph.add_event_emitter_node()
 
 func _on_Toolbar_New_resource_pressed() -> void:
 	$WindowDialog.popup()

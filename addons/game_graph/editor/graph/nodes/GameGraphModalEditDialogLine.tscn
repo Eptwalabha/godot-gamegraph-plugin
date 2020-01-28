@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://addons/game_graph/graph_nodes/GameGraphModalEditDialogLine.gd" type="Script" id=1]
+[ext_resource path="res://addons/game_graph/editor/graph/nodes/GameGraphModalEditDialogLine.gd" type="Script" id=1]
 
 [node name="GameGraphModalEditDialogLine" type="WindowDialog"]
 anchor_right = 1.0
@@ -29,7 +29,6 @@ margin_bottom = 264.0
 custom_constants/separation = 6
 
 [node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer2"]
-editor/display_folded = true
 margin_right = 289.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
@@ -43,7 +42,6 @@ align = 1
 valign = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer2"]
-editor/display_folded = true
 margin_top = 38.0
 margin_right = 289.0
 margin_bottom = 120.0
@@ -61,7 +59,6 @@ rect_min_size = Vector2( 0, 64 )
 hint_tooltip = "Your line of dialog"
 
 [node name="ColorRect2" type="ColorRect" parent="MarginContainer/VBoxContainer2"]
-editor/display_folded = true
 margin_top = 126.0
 margin_right = 289.0
 margin_bottom = 158.0
@@ -99,7 +96,6 @@ size_flags_horizontal = 3
 placeholder_text = "name"
 
 [node name="Picture" type="HBoxContainer" parent="MarginContainer/VBoxContainer2/Speaker"]
-editor/display_folded = true
 margin_top = 28.0
 margin_right = 289.0
 margin_bottom = 42.0

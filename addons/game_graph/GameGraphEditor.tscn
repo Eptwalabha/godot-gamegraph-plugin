@@ -2,7 +2,7 @@
 
 [ext_resource path="res://addons/game_graph/GameGraphEditor.gd" type="Script" id=1]
 [ext_resource path="res://addons/game_graph/editor/dialog_list/GameGraphEditorDialogList.tscn" type="PackedScene" id=2]
-[ext_resource path="res://addons/game_graph/graph_nodes/GameGraphGraphEdit.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/game_graph/editor/graph/GameGraphGraphEdit.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/game_graph/editor/dialogs/GameGraphWindowDialogNewDialog.tscn" type="PackedScene" id=4]
 [ext_resource path="res://addons/game_graph/assets/icon_load.svg" type="Texture" id=5]
 [ext_resource path="res://addons/game_graph/assets/icon_save.svg" type="Texture" id=6]
@@ -80,9 +80,8 @@ custom_constants/separation = 0
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 30.0
 margin_right = 804.0
-margin_bottom = 564.0
+margin_bottom = 268.0
 
 [node name="NoDialog" type="CenterContainer" parent="TabContainer/Dialog/Main/MainContainer"]
 margin_right = 804.0

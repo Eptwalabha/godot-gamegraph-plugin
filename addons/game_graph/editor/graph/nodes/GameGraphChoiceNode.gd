@@ -1,16 +1,17 @@
 tool
-extends "res://addons/game_graph/graph_nodes/GameGraphNode.gd"
+extends "GameGraphNode.gd"
 
 class_name GameGraphChoiceNode
 
-var line = preload("GameGraphChoiceLine.tscn")
+var ChoiceLine = preload("GameGraphChoiceLine.tscn")
+var ChoiceResource = preload("res://addons/game_graph/resources/GameGraphNodeChoiceResource.gd")
 
 func _ready() -> void:
 	._ready()
 	set_slot(0, true, 0, Color(0, 0, 1), false, 0, Color(0, 0, 1))
 
 func save() -> Resource:
-	var resource = preload("../resources/GameGraphNodeChoiceResource.gd").new()
+	var resource = ChoiceResource.new()
 	resource.offset = offset
 	resource.rect_size = rect_size
 	resource.node_id = node_id
@@ -52,7 +53,7 @@ func _get_slot_index(choice_line: GameGraphChoiceLine) -> int:
 	return -1
 
 func _new_choice_line() -> GameGraphChoiceLine:
-	var choice_line = line.instance()
+	var choice_line = ChoiceLine.instance()
 	add_child(choice_line)
 	var slot_port = choice_line.get_index()
 	set_slot(slot_port, false, 0, Color(), true, 0, Color(0, 1, 0))

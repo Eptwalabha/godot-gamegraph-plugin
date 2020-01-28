@@ -3,10 +3,11 @@ extends GraphEdit
 
 class_name GameGraphGraphEdit
 
-var NodeDialog = preload("GameGraphDialogNode.tscn")
-var NodeEventEmitter = preload("GameGraphEventNode.tscn")
-var NodeChoice = preload("GameGraphChoiceNode.tscn")
-var NodeStart = preload("GameGraphStartNode.tscn")
+var NodeDialog = preload("nodes/GameGraphDialogNode.tscn")
+var NodeEventEmitter = preload("nodes/GameGraphEventNode.tscn")
+var NodeChoice = preload("nodes/GameGraphChoiceNode.tscn")
+var NodeStart = preload("nodes/GameGraphStartNode.tscn")
+var GameGraphResource = preload("res://addons/game_graph/resources/GameGraphGraphResource.gd")
 
 var node_id = 0
 
@@ -15,7 +16,7 @@ func _ready() -> void:
 	add_valid_connection_type(1, 0)
 
 func save() -> Resource:
-	var resource : GameGraphGraphResource = preload("../resources/GameGraphGraphResource.gd").new()
+	var resource : GameGraphGraphResource = GameGraphResource.new()
 	resource.nodes = _get_node_resources()
 	resource.connections = _get_connections()
 	return resource
@@ -170,7 +171,6 @@ func _on_slot_removed(slot_port: int, dialog: GameGraphNode) -> void:
 	shift_connection_up(dialog.name, slot_port)
 
 func _on_GameGraphNode_close_request(node: GameGraphNode) -> void:
-	print("remove")
 	remove_node(node)
 
 func _on_GraphEdit_connection_request(from: String, from_slot: int, to: String, to_slot: int) -> void:
@@ -178,3 +178,7 @@ func _on_GraphEdit_connection_request(from: String, from_slot: int, to: String, 
 
 func _on_GraphEdit_disconnection_request(from: String, from_slot: int, to: String, to_slot: int) -> void:
 	disconnect_node(from, from_slot, to, to_slot)
+
+
+func _on_GraphEdit_connection_from_empty(to: String, to_slot: int, release_position: Vector2) -> void:
+	pass # Replace with function body.

@@ -17,22 +17,22 @@ _global_script_classes=[ {
 "base": "MarginContainer",
 "class": "GameGraphChoiceLine",
 "language": "GDScript",
-"path": "res://addons/game_graph/graph_nodes/GameGraphChoiceLine.gd"
+"path": "res://addons/game_graph/editor/graph/nodes/GameGraphChoiceLine.gd"
 }, {
-"base": "GraphNode",
+"base": "",
 "class": "GameGraphChoiceNode",
 "language": "GDScript",
-"path": "res://addons/game_graph/graph_nodes/GameGraphChoiceNode.gd"
+"path": "res://addons/game_graph/editor/graph/nodes/GameGraphChoiceNode.gd"
 }, {
 "base": "MarginContainer",
 "class": "GameGraphDialogLine",
 "language": "GDScript",
-"path": "res://addons/game_graph/graph_nodes/GameGraphDialogLine.gd"
+"path": "res://addons/game_graph/editor/graph/nodes/GameGraphDialogLine.gd"
 }, {
-"base": "GraphNode",
+"base": "",
 "class": "GameGraphDialogNode",
 "language": "GDScript",
-"path": "res://addons/game_graph/graph_nodes/GameGraphDialogNode.gd"
+"path": "res://addons/game_graph/editor/graph/nodes/GameGraphDialogNode.gd"
 }, {
 "base": "Resource",
 "class": "GameGraphDialogResource",
@@ -54,15 +54,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/game_graph/editor/dialog_list/GameGraphEditorDialogListLine.gd"
 }, {
-"base": "GraphNode",
+"base": "",
 "class": "GameGraphEventNode",
 "language": "GDScript",
-"path": "res://addons/game_graph/graph_nodes/GameGraphEventNode.gd"
+"path": "res://addons/game_graph/editor/graph/nodes/GameGraphEventNode.gd"
 }, {
 "base": "GraphEdit",
 "class": "GameGraphGraphEdit",
 "language": "GDScript",
-"path": "res://addons/game_graph/graph_nodes/GameGraphGraphEdit.gd"
+"path": "res://addons/game_graph/editor/graph/GameGraphGraphEdit.gd"
 }, {
 "base": "Resource",
 "class": "GameGraphGraphResource",
@@ -72,7 +72,7 @@ _global_script_classes=[ {
 "base": "GraphNode",
 "class": "GameGraphNode",
 "language": "GDScript",
-"path": "res://addons/game_graph/graph_nodes/GameGraphNode.gd"
+"path": "res://addons/game_graph/editor/graph/nodes/GameGraphNode.gd"
 }, {
 "base": "Resource",
 "class": "GameGraphNodeChoiceLineResource",
@@ -119,10 +119,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/game_graph/GameGraphResource.gd"
 }, {
-"base": "GraphNode",
+"base": "",
 "class": "GameGraphStartNode",
 "language": "GDScript",
-"path": "res://addons/game_graph/graph_nodes/GameGraphStartNode.gd"
+"path": "res://addons/game_graph/editor/graph/nodes/GameGraphStartNode.gd"
 }, {
 "base": "WindowDialog",
 "class": "GameGraphWindowDialogNewDialog",
@@ -165,10 +165,6 @@ config/icon="res://icon.png"
 [debug]
 
 gdscript/warnings/unused_class_variable=true
-
-[editor_plugins]
-
-enabled=PoolStringArray( "game_graph" )
 
 [rendering]
 

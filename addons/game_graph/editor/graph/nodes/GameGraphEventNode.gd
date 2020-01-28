@@ -1,14 +1,16 @@
 tool
-extends "res://addons/game_graph/graph_nodes/GameGraphNode.gd"
+extends "GameGraphNode.gd"
 
 class_name GameGraphEventNode
+
+var NodeEventResource = preload("res://addons/game_graph/resources/GameGraphNodeEventResource.gd")
 
 func _ready() -> void:
 	._ready()
 	set_slot(0, true, 1, Color(1, 1, 0), false, 0, Color(0, 0, 1))
 
 func save() -> Resource:
-	var resource = preload("../resources/GameGraphNodeEventResource.gd").new()
+	var resource = NodeEventResource.new()
 	resource.offset = offset
 	resource.rect_size = rect_size
 	resource.node_id = node_id

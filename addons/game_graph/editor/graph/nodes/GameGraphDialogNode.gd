@@ -1,16 +1,17 @@
 tool
-extends "res://addons/game_graph/graph_nodes/GameGraphNode.gd"
+extends "GameGraphNode.gd"
 
 class_name GameGraphDialogNode
 
-var line = preload("res://addons/game_graph/graph_nodes/GameGraphDialogLine.tscn")
+var DialogLine = preload("GameGraphDialogLine.tscn")
+var DialogResource = preload("res://addons/game_graph/resources/GameGraphNodeDialogResource.gd")
 
 func _ready() -> void:
 	._ready()
 	set_slot(0, true, 0, Color(0, 0, 1), true, 0, Color(0, 1, 0))
 
 func save() -> Resource:
-	var resource = preload("../resources/GameGraphNodeDialogResource.gd").new()
+	var resource = DialogResource.new()
 	resource.offset = offset
 	resource.rect_size = rect_size
 	resource.node_id = node_id
@@ -53,7 +54,7 @@ func _get_slot_index(dialog_line: GameGraphDialogLine) -> int:
 	return -1
 
 func _new_dialog_line() -> GameGraphDialogLine:
-	var dialog_line = line.instance()
+	var dialog_line = DialogLine.instance()
 	add_child(dialog_line)
 	var slot_port = dialog_line.get_index()
 	set_slot(slot_port, false, 0, Color(), true, 1, Color(1, 1, 0))
