@@ -26,15 +26,15 @@ func _ready() -> void:
 	popup_menu.add_item("dialog", POPUPMENU.DIALOG)
 	popup_menu.add_item("choice", POPUPMENU.CHOICE)
 	popup_menu.add_item("event", POPUPMENU.EVENT)
-	set_graph_visibility(false)
+	update_graph_visibility()
 
 func console(text) -> void:
 	var c = $TabContainer/Console
-	if c is Label:
+	if c is TextEdit:
 		c.text = "%s%s\n" % [c.text, text]
 
 func commit_current() -> void:
-	if current_dialog_key != '':
+	if current_dialog_key != '' and dialogs.has(current_dialog_key):
 		dialogs[current_dialog_key].graph = graph.save()
 
 func save_resource() -> GameGraphResource:
@@ -56,18 +56,19 @@ func reload_interface(resource: GameGraphResource) -> void:
 		if dialog is GameGraphDialogResource:
 			dialogs[dialog.dialog_key] = dialog
 			dialog_list.add_item(dialog.dialog_key, dialog.label)
-	var has_at_least_one_dialog = len(dialogs.keys()) > 0
-	set_graph_visibility(has_at_least_one_dialog)
-	if has_at_least_one_dialog:
+	if len(dialogs.keys()) > 0:
 		current_dialog_key = dialogs.keys()[0]
+		dialog_list.set_selected_item(current_dialog_key)
 		graph.from_resource(dialogs[current_dialog_key].graph)
 		console("resource loaded")
+	update_graph_visibility()
 
 func load_current_dialog(dialog_key: String) -> void:
-	if dialog_key == current_dialog_key:
+	if dialog_key == current_dialog_key or not dialogs.keys().has(dialog_key):
 		return
 	commit_current()
 	current_dialog_key = dialog_key
+	dialog_list.set_selected_item(current_dialog_key)
 	graph.clear_graph()
 	graph.from_resource(dialogs[current_dialog_key].graph)
 
@@ -76,7 +77,8 @@ func load_new_dialog(dialog_key: String) -> void:
 	current_dialog_key = dialog_key
 	graph.new_graph()
 
-func set_graph_visibility(visible: bool) -> void:
+func update_graph_visibility() -> void:
+	var visible = len(dialogs.keys()) > 0
 	graph.visible = visible
 	no_dialog_container.visible = not visible
 
@@ -120,7 +122,7 @@ func _on_PopupMenu_focus_exited() -> void:
 
 func _on_Toolbar_New_resource_pressed() -> void:
 	$WindowDialog.popup()
-	
+
 func _on_Toolbar_Load_resource_pressed() -> void:
 	$LoadDialog.popup_centered()
 
@@ -148,13 +150,19 @@ func _on_DialogList_dialog_selected(dialog_key) -> void:
 
 func _on_DialogList_dialog_deleted(dialog_key) -> void:
 	console("dialog to delete %s" % dialog_key)
+	dialogs.erase(dialog_key)
+	dialog_list.remove_item(dialog_key)
+	if len(dialogs.keys()) > 0:
+		load_current_dialog(dialogs.keys()[0])
+	else:
+		update_graph_visibility()
 
 func _on_WindowDialog_new_dialog_submitted(key, label) -> void:
 	dialog_list.add_item(key, label)
 	dialogs[key] = GameGraphDialogResource.new()
 	dialogs[key].dialog_key = key
 	dialogs[key].label = label
-	set_graph_visibility(true)
+	update_graph_visibility()
 	load_new_dialog(key)
 	$WindowDialog.hide()
 

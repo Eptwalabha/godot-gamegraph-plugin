@@ -14,7 +14,7 @@ func _ready() -> void:
 
 func _on_Edit_pressed() -> void:
 	emit_signal("edit_pressed")
-	
+
 func _on_Delete_pressed() -> void:
 	emit_signal("delete_pressed")
 

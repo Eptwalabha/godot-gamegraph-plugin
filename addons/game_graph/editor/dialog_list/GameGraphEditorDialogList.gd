@@ -24,6 +24,16 @@ func clear_items() -> void:
 	for dialog_button in list_container.get_children():
 		dialog_button.queue_free()
 
+func remove_item(dialog_key: String) -> void:
+	for dialog in list_container.get_children():
+		if dialog.key == dialog_key:
+			dialog.queue_free()
+			break
+
+func set_selected_item(dialog_key: String) -> void:
+	for dialog in list_container.get_children():
+		dialog.selected = (dialog.key == dialog_key)
+
 func _filter_items(request) -> void:
 	var request_lower = request.to_lower()
 	for dialog in list_container.get_children():

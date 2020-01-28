@@ -36,7 +36,7 @@ func delete_choice_line(choice_line: GameGraphChoiceLine) -> void:
 	emit_signal("slot_removed", slot_port)
 	choice_line.disconnect("delete_pressed", self, "_on_ChoiceLine_deleted")
 	choice_line.queue_free()
-	
+
 func insert_new_choice_line() -> void:
 	var choice_line = _new_choice_line()
 	var slot_port = choice_line.get_index()

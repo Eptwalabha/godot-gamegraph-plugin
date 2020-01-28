@@ -1,31 +1,44 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://addons/game_graph/editor/dialog_list/GameGraphEditorDialogListLine.gd" type="Script" id=1]
 [ext_resource path="res://addons/game_graph/assets/icon_remove.svg" type="Texture" id=2]
 
-[node name="DialogListLine" type="Button"]
+[sub_resource type="StyleBoxFlat" id=1]
+resource_local_to_scene = true
+content_margin_left = 3.0
+content_margin_right = 3.0
+content_margin_top = 3.0
+content_margin_bottom = 3.0
+bg_color = Color( 0.6, 0.6, 0.6, 0.192157 )
+
+[node name="DialogListLine" type="PanelContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_vertical = 0
-flat = true
+custom_styles/panel = SubResource( 1 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Line" type="HBoxContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 1021.0
+margin_bottom = 597.0
 
 [node name="Label" type="Label" parent="Line"]
-margin_top = 293.0
-margin_right = 992.0
-margin_bottom = 307.0
+margin_top = 290.0
+margin_right = 986.0
+margin_bottom = 304.0
 size_flags_horizontal = 3
 text = "AAA"
 
 [node name="Button" type="Button" parent="Line"]
-margin_left = 996.0
-margin_right = 1024.0
-margin_bottom = 600.0
+margin_left = 990.0
+margin_right = 1018.0
+margin_bottom = 594.0
 icon = ExtResource( 2 )
 flat = true
-[connection signal="pressed" from="." to="." method="_on_DialogListLine_pressed"]
+[connection signal="gui_input" from="." to="." method="_on_DialogListLine_gui_input"]
 [connection signal="pressed" from="Line/Button" to="." method="_on_Button_pressed"]

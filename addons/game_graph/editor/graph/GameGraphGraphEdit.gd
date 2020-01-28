@@ -136,7 +136,7 @@ func shift_connection_down(from, slot_port) -> void:
 
 func get_input_slot_type(from, from_slot) -> int:
 	return get_node(from).get_connection_input_type(from_slot)
-	
+
 func get_output_slot_type(from, from_slot) -> int:
 	return get_node(from).get_connection_output_type(from_slot)
 
@@ -166,7 +166,7 @@ func _get_connections() -> Array:
 
 func _on_slot_inserted(slot_port: int, dialog: GameGraphNode) -> void:
 	shift_connection_down(dialog.name, slot_port)
-	
+
 func _on_slot_removed(slot_port: int, dialog: GameGraphNode) -> void:
 	shift_connection_up(dialog.name, slot_port)
 
