@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ui-minus.svg-d64b7da627e322a03fcc3ba66f826a51.stex"
+path="res://.import/icon_add.svg-9090760fe1e3438937557c15b2b06f04.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/game_graph/assets/ui-minus.svg"
-dest_files=[ "res://.import/ui-minus.svg-d64b7da627e322a03fcc3ba66f826a51.stex" ]
+source_file="res://addons/game_graph/assets/icon_add.svg"
+dest_files=[ "res://.import/icon_add.svg-9090760fe1e3438937557c15b2b06f04.stex" ]
 
 [params]
 

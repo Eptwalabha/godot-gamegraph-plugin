@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ui-plus.svg-9c7272384f985feb0edb3ad605c2d945.stex"
+path="res://.import/icon_remove.svg-2561c667c1776cb755ae1139d915861f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/game_graph/assets/ui-plus.svg"
-dest_files=[ "res://.import/ui-plus.svg-9c7272384f985feb0edb3ad605c2d945.stex" ]
+source_file="res://addons/game_graph/assets/icon_remove.svg"
+dest_files=[ "res://.import/icon_remove.svg-2561c667c1776cb755ae1139d915861f.stex" ]
 
 [params]
 

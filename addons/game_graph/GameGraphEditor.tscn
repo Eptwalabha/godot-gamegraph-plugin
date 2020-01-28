@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://addons/game_graph/GameGraphEditor.gd" type="Script" id=1]
 [ext_resource path="res://addons/game_graph/editor/dialog_list/GameGraphEditorDialogList.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/game_graph/graph_nodes/GameGraphGraphEdit.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/game_graph/editor/dialogs/GameGraphWindowDialogNewDialog.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/game_graph/assets/icon_load.svg" type="Texture" id=5]
+[ext_resource path="res://addons/game_graph/assets/icon_save.svg" type="Texture" id=6]
 
 [node name="GameGraphEditor" type="Control"]
 anchor_right = 1.0
@@ -44,7 +46,7 @@ custom_constants/separation = 0
 
 [node name="Menu" type="MarginContainer" parent="TabContainer/Dialogs/MainContainer"]
 margin_right = 804.0
-margin_bottom = 30.0
+margin_bottom = 32.0
 rect_min_size = Vector2( 0, 24 )
 custom_constants/margin_right = 5
 custom_constants/margin_top = 5
@@ -55,26 +57,28 @@ custom_constants/margin_bottom = 5
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 799.0
-margin_bottom = 25.0
+margin_bottom = 27.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/Dialogs/MainContainer/Menu/HBoxContainer"]
 margin_right = 794.0
-margin_bottom = 20.0
+margin_bottom = 22.0
 size_flags_horizontal = 3
 alignment = 2
 
 [node name="Load" type="Button" parent="TabContainer/Dialogs/MainContainer/Menu/HBoxContainer/HBoxContainer2"]
-margin_left = 689.0
-margin_right = 731.0
-margin_bottom = 20.0
+margin_left = 653.0
+margin_right = 713.0
+margin_bottom = 22.0
 text = "Load"
+icon = ExtResource( 5 )
 
 [node name="Save" type="Button" parent="TabContainer/Dialogs/MainContainer/Menu/HBoxContainer/HBoxContainer2"]
-margin_left = 735.0
+margin_left = 717.0
 margin_right = 794.0
-margin_bottom = 20.0
+margin_bottom = 22.0
 text = "Save as"
+icon = ExtResource( 6 )
 
 [node name="GraphEdit" parent="TabContainer/Dialogs/MainContainer" instance=ExtResource( 3 )]
 visible = false
@@ -85,7 +89,7 @@ margin_right = 804.0
 margin_bottom = 564.0
 
 [node name="NoDialog" type="CenterContainer" parent="TabContainer/Dialogs/MainContainer"]
-margin_top = 30.0
+margin_top = 32.0
 margin_right = 804.0
 margin_bottom = 564.0
 size_flags_horizontal = 3
@@ -93,9 +97,9 @@ size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="TabContainer/Dialogs/MainContainer/NoDialog"]
 margin_left = 340.0
-margin_top = 251.0
+margin_top = 250.0
 margin_right = 463.0
-margin_bottom = 282.0
+margin_bottom = 281.0
 text = "No dialog yet
 click the 'New' icon"
 align = 1
