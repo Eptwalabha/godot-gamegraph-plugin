@@ -42,9 +42,9 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "GameGraphEditor",
 "language": "GDScript",
-"path": "res://addons/game_graph/GameGraphEditor.gd"
+"path": "res://addons/game_graph/editor/GameGraphEditor.gd"
 }, {
-"base": "VBoxContainer",
+"base": "MarginContainer",
 "class": "GameGraphEditorDialogList",
 "language": "GDScript",
 "path": "res://addons/game_graph/editor/dialog_list/GameGraphEditorDialogList.gd"
@@ -117,7 +117,7 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "GameGraphResource",
 "language": "GDScript",
-"path": "res://addons/game_graph/GameGraphResource.gd"
+"path": "res://addons/game_graph/resources/GameGraphResource.gd"
 }, {
 "base": "",
 "class": "GameGraphStartNode",
@@ -151,7 +151,7 @@ _global_script_class_icons={
 "GameGraphNodeResource": "",
 "GameGraphNodeStartResource": "",
 "GameGraphPlugin": "",
-"GameGraphResource": "res://addons/game_graph/game_graph.png",
+"GameGraphResource": "res://addons/game_graph/assets/game_graph.png",
 "GameGraphStartNode": "",
 "GameGraphWindowDialogNewDialog": ""
 }
@@ -159,12 +159,16 @@ _global_script_class_icons={
 [application]
 
 config/name="story_editor"
-run/main_scene="res://addons/game_graph/GameGraphEditor.tscn"
+run/main_scene="res://addons/game_graph/editor/GameGraphEditor.tscn"
 config/icon="res://icon.png"
 
 [debug]
 
 gdscript/warnings/unused_class_variable=true
+
+[editor_plugins]
+
+enabled=PoolStringArray( "game_graph" )
 
 [rendering]
 

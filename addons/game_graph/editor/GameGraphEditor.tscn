@@ -1,18 +1,18 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://addons/game_graph/GameGraphEditor.gd" type="Script" id=1]
-[ext_resource path="res://addons/game_graph/editor/dialog_list/GameGraphEditorDialogList.tscn" type="PackedScene" id=2]
-[ext_resource path="res://addons/game_graph/editor/graph/GameGraphGraphEdit.tscn" type="PackedScene" id=3]
-[ext_resource path="res://addons/game_graph/editor/dialogs/GameGraphWindowDialogNewDialog.tscn" type="PackedScene" id=4]
-[ext_resource path="res://addons/game_graph/assets/icon_load.svg" type="Texture" id=5]
-[ext_resource path="res://addons/game_graph/assets/icon_save.svg" type="Texture" id=6]
-[ext_resource path="res://addons/game_graph/assets/icon_new.svg" type="Texture" id=7]
+[ext_resource path="res://addons/game_graph/editor/dialogs/GameGraphWindowDialogNewDialog.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/game_graph/assets/icon_load.svg" type="Texture" id=2]
+[ext_resource path="res://addons/game_graph/editor/GameGraphEditor.gd" type="Script" id=3]
+[ext_resource path="res://addons/game_graph/assets/icon_new.svg" type="Texture" id=4]
+[ext_resource path="res://addons/game_graph/assets/icon_save.svg" type="Texture" id=5]
+[ext_resource path="res://addons/game_graph/editor/dialog_list/GameGraphEditorDialogList.tscn" type="PackedScene" id=6]
+[ext_resource path="res://addons/game_graph/editor/graph/GameGraphGraphEdit.tscn" type="PackedScene" id=7]
 
 [node name="GameGraphEditor" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 0, 200 )
-script = ExtResource( 1 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -41,19 +41,19 @@ size_flags_horizontal = 3
 [node name="New" type="ToolButton" parent="TabContainer/Dialog/Toolbar"]
 margin_right = 28.0
 margin_bottom = 24.0
-icon = ExtResource( 7 )
+icon = ExtResource( 4 )
 
 [node name="Load" type="ToolButton" parent="TabContainer/Dialog/Toolbar"]
 margin_left = 32.0
 margin_right = 60.0
 margin_bottom = 24.0
-icon = ExtResource( 5 )
+icon = ExtResource( 2 )
 
 [node name="Save" type="ToolButton" parent="TabContainer/Dialog/Toolbar"]
 margin_left = 64.0
 margin_right = 92.0
 margin_bottom = 24.0
-icon = ExtResource( 6 )
+icon = ExtResource( 5 )
 
 [node name="Main" type="HSplitContainer" parent="TabContainer/Dialog"]
 margin_top = 28.0
@@ -61,7 +61,7 @@ margin_right = 1016.0
 margin_bottom = 564.0
 size_flags_vertical = 3
 
-[node name="DialogList" parent="TabContainer/Dialog/Main" instance=ExtResource( 2 )]
+[node name="DialogList" parent="TabContainer/Dialog/Main" instance=ExtResource( 6 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 200.0
@@ -76,7 +76,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
-[node name="GraphEdit" parent="TabContainer/Dialog/Main/MainContainer" instance=ExtResource( 3 )]
+[node name="GraphEdit" parent="TabContainer/Dialog/Main/MainContainer" instance=ExtResource( 7 )]
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -153,7 +153,7 @@ resizable = true
 mode = 0
 filters = PoolStringArray( "*.tres ; Resource", "*.res ; Binary Resource" )
 
-[node name="WindowDialog" parent="." instance=ExtResource( 4 )]
+[node name="WindowDialog" parent="." instance=ExtResource( 1 )]
 [connection signal="pressed" from="TabContainer/Dialog/Toolbar/New" to="." method="_on_Toolbar_New_resource_pressed"]
 [connection signal="pressed" from="TabContainer/Dialog/Toolbar/Load" to="." method="_on_Toolbar_Load_resource_pressed"]
 [connection signal="pressed" from="TabContainer/Dialog/Toolbar/Save" to="." method="_on_Toolbar_Save_resource_pressed"]

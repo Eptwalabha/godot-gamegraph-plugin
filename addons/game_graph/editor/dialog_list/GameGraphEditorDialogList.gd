@@ -1,14 +1,14 @@
 tool
-extends VBoxContainer
+extends MarginContainer
 
 class_name GameGraphEditorDialogList
 
 signal dialog_selected(dialog_key)
 signal dialog_deleted(dialog_key)
 
-onready var list_container := $Scroll/Margin/DialogsList as VBoxContainer
-onready var filter := $Filter/Filter as LineEdit
-onready var search_icon := $Filter/Filter/Magnifier as TextureRect
+onready var list_container := $Container/Scroll/Margin/DialogsList as VBoxContainer
+onready var filter := $Container/Filter as LineEdit
+onready var search_icon := $Container/Filter/Magnifier as TextureRect
 
 var DialogListLine = preload("GameGraphEditorDialogListLine.tscn")
 

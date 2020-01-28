@@ -178,7 +178,3 @@ func _on_GraphEdit_connection_request(from: String, from_slot: int, to: String, 
 
 func _on_GraphEdit_disconnection_request(from: String, from_slot: int, to: String, to_slot: int) -> void:
 	disconnect_node(from, from_slot, to, to_slot)
-
-
-func _on_GraphEdit_connection_from_empty(to: String, to_slot: int, release_position: Vector2) -> void:
-	pass # Replace with function body.

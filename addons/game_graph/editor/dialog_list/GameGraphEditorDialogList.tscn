@@ -3,33 +3,33 @@
 [ext_resource path="res://addons/game_graph/editor/dialog_list/GameGraphEditorDialogList.gd" type="Script" id=1]
 [ext_resource path="res://addons/game_graph/assets/icon_search.svg" type="Texture" id=2]
 
-[node name="DialogList" type="VBoxContainer"]
+[node name="DialogList" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 200, 0 )
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Filter" type="MarginContainer" parent="."]
-margin_right = 1024.0
-margin_bottom = 34.0
-custom_constants/margin_right = 5
-custom_constants/margin_top = 5
-custom_constants/margin_left = 5
-custom_constants/margin_bottom = 5
-
-[node name="Filter" type="LineEdit" parent="Filter"]
+[node name="Container" type="VBoxContainer" parent="."]
 margin_left = 5.0
 margin_top = 5.0
+margin_right = 1024.0
+margin_bottom = 595.0
+
+[node name="Filter" type="LineEdit" parent="Container"]
 margin_right = 1019.0
-margin_bottom = 29.0
+margin_bottom = 24.0
 size_flags_horizontal = 3
 clear_button_enabled = true
 placeholder_text = "Filter"
+caret_blink = true
 
-[node name="Magnifier" type="TextureRect" parent="Filter/Filter"]
+[node name="Magnifier" type="TextureRect" parent="Container/Filter"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -43,26 +43,28 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Scroll" type="ScrollContainer" parent="."]
-margin_top = 38.0
-margin_right = 1024.0
-margin_bottom = 600.0
+[node name="Label" type="Label" parent="Container"]
+margin_top = 28.0
+margin_right = 1019.0
+margin_bottom = 42.0
+text = "Dialogs list"
+
+[node name="Scroll" type="ScrollContainer" parent="Container"]
+margin_top = 46.0
+margin_right = 1019.0
+margin_bottom = 590.0
 size_flags_vertical = 3
 
-[node name="Margin" type="MarginContainer" parent="Scroll"]
-margin_right = 1024.0
-margin_bottom = 562.0
+[node name="Margin" type="PanelContainer" parent="Container/Scroll"]
+margin_right = 1019.0
+margin_bottom = 544.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/margin_right = 5
-custom_constants/margin_top = 5
-custom_constants/margin_left = 5
-custom_constants/margin_bottom = 5
 
-[node name="DialogsList" type="VBoxContainer" parent="Scroll/Margin"]
-margin_left = 5.0
-margin_top = 5.0
-margin_right = 1019.0
-margin_bottom = 557.0
+[node name="DialogsList" type="VBoxContainer" parent="Container/Scroll/Margin"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1012.0
+margin_bottom = 537.0
 custom_constants/separation = 0
-[connection signal="text_changed" from="Filter/Filter" to="." method="_on_Filter_text_changed"]
+[connection signal="text_changed" from="Container/Filter" to="." method="_on_Filter_text_changed"]
