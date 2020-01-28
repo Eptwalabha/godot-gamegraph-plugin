@@ -41,6 +41,7 @@ size_flags_horizontal = 3
 [node name="New" type="ToolButton" parent="TabContainer/Dialog/Toolbar"]
 margin_right = 28.0
 margin_bottom = 24.0
+hint_tooltip = "add a new dialog"
 icon = ExtResource( 4 )
 
 [node name="Load" type="ToolButton" parent="TabContainer/Dialog/Toolbar"]
@@ -135,7 +136,7 @@ margin_top = -206.0
 margin_right = 291.5
 margin_bottom = 206.0
 resizable = true
-filters = PoolStringArray( "*.tres ; Resource", "*.res ; Binary Resource" )
+filters = PoolStringArray( "*.tres", "*.res" )
 
 [node name="LoadDialog" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -151,7 +152,7 @@ size_flags_vertical = 0
 window_title = "Open a File"
 resizable = true
 mode = 0
-filters = PoolStringArray( "*.tres ; Resource", "*.res ; Binary Resource" )
+filters = PoolStringArray( "*.tres", "*.res" )
 
 [node name="WindowDialog" parent="." instance=ExtResource( 1 )]
 [connection signal="pressed" from="TabContainer/Dialog/Toolbar/New" to="." method="_on_Toolbar_New_resource_pressed"]
