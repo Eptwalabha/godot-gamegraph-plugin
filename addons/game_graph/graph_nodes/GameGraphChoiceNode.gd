@@ -64,3 +64,6 @@ func _on_Button_pressed() -> void:
 
 func _on_ChoiceLine_deleted(choice_line: GameGraphChoiceLine) -> void:
 	delete_choice_line(choice_line)
+
+func _on_GameGraphChoiceNode_resize_request(new_minsize: Vector2) -> void:
+	rect_size = new_minsize

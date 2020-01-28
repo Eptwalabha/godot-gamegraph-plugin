@@ -3,10 +3,10 @@ extends Control
 
 class_name GameGraphEditor
 
-onready var graph := $TabContainer/Dialogs/MainContainer/GraphEdit as GameGraphGraphEdit
-onready var no_dialog_container := $TabContainer/Dialogs/MainContainer/NoDialog as CenterContainer
+onready var graph := $TabContainer/Dialog/Main/MainContainer/GraphEdit as GameGraphGraphEdit
+onready var no_dialog_container := $TabContainer/Dialog/Main/MainContainer/NoDialog as CenterContainer
 onready var popup_menu := $PopupMenu as PopupMenu
-onready var dialog_list := $TabContainer/Dialogs/DialogList as GameGraphEditorDialogList
+onready var dialog_list := $TabContainer/Dialog/Main/DialogList as GameGraphEditorDialogList
 
 var GameGraphResource = preload("GameGraphResource.gd")
 var GameGraphGraphResource = preload("resources/GameGraphGraphResource.gd")
@@ -30,7 +30,8 @@ func _ready() -> void:
 
 func console(text) -> void:
 	var c = $TabContainer/Console
-	c.text = "%s%s\n" % [c.text, text]
+	if c is Label:
+		c.text = "%s%s\n" % [c.text, text]
 
 func commit_current() -> void:
 	if current_dialog_key != '':
@@ -129,11 +130,14 @@ func _on_PopupMenu_focus_exited() -> void:
 func _on_EventMenu_pressed() -> void:
 	graph.add_event_emitter_node()
 
-func _on_Save_resource_pressed() -> void:
-	$SaveDialog.popup_centered()
+func _on_Toolbar_New_resource_pressed() -> void:
+	$WindowDialog.popup()
 	
-func _on_Load_resource_pressed() -> void:
+func _on_Toolbar_Load_resource_pressed() -> void:
 	$LoadDialog.popup_centered()
+
+func _on_Toolbar_Save_resource_pressed() -> void:
+	$SaveDialog.popup_centered()
 
 func _on_LoadDialog_file_selected(file: String) -> void:
 	var data = ResourceLoader.load(file)
@@ -153,9 +157,6 @@ func _on_SaveDialog_file_selected(file: String) -> void:
 func _on_DialogList_dialog_selected(dialog_key) -> void:
 	console("dialog selected '%s'" % dialog_key)
 	load_current_dialog(dialog_key)
-
-func _on_DialogList_new_dialog_requested() -> void:
-	$WindowDialog.popup()
 
 func _on_DialogList_dialog_deleted(dialog_key) -> void:
 	console("dialog to delete %s" % dialog_key)

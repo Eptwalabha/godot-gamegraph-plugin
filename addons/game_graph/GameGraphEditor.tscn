@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://addons/game_graph/GameGraphEditor.gd" type="Script" id=1]
 [ext_resource path="res://addons/game_graph/editor/dialog_list/GameGraphEditorDialogList.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://addons/game_graph/editor/dialogs/GameGraphWindowDialogNewDialog.tscn" type="PackedScene" id=4]
 [ext_resource path="res://addons/game_graph/assets/icon_load.svg" type="Texture" id=5]
 [ext_resource path="res://addons/game_graph/assets/icon_save.svg" type="Texture" id=6]
+[ext_resource path="res://addons/game_graph/assets/icon_new.svg" type="Texture" id=7]
 
 [node name="GameGraphEditor" type="Control"]
 anchor_right = 1.0
@@ -20,8 +21,11 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 tab_align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Dialogs" type="HSplitContainer" parent="TabContainer"]
+[node name="Dialog" type="VBoxContainer" parent="TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -29,58 +33,50 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="DialogList" parent="TabContainer/Dialogs" instance=ExtResource( 2 )]
+[node name="Toolbar" type="HBoxContainer" parent="TabContainer/Dialog"]
+margin_right = 1016.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="New" type="ToolButton" parent="TabContainer/Dialog/Toolbar"]
+margin_right = 28.0
+margin_bottom = 24.0
+icon = ExtResource( 7 )
+
+[node name="Load" type="ToolButton" parent="TabContainer/Dialog/Toolbar"]
+margin_left = 32.0
+margin_right = 60.0
+margin_bottom = 24.0
+icon = ExtResource( 5 )
+
+[node name="Save" type="ToolButton" parent="TabContainer/Dialog/Toolbar"]
+margin_left = 64.0
+margin_right = 92.0
+margin_bottom = 24.0
+icon = ExtResource( 6 )
+
+[node name="Main" type="HSplitContainer" parent="TabContainer/Dialog"]
+margin_top = 28.0
+margin_right = 1016.0
+margin_bottom = 564.0
+size_flags_vertical = 3
+
+[node name="DialogList" parent="TabContainer/Dialog/Main" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 200.0
-margin_bottom = 564.0
+margin_bottom = 536.0
 
-[node name="MainContainer" type="VBoxContainer" parent="TabContainer/Dialogs"]
+[node name="MainContainer" type="VBoxContainer" parent="TabContainer/Dialog/Main"]
 margin_left = 212.0
 margin_right = 1016.0
-margin_bottom = 564.0
+margin_bottom = 536.0
 rect_min_size = Vector2( 200, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
-[node name="Menu" type="MarginContainer" parent="TabContainer/Dialogs/MainContainer"]
-margin_right = 804.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 0, 24 )
-custom_constants/margin_right = 5
-custom_constants/margin_top = 5
-custom_constants/margin_left = 5
-custom_constants/margin_bottom = 5
-
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Dialogs/MainContainer/Menu"]
-margin_left = 5.0
-margin_top = 5.0
-margin_right = 799.0
-margin_bottom = 27.0
-size_flags_horizontal = 3
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/Dialogs/MainContainer/Menu/HBoxContainer"]
-margin_right = 794.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-alignment = 2
-
-[node name="Load" type="Button" parent="TabContainer/Dialogs/MainContainer/Menu/HBoxContainer/HBoxContainer2"]
-margin_left = 653.0
-margin_right = 713.0
-margin_bottom = 22.0
-text = "Load"
-icon = ExtResource( 5 )
-
-[node name="Save" type="Button" parent="TabContainer/Dialogs/MainContainer/Menu/HBoxContainer/HBoxContainer2"]
-margin_left = 717.0
-margin_right = 794.0
-margin_bottom = 22.0
-text = "Save as"
-icon = ExtResource( 6 )
-
-[node name="GraphEdit" parent="TabContainer/Dialogs/MainContainer" instance=ExtResource( 3 )]
+[node name="GraphEdit" parent="TabContainer/Dialog/Main/MainContainer" instance=ExtResource( 3 )]
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -88,18 +84,17 @@ margin_top = 30.0
 margin_right = 804.0
 margin_bottom = 564.0
 
-[node name="NoDialog" type="CenterContainer" parent="TabContainer/Dialogs/MainContainer"]
-margin_top = 32.0
+[node name="NoDialog" type="CenterContainer" parent="TabContainer/Dialog/Main/MainContainer"]
 margin_right = 804.0
-margin_bottom = 564.0
+margin_bottom = 536.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="TabContainer/Dialogs/MainContainer/NoDialog"]
+[node name="Label" type="Label" parent="TabContainer/Dialog/Main/MainContainer/NoDialog"]
 margin_left = 340.0
-margin_top = 250.0
+margin_top = 252.0
 margin_right = 463.0
-margin_bottom = 281.0
+margin_bottom = 283.0
 text = "No dialog yet
 click the 'New' icon"
 align = 1
@@ -160,13 +155,13 @@ mode = 0
 filters = PoolStringArray( "*.tres ; Resource", "*.res ; Binary Resource" )
 
 [node name="WindowDialog" parent="." instance=ExtResource( 4 )]
-[connection signal="dialog_deleted" from="TabContainer/Dialogs/DialogList" to="." method="_on_DialogList_dialog_deleted"]
-[connection signal="dialog_selected" from="TabContainer/Dialogs/DialogList" to="." method="_on_DialogList_dialog_selected"]
-[connection signal="new_dialog_requested" from="TabContainer/Dialogs/DialogList" to="." method="_on_DialogList_new_dialog_requested"]
-[connection signal="pressed" from="TabContainer/Dialogs/MainContainer/Menu/HBoxContainer/HBoxContainer2/Load" to="." method="_on_Load_resource_pressed"]
-[connection signal="pressed" from="TabContainer/Dialogs/MainContainer/Menu/HBoxContainer/HBoxContainer2/Save" to="." method="_on_Save_resource_pressed"]
-[connection signal="connection_to_empty" from="TabContainer/Dialogs/MainContainer/GraphEdit" to="." method="_on_GraphEdit_connection_to_empty"]
-[connection signal="popup_request" from="TabContainer/Dialogs/MainContainer/GraphEdit" to="." method="_on_GraphEdit_popup_request"]
+[connection signal="pressed" from="TabContainer/Dialog/Toolbar/New" to="." method="_on_Toolbar_New_resource_pressed"]
+[connection signal="pressed" from="TabContainer/Dialog/Toolbar/Load" to="." method="_on_Toolbar_Load_resource_pressed"]
+[connection signal="pressed" from="TabContainer/Dialog/Toolbar/Save" to="." method="_on_Toolbar_Save_resource_pressed"]
+[connection signal="dialog_deleted" from="TabContainer/Dialog/Main/DialogList" to="." method="_on_DialogList_dialog_deleted"]
+[connection signal="dialog_selected" from="TabContainer/Dialog/Main/DialogList" to="." method="_on_DialogList_dialog_selected"]
+[connection signal="connection_to_empty" from="TabContainer/Dialog/Main/MainContainer/GraphEdit" to="." method="_on_GraphEdit_connection_to_empty"]
+[connection signal="popup_request" from="TabContainer/Dialog/Main/MainContainer/GraphEdit" to="." method="_on_GraphEdit_popup_request"]
 [connection signal="focus_exited" from="PopupMenu" to="." method="_on_PopupMenu_focus_exited"]
 [connection signal="id_pressed" from="PopupMenu" to="." method="_on_PopupMenu_id_pressed"]
 [connection signal="file_selected" from="SaveDialog" to="." method="_on_SaveDialog_file_selected"]

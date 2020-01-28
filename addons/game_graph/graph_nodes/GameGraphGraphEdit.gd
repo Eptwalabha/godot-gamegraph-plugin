@@ -83,6 +83,7 @@ func _make_node_instance(type: String) -> GameGraphNode:
 	if node is GameGraphNode:
 		node.connect("slot_inserted", self, "_on_slot_inserted", [node])
 		node.connect("slot_removed", self, "_on_slot_removed", [node])
+		node.connect("resize_request", node, "_on_GameGraphNode_resize_request")
 	node.connect("close_request", self, "_on_GameGraphNode_close_request", [node])
 	return node
 
@@ -169,6 +170,7 @@ func _on_slot_removed(slot_port: int, dialog: GameGraphNode) -> void:
 	shift_connection_up(dialog.name, slot_port)
 
 func _on_GameGraphNode_close_request(node: GameGraphNode) -> void:
+	print("remove")
 	remove_node(node)
 
 func _on_GraphEdit_connection_request(from: String, from_slot: int, to: String, to_slot: int) -> void:

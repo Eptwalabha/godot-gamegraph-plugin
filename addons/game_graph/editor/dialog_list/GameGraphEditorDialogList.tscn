@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://addons/game_graph/editor/dialog_list/GameGraphEditorDialogList.gd" type="Script" id=1]
 [ext_resource path="res://addons/game_graph/assets/icon_search.svg" type="Texture" id=2]
-[ext_resource path="res://addons/game_graph/assets/icon_new.svg" type="Texture" id=3]
 
 [node name="DialogList" type="VBoxContainer"]
 anchor_right = 1.0
@@ -21,27 +20,16 @@ custom_constants/margin_top = 5
 custom_constants/margin_left = 5
 custom_constants/margin_bottom = 5
 
-[node name="Container" type="HBoxContainer" parent="Filter"]
+[node name="Filter" type="LineEdit" parent="Filter"]
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 1019.0
 margin_bottom = 29.0
-
-[node name="New" type="ToolButton" parent="Filter/Container"]
-margin_right = 59.0
-margin_bottom = 24.0
-text = "New"
-icon = ExtResource( 3 )
-
-[node name="Filter" type="LineEdit" parent="Filter/Container"]
-margin_left = 63.0
-margin_right = 1014.0
-margin_bottom = 24.0
 size_flags_horizontal = 3
 clear_button_enabled = true
 placeholder_text = "Filter"
 
-[node name="Magnifier" type="TextureRect" parent="Filter/Container/Filter"]
+[node name="Magnifier" type="TextureRect" parent="Filter/Filter"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -75,8 +63,6 @@ custom_constants/margin_bottom = 5
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 1019.0
-margin_bottom = 5.0
-size_flags_vertical = 0
+margin_bottom = 557.0
 custom_constants/separation = 0
-[connection signal="pressed" from="Filter/Container/New" to="." method="_on_New_pressed"]
-[connection signal="text_changed" from="Filter/Container/Filter" to="." method="_on_Filter_text_changed"]
+[connection signal="text_changed" from="Filter/Filter" to="." method="_on_Filter_text_changed"]
