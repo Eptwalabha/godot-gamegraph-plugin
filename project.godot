@@ -159,7 +159,7 @@ _global_script_class_icons={
 [application]
 
 config/name="story_editor"
-run/main_scene="res://addons/game_graph/editor/GameGraphEditor.tscn"
+run/main_scene="res://examples/simple/Simple.tscn"
 config/icon="res://icon.png"
 
 [debug]

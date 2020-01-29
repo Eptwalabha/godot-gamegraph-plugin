@@ -39,15 +39,27 @@ func start_dialog(dialog_name) -> bool:
 		return true
 	return false
 
-func next_dialog() -> Dictionary:
+func next(choice_id = null) -> Dictionary:
 	var current_node = get_current_node()
-	if current_node.type == 'start':
-		jump_to_next_node()
-		for event in current_node.events:
-			emit_signal("event_triggered", current_dialog, event)
-		return get_next_item()
-	else:
-		return get_next_item()
+	match current_node.type:
+		'start':
+			jump_to_next_node()
+			for event in current_node.events:
+				emit_signal("event_triggered", current_dialog, event)
+			return get_next_item()
+		'dialog':
+			return get_next_item()
+		'choice':
+			if choice_id != null and choice_id < len(current_node.choices):
+				var choice = current_node.choices[choice_id]
+				for event in choice.events:
+					emit_signal("event_triggered", current_dialog, event)
+				if choice.output == null:
+					return get_ending()
+				current_node_id = choice.output
+				current_line_id = 0
+				return get_next_item()
+	return get_ending()
 
 func is_end_node() -> bool:
 	return get_current_node().output == null
@@ -93,20 +105,6 @@ func get_next_item() -> Dictionary:
 		}
 	else:
 		return get_ending()
-
-func pick_choice(choice_id: int) -> Dictionary:
-	var current_node = get_current_node()
-	if current_node.type == 'choice':
-		if choice_id < len(current_node.choices):
-			var choice = current_node.choices[choice_id]
-			for event in choice.events:
-				emit_signal("event_triggered", current_dialog, event)
-			if choice.output == null:
-				return get_ending()
-			current_node_id = choice.output
-			current_line_id = 0
-			return get_next_item()
-	return get_ending()
 
 func get_ending() -> Dictionary:
 	return { 'type': "end" }

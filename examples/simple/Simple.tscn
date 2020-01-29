@@ -89,6 +89,7 @@ margin_left = -0.0800171
 margin_top = 0.199997
 margin_right = -0.320068
 theme = SubResource( 2 )
+bbcode_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -143,15 +144,15 @@ __meta__ = {
 }
 
 [node name="DialogText" type="RichTextLabel" parent="UI/Dialog/Content"]
-margin_right = 825.0
+margin_right = 824.0
 margin_bottom = 73.0
 size_flags_vertical = 3
 bbcode_enabled = true
 
 [node name="Choices" type="VBoxContainer" parent="UI/Dialog/Content"]
 margin_top = 77.0
-margin_right = 825.0
-margin_bottom = 151.0
+margin_right = 824.0
+margin_bottom = 150.0
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false

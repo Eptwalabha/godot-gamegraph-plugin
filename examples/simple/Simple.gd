@@ -17,7 +17,6 @@ func _ready() -> void:
 	var id = 0
 	for dialog in dialogs:
 		var d = dialogs[dialog]
-		print("label='%s' -> %s" % [d.label, d.key])
 		dialog_keys.push_back(d.key)
 		select.add_item(d.label, id)
 		id += 1
@@ -51,17 +50,18 @@ func _on_Button_pressed() -> void:
 	if selected > -1:
 		var dialog_key = dialog_keys[selected]
 		if story.start_dialog(dialog_key):
-			update_dialog(story.next_dialog())
+			update_dialog(story.next())
 
 func _on_NextDialog_pressed() -> void:
-	update_dialog(story.next_dialog())
+	update_dialog(story.next())
 
 func _on_DialogChoice_pressed(choice_id: int) -> void:
 	empty_choice_container()
-	update_dialog(story.pick_choice(choice_id))
+	update_dialog(story.next(choice_id))
 
 func _on_GameGraph_event_triggered(dialog_name, event_name) -> void:
-	var new_line = "new event '%s' from dialog %s" % [event_name, dialog_name]
-	events.text = "%s%s\n" % [events.text, new_line]
+	var error = events.append_bbcode("new event '[b][color=blue]%s[/color][/b]' from dialog [color=blue]%s[/color]\n" % [event_name, dialog_name])
+	if error:
+		print("%s %s %s" % [error, dialog_name, event_name])
 	if event_name == "particle":
 		particle.emitting = true
