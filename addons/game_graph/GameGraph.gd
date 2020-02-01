@@ -4,13 +4,12 @@ extends Node
 
 signal event_triggered(dialog_name, event_name)
 
-var dialogs = {}
+export(Resource) var story
 
+var dialogs = {}
 var current_dialog = ''
 var current_node_id = 0
 var current_line_id = 0
-
-export(Resource) var story
 
 func _ready() -> void:
 	_build_automaton()
@@ -136,38 +135,45 @@ func _build_events(node_resources: Array) -> Dictionary:
 			events[node.node_id] = node.event_name
 	return events
 
-func _build_connected_nodes(nodes: Dictionary, events: Dictionary, connections: Array) -> Dictionary:
+func _build_connected_nodes(
+		nodes: Dictionary,
+		events: Dictionary,
+		connections: Array) -> Dictionary:
 	var final_nodes = {}
 	for c in connections:
-		var from = nodes.get(c[0])
-		var output_port = c[1]
-		var is_output_event = events.has(c[2])
-		var is_output_node = nodes.has(c[2])
-		if not nodes.has(c[0]) or not (is_output_event or is_output_node):
+		var from_index = c[0]
+		var from = nodes.get(from_index)
+		var out_port = c[1]
+		var to_index = c[2]
+		var is_output_event = events.has(to_index)
+		var is_output_node = nodes.has(to_index)
+		if not nodes.has(from_index) or not (is_output_event or is_output_node):
 			continue
 
-		if not final_nodes.has(c[0]):
-			final_nodes[c[0]] = from
+		if not final_nodes.has(from_index):
+			final_nodes[from_index] = from
 
+		var from_node = final_nodes[from_index]
 		if is_output_node:
-			var to = nodes.get(c[2])
-			if not final_nodes.has(c[2]):
-				final_nodes[c[2]] = to
+			var to = nodes.get(to_index)
+			if not final_nodes.has(to_index):
+				final_nodes[to_index] = to
 			if from.type == 'choice':
-				final_nodes[c[0]].choices[output_port].output = c[2]
+				from_node.choices[out_port].output = to_index
 			else :
-				final_nodes[c[0]].output = c[2]
+				from_node.output = to_index
 		elif is_output_event:
-			var event_name : String = events.get(c[2])
+			var event_name : String = events.get(to_index)
 			if from.type == 'dialog':
-				if output_port == 0:
-					final_nodes[c[0]].events.push_back(event_name)
+				if out_port == 0:
+					from_node.events.push_back(event_name)
 				else:
-					final_nodes[c[0]].lines[output_port - 1].events.push_back(event_name)
+					from_node.lines[out_port - 1].events.push_back(event_name)
 			elif from.type == 'start':
-				final_nodes[c[0]].events.push_back(event_name)
+				from_node.events.push_back(event_name)
 			elif from.type == 'choice':
-				final_nodes[c[0]].choices[output_port].events.push_back(event_name)
+				from_node.choices[out_port].events.push_back(event_name)
+		final_nodes[from_index] = from_node
 	return final_nodes
 
 func _to_dictionary(node) -> Dictionary:
