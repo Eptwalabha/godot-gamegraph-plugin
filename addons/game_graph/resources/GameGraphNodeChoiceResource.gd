@@ -1,7 +1,6 @@
 tool
-extends "res://addons/game_graph/resources/GameGraphNodeResource.gd"
-
 class_name GameGraphNodeChoiceResource
+extends GameGraphNodeResource
 
 export(String) var question
 export(Array, Resource) var choices

@@ -1,15 +1,14 @@
 tool
-extends Control
-
 class_name GameGraphEditor
+extends Control
 
 onready var graph := $TabContainer/Dialog/Main/MainContainer/GraphEdit as GameGraphGraphEdit
 onready var no_dialog_container := $TabContainer/Dialog/Main/MainContainer/NoDialog as CenterContainer
 onready var popup_menu := $PopupMenu as PopupMenu
 onready var dialog_list := $TabContainer/Dialog/Main/DialogList as GameGraphEditorDialogList
 
-var GameGraphResource = preload("res://addons/game_graph/resources/GameGraphResource.gd")
-var GameGraphGraphResource = preload("res://addons/game_graph/resources/GameGraphGraphResource.gd")
+const GameGraphResource = preload("res://addons/game_graph/resources/GameGraphResource.gd")
+const GameGraphGraphResource = preload("res://addons/game_graph/resources/GameGraphGraphResource.gd")
 var last_slot = null
 var current_dialog_key : String = ''
 var dialogs : Dictionary = {}

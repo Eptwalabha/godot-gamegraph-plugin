@@ -5,7 +5,7 @@ extends MarginContainer
 signal edit_pressed
 signal delete_pressed
 
-var DialogLineResource = preload("res://addons/game_graph/resources/GameGraphNodeDialogLineResource.gd")
+const DialogLineResource = preload("res://addons/game_graph/resources/GameGraphNodeDialogLineResource.gd")
 
 func _ready() -> void:
 	$Line/Edit.connect("pressed", self, "_on_Edit_pressed")

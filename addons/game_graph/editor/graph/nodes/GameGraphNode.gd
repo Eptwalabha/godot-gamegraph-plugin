@@ -1,7 +1,6 @@
 tool
-extends GraphNode
-
 class_name GameGraphNode
+extends GraphNode
 
 signal slot_removed(slot_port)
 signal slot_inserted(slot_port)

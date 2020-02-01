@@ -2,7 +2,7 @@ tool
 class_name GameGraphEventNode
 extends "../GameGraphNode.gd"
 
-var NodeEventResource = preload("res://addons/game_graph/resources/GameGraphNodeEventResource.gd")
+const NodeEventResource = preload("res://addons/game_graph/resources/GameGraphNodeEventResource.gd")
 
 func _ready() -> void:
 	._ready()

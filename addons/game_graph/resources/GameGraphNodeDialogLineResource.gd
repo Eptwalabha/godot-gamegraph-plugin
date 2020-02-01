@@ -1,7 +1,6 @@
 tool
-extends Resource
-
 class_name GameGraphNodeDialogLineResource
+extends Resource
 
 export(String) var dialog_key
 export(String) var who

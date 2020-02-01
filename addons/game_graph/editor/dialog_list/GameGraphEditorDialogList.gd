@@ -1,7 +1,6 @@
 tool
-extends MarginContainer
-
 class_name GameGraphEditorDialogList
+extends MarginContainer
 
 signal dialog_selected(dialog_key)
 signal dialog_deleted(dialog_key)
@@ -10,7 +9,7 @@ onready var list_container := $Container/Scroll/Margin/DialogsList as VBoxContai
 onready var filter := $Container/Filter as LineEdit
 onready var search_icon := $Container/Filter/Magnifier as TextureRect
 
-var DialogListLine = preload("GameGraphEditorDialogListLine.tscn")
+const DialogListLine = preload("GameGraphEditorDialogListLine.tscn")
 
 func add_item(dialog_key: String, dialog_name: String) -> void:
 	var dialog_line : GameGraphEditorDialogListLine = DialogListLine.instance()

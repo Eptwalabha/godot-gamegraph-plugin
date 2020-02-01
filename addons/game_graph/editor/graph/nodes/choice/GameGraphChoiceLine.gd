@@ -5,7 +5,7 @@ extends MarginContainer
 signal edit_pressed
 signal delete_pressed
 
-var ChoiceLineResource : Resource = preload("res://addons/game_graph/resources/GameGraphNodeChoiceLineResource.gd")
+const ChoiceLineResource : Resource = preload("res://addons/game_graph/resources/GameGraphNodeChoiceLineResource.gd")
 
 func _ready() -> void:
 	$Line/Delete.connect("pressed", self, "_on_Delete_pressed")

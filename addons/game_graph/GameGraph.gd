@@ -1,7 +1,6 @@
 tool
-extends Node
-
 class_name GameGraph
+extends Node
 
 signal event_triggered(dialog_name, event_name)
 

@@ -1,7 +1,6 @@
 tool
-extends EditorPlugin
-
 class_name GameGraphPlugin
+extends EditorPlugin
 
 var editor
 

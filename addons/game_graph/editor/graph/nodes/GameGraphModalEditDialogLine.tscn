@@ -5,13 +5,14 @@
 [node name="GameGraphModalEditDialogLine" type="WindowDialog"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 76.0
-margin_top = 60.0
-margin_right = -649.0
-margin_bottom = -271.0
+margin_right = -640.0
+margin_bottom = -327.0
 window_title = "Edit dialog line"
 resizable = true
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
@@ -20,16 +21,19 @@ custom_constants/margin_right = 5
 custom_constants/margin_top = 5
 custom_constants/margin_left = 5
 custom_constants/margin_bottom = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer"]
 margin_left = 5.0
 margin_top = 5.0
-margin_right = 294.0
-margin_bottom = 264.0
+margin_right = 379.0
+margin_bottom = 268.0
 custom_constants/separation = 6
 
 [node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer2"]
-margin_right = 289.0
+margin_right = 374.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
 color = Color( 0.247059, 0.270588, 0.32549, 1 )
@@ -43,24 +47,24 @@ valign = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer2"]
 margin_top = 38.0
-margin_right = 289.0
+margin_right = 374.0
 margin_bottom = 120.0
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer2/VBoxContainer"]
-margin_right = 289.0
+margin_right = 374.0
 margin_bottom = 14.0
 text = "text:"
 
 [node name="TextEdit" type="TextEdit" parent="MarginContainer/VBoxContainer2/VBoxContainer"]
 margin_top = 18.0
-margin_right = 289.0
+margin_right = 374.0
 margin_bottom = 82.0
 rect_min_size = Vector2( 0, 64 )
 hint_tooltip = "Your line of dialog"
 
 [node name="ColorRect2" type="ColorRect" parent="MarginContainer/VBoxContainer2"]
 margin_top = 126.0
-margin_right = 289.0
+margin_right = 374.0
 margin_bottom = 158.0
 rect_min_size = Vector2( 0, 32 )
 color = Color( 0.247059, 0.270588, 0.32549, 1 )
@@ -74,61 +78,61 @@ valign = 1
 
 [node name="Speaker" type="VBoxContainer" parent="MarginContainer/VBoxContainer2"]
 margin_top = 164.0
-margin_right = 289.0
+margin_right = 374.0
 margin_bottom = 230.0
 
 [node name="Name" type="HBoxContainer" parent="MarginContainer/VBoxContainer2/Speaker"]
-margin_right = 289.0
+margin_right = 374.0
 margin_bottom = 24.0
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer2/Speaker/Name"]
 margin_top = 5.0
-margin_right = 142.0
+margin_right = 185.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
 text = "name"
 
 [node name="MenuButton" type="LineEdit" parent="MarginContainer/VBoxContainer2/Speaker/Name"]
-margin_left = 146.0
-margin_right = 289.0
+margin_left = 189.0
+margin_right = 374.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 placeholder_text = "name"
 
 [node name="Picture" type="HBoxContainer" parent="MarginContainer/VBoxContainer2/Speaker"]
 margin_top = 28.0
-margin_right = 289.0
+margin_right = 374.0
 margin_bottom = 42.0
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer2/Speaker/Picture"]
-margin_right = 289.0
+margin_right = 374.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 text = "picture"
 
 [node name="Position" type="HBoxContainer" parent="MarginContainer/VBoxContainer2/Speaker"]
 margin_top = 46.0
-margin_right = 289.0
+margin_right = 374.0
 margin_bottom = 66.0
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer2/Speaker/Position"]
 margin_top = 3.0
-margin_right = 142.0
+margin_right = 185.0
 margin_bottom = 17.0
 size_flags_horizontal = 3
 text = "position"
 
 [node name="MenuButton" type="MenuButton" parent="MarginContainer/VBoxContainer2/Speaker/Position"]
-margin_left = 146.0
-margin_right = 289.0
+margin_left = 189.0
+margin_right = 374.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 items = [ "left", null, 0, false, false, 0, 0, null, "", false, "right", null, 0, false, false, 1, 0, null, "", false ]
 
 [node name="Close" type="Button" parent="MarginContainer/VBoxContainer2"]
-margin_left = 242.0
+margin_left = 327.0
 margin_top = 236.0
-margin_right = 289.0
+margin_right = 374.0
 margin_bottom = 256.0
 size_flags_horizontal = 8
 text = "Close"

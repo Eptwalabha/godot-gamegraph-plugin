@@ -1,7 +1,6 @@
 tool
-extends WindowDialog
-
 class_name GameGraphWindowDialogNewDialog
+extends WindowDialog
 
 signal new_dialog_submitted(label, key)
 signal key_requested(key)

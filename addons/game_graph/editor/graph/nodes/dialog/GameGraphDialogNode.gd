@@ -2,9 +2,8 @@ tool
 class_name GameGraphDialogNode
 extends "../GameGraphNode.gd"
 
-
-var DialogLine = preload("GameGraphDialogLine.tscn")
-var DialogResource = preload("res://addons/game_graph/resources/GameGraphNodeDialogResource.gd")
+const DialogLine = preload("GameGraphDialogLine.tscn")
+const DialogResource = preload("res://addons/game_graph/resources/GameGraphNodeDialogResource.gd")
 
 func _ready() -> void:
 	._ready()

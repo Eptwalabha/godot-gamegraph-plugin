@@ -1,7 +1,6 @@
 tool
-extends "res://addons/game_graph/resources/GameGraphNodeResource.gd"
-
 class_name GameGraphNodeStartResource
+extends GameGraphNodeResource
 
 func get_type() -> String:
 	return "start"

@@ -1,7 +1,6 @@
 tool
-extends "res://addons/game_graph/resources/GameGraphNodeResource.gd"
-
 class_name GameGraphNodeDialogResource
+extends GameGraphNodeResource
 
 export(Array, Resource) var dialog_lines
 

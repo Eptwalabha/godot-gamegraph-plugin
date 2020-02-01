@@ -2,8 +2,8 @@ tool
 class_name GameGraphChoiceNode
 extends "../GameGraphNode.gd"
 
-var ChoiceLine = preload("GameGraphChoiceLine.tscn")
-var ChoiceResource = preload("res://addons/game_graph/resources/GameGraphNodeChoiceResource.gd")
+const ChoiceLine = preload("GameGraphChoiceLine.tscn")
+const ChoiceResource = preload("res://addons/game_graph/resources/GameGraphNodeChoiceResource.gd")
 
 func _ready() -> void:
 	._ready()

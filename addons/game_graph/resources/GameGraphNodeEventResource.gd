@@ -1,7 +1,6 @@
 tool
-extends "res://addons/game_graph/resources/GameGraphNodeResource.gd"
-
 class_name GameGraphNodeEventResource
+extends GameGraphNodeResource
 
 export(String) var event_name
 
