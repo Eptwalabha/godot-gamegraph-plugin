@@ -1,7 +1,7 @@
 tool
-extends "GameGraphNode.gd"
-
 class_name GameGraphDialogNode
+extends "../GameGraphNode.gd"
+
 
 var DialogLine = preload("GameGraphDialogLine.tscn")
 var DialogResource = preload("res://addons/game_graph/resources/GameGraphNodeDialogResource.gd")

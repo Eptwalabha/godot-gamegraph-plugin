@@ -1,7 +1,6 @@
 tool
-extends "GameGraphNode.gd"
-
 class_name GameGraphEventNode
+extends "../GameGraphNode.gd"
 
 var NodeEventResource = preload("res://addons/game_graph/resources/GameGraphNodeEventResource.gd")
 

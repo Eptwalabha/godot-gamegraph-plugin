@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://addons/game_graph/editor/graph/nodes/GameGraphStartNode.gd" type="Script" id=1]
+[ext_resource path="res://addons/game_graph/editor/graph/nodes/start/GameGraphStartNode.gd" type="Script" id=1]
 
 [node name="Start" type="GraphNode"]
 margin_left = 79.0

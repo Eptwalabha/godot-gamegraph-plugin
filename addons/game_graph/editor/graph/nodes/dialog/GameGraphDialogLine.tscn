@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://addons/game_graph/editor/graph/nodes/GameGraphDialogLine.gd" type="Script" id=1]
-[ext_resource path="res://addons/game_graph/assets/icon_g_d_script.svg" type="Texture" id=2]
+[ext_resource path="res://addons/game_graph/assets/icon_g_d_script.svg" type="Texture" id=1]
+[ext_resource path="res://addons/game_graph/editor/graph/nodes/dialog/GameGraphDialogLine.gd" type="Script" id=2]
 [ext_resource path="res://addons/game_graph/assets/icon_remove.svg" type="Texture" id=3]
 
 [node name="GameGraphDialogLine" type="MarginContainer"]
@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/margin_top = 2
 custom_constants/margin_bottom = 2
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -38,7 +38,7 @@ visible = false
 margin_left = 964.0
 margin_right = 992.0
 margin_bottom = 596.0
-icon = ExtResource( 2 )
+icon = ExtResource( 1 )
 flat = true
 
 [node name="Delete" type="Button" parent="Line"]

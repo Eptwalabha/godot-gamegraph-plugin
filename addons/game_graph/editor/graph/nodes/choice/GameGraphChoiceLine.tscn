@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://addons/game_graph/editor/graph/nodes/GameGraphChoiceLine.gd" type="Script" id=1]
+[ext_resource path="res://addons/game_graph/editor/graph/nodes/choice/GameGraphChoiceLine.gd" type="Script" id=1]
 [ext_resource path="res://addons/game_graph/assets/icon_remove.svg" type="Texture" id=2]
 
 [node name="GameGraphChoiceLine" type="MarginContainer"]

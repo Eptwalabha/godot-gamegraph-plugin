@@ -1,7 +1,6 @@
 tool
-extends "GameGraphNode.gd"
-
 class_name GameGraphChoiceNode
+extends "../GameGraphNode.gd"
 
 var ChoiceLine = preload("GameGraphChoiceLine.tscn")
 var ChoiceResource = preload("res://addons/game_graph/resources/GameGraphNodeChoiceResource.gd")

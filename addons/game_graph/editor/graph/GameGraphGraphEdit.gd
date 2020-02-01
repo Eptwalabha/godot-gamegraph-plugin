@@ -3,10 +3,10 @@ extends GraphEdit
 
 class_name GameGraphGraphEdit
 
-var NodeDialog = preload("nodes/GameGraphDialogNode.tscn")
-var NodeEventEmitter = preload("nodes/GameGraphEventNode.tscn")
-var NodeChoice = preload("nodes/GameGraphChoiceNode.tscn")
-var NodeStart = preload("nodes/GameGraphStartNode.tscn")
+var NodeDialog = preload("nodes/dialog/GameGraphDialogNode.tscn")
+var NodeEventEmitter = preload("nodes/event/GameGraphEventNode.tscn")
+var NodeChoice = preload("nodes/choice/GameGraphChoiceNode.tscn")
+var NodeStart = preload("nodes/start/GameGraphStartNode.tscn")
 var GameGraphResource = preload("res://addons/game_graph/resources/GameGraphGraphResource.gd")
 
 var node_id = 0

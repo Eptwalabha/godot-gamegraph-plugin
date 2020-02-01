@@ -17,22 +17,22 @@ _global_script_classes=[ {
 "base": "MarginContainer",
 "class": "GameGraphChoiceLine",
 "language": "GDScript",
-"path": "res://addons/game_graph/editor/graph/nodes/GameGraphChoiceLine.gd"
+"path": "res://addons/game_graph/editor/graph/nodes/choice/GameGraphChoiceLine.gd"
 }, {
 "base": "",
 "class": "GameGraphChoiceNode",
 "language": "GDScript",
-"path": "res://addons/game_graph/editor/graph/nodes/GameGraphChoiceNode.gd"
+"path": "res://addons/game_graph/editor/graph/nodes/choice/GameGraphChoiceNode.gd"
 }, {
 "base": "MarginContainer",
 "class": "GameGraphDialogLine",
 "language": "GDScript",
-"path": "res://addons/game_graph/editor/graph/nodes/GameGraphDialogLine.gd"
+"path": "res://addons/game_graph/editor/graph/nodes/dialog/GameGraphDialogLine.gd"
 }, {
 "base": "",
 "class": "GameGraphDialogNode",
 "language": "GDScript",
-"path": "res://addons/game_graph/editor/graph/nodes/GameGraphDialogNode.gd"
+"path": "res://addons/game_graph/editor/graph/nodes/dialog/GameGraphDialogNode.gd"
 }, {
 "base": "Resource",
 "class": "GameGraphDialogResource",
@@ -57,7 +57,7 @@ _global_script_classes=[ {
 "base": "",
 "class": "GameGraphEventNode",
 "language": "GDScript",
-"path": "res://addons/game_graph/editor/graph/nodes/GameGraphEventNode.gd"
+"path": "res://addons/game_graph/editor/graph/nodes/event/GameGraphEventNode.gd"
 }, {
 "base": "GraphEdit",
 "class": "GameGraphGraphEdit",
@@ -122,7 +122,7 @@ _global_script_classes=[ {
 "base": "",
 "class": "GameGraphStartNode",
 "language": "GDScript",
-"path": "res://addons/game_graph/editor/graph/nodes/GameGraphStartNode.gd"
+"path": "res://addons/game_graph/editor/graph/nodes/start/GameGraphStartNode.gd"
 }, {
 "base": "WindowDialog",
 "class": "GameGraphWindowDialogNewDialog",
@@ -159,16 +159,12 @@ _global_script_class_icons={
 [application]
 
 config/name="story_editor"
-run/main_scene="res://examples/simple/Simple.tscn"
+run/main_scene="res://addons/game_graph/editor/GameGraphEditor.tscn"
 config/icon="res://icon.png"
 
 [debug]
 
 gdscript/warnings/unused_class_variable=true
-
-[editor_plugins]
-
-enabled=PoolStringArray( "game_graph" )
 
 [rendering]
 

@@ -1,7 +1,6 @@
 tool
-extends MarginContainer
-
 class_name GameGraphChoiceLine
+extends MarginContainer
 
 signal edit_pressed
 signal delete_pressed
