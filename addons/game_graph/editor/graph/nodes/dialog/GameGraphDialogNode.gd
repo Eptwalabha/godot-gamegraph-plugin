@@ -2,10 +2,10 @@ tool
 class_name GameGraphDialogNode
 extends "../GameGraphNode.gd"
 
+signal dialog_line_edited(node, line)
+
 const DialogLine = preload("GameGraphDialogLine.tscn")
 const DialogResource = preload("res://addons/game_graph/resources/GameGraphNodeDialogResource.gd")
-
-onready var dialog_line_editor := $DialogLineEditor as WindowDialogLineEditor
 
 func _ready() -> void:
 	._ready()
@@ -72,4 +72,4 @@ func _on_DialogLine_deleted(dialog_line: GameGraphDialogLine) -> void:
 	delete_dialog_line(dialog_line)
 
 func _on_DialogLine_edited(dialog_line: GameGraphDialogLine) -> void:
-	dialog_line_editor.open(dialog_line)
+	emit_signal("dialog_line_edited", self, dialog_line)

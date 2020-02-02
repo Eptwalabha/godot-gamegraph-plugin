@@ -4,6 +4,7 @@ onready var story := $GameGraph as GameGraph
 onready var select := $UI/Menu/DialogSelection as OptionButton
 onready var choices_container := $UI/Dialog/Content/Choices as VBoxContainer
 onready var dialog_text := $UI/Dialog/Content/DialogText as RichTextLabel
+onready var dialog_title := $UI/Dialog/Title as Label
 onready var dialog_next := $UI/Dialog/Next as Button
 onready var events := $UI/Events as RichTextLabel
 onready var particle := $Particles2D as Particles2D
@@ -26,6 +27,7 @@ func update_dialog(data) -> void:
 	dialog_box.visible = data.type != 'end'
 	if data.type != 'end':
 		empty_choice_container()
+		dialog_title.text = data.who
 		dialog_text.set_bbcode(data.text.c_unescape())
 		dialog_next.visible = data.type == 'dialog'
 		if data.type == 'choice':

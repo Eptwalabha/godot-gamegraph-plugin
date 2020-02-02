@@ -86,7 +86,9 @@ func get_next_item() -> Dictionary:
 			current_line_id += 1
 			return {
 				'type': 'dialog',
-				'text': line.text
+				'text': line.text,
+				'who': line.who,
+				'how': line.how,
 			}
 	elif current_node.type == 'choice':
 		var choices = []
@@ -94,12 +96,14 @@ func get_next_item() -> Dictionary:
 			var choice = current_node.choices[i]
 			choices.push_back({
 				'text': choice.text,
-				'id': i
+				'id': i,
 			})
 		return {
 			'type': 'choice',
 			'text': current_node.question,
-			'choices': choices
+			'who': '',
+			'how': '',
+			'choices': choices,
 		}
 	else:
 		return get_ending()

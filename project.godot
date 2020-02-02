@@ -172,6 +172,10 @@ config/icon="res://icon.png"
 
 gdscript/warnings/unused_class_variable=true
 
+[editor_plugins]
+
+enabled=PoolStringArray( "game_graph" )
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"

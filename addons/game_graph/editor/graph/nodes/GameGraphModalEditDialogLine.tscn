@@ -10,7 +10,7 @@ anchor_bottom = 0.5
 margin_left = -158.0
 margin_top = -89.0
 margin_right = 158.0
-margin_bottom = 89.0
+margin_bottom = 120.0
 window_title = "Edit dialog line"
 resizable = true
 script = ExtResource( 1 )
@@ -88,9 +88,10 @@ placeholder_text = "name"
 
 [node name="Close" type="Button" parent="Params"]
 margin_left = 260.0
-margin_top = 148.0
+margin_top = 172.0
 margin_right = 307.0
-margin_bottom = 168.0
+margin_bottom = 192.0
 size_flags_horizontal = 8
+size_flags_vertical = 10
 text = "Close"
 [connection signal="pressed" from="Params/Close" to="." method="_on_Close_pressed"]

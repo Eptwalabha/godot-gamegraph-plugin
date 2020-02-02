@@ -2,17 +2,18 @@ tool
 class_name GameGraphEditor
 extends Control
 
-onready var graph := $TabContainer/Dialog/Main/MainContainer/GraphEdit as GameGraphGraphEdit
-onready var no_dialog_container := $TabContainer/Dialog/Main/MainContainer/NoDialog as CenterContainer
-onready var popup_menu := $PopupMenu as PopupMenu
-onready var dialog_list := $TabContainer/Dialog/Main/DialogList as GameGraphEditorDialogList
-
 const GameGraphResource = preload("res://addons/game_graph/resources/GameGraphResource.gd")
 const GameGraphGraphResource = preload("res://addons/game_graph/resources/GameGraphGraphResource.gd")
 var last_slot = null
 var current_dialog_key : String = ''
 var dialogs : Dictionary = {}
 var resource_path := ''
+
+onready var graph := $TabContainer/Dialog/Main/MainContainer/GraphEdit as GameGraphGraphEdit
+onready var no_dialog_container := $TabContainer/Dialog/Main/MainContainer/NoDialog as CenterContainer
+onready var popup_menu := $PopupMenu as PopupMenu
+onready var dialog_list := $TabContainer/Dialog/Main/DialogList as GameGraphEditorDialogList
+onready var dialog_line_editor := $WindowDialogLineEditor as WindowDialogLineEditor
 
 enum POPUPMENU {
 	DIALOG = 1,
@@ -168,3 +169,7 @@ func _on_WindowDialog_new_dialog_submitted(key, label) -> void:
 func _on_WindowDialog_key_requested(key) -> void:
 	var already_used = dialogs.has(key)
 	$WindowDialog.show_key_unicity_warning(already_used)
+
+
+func _on_GraphEdit_dialog_line_edited(dialog_node, dialog_line) -> void:
+	dialog_line_editor.open(dialog_line)

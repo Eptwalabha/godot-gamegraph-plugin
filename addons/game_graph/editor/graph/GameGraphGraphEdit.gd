@@ -2,6 +2,8 @@ tool
 class_name GameGraphGraphEdit
 extends GraphEdit
 
+signal dialog_line_edited(dialog_node, dialog_line)
+
 const NodeDialog = preload("nodes/dialog/GameGraphDialogNode.tscn")
 const NodeEventEmitter = preload("nodes/event/GameGraphEventNode.tscn")
 const NodeChoice = preload("nodes/choice/GameGraphChoiceNode.tscn")
@@ -76,6 +78,7 @@ func _make_node_instance(type: String) -> GameGraphNode:
 			node = NodeChoice.instance()
 		"dialog":
 			node = NodeDialog.instance()
+			node.connect("dialog_line_edited", self, "_on_DialogLine_edited")
 		"event_emitter":
 			node = NodeEventEmitter.instance()
 		"start":
@@ -177,3 +180,8 @@ func _on_GraphEdit_connection_request(from: String, from_slot: int, to: String, 
 
 func _on_GraphEdit_disconnection_request(from: String, from_slot: int, to: String, to_slot: int) -> void:
 	disconnect_node(from, from_slot, to, to_slot)
+
+func _on_DialogLine_edited(
+		dialog_node: GameGraphDialogNode,
+		dialog_line: GameGraphDialogLine) -> void:
+	emit_signal("dialog_line_edited", dialog_node, dialog_line)
