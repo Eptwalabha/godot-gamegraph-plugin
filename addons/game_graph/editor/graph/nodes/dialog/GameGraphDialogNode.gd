@@ -5,6 +5,8 @@ extends "../GameGraphNode.gd"
 const DialogLine = preload("GameGraphDialogLine.tscn")
 const DialogResource = preload("res://addons/game_graph/resources/GameGraphNodeDialogResource.gd")
 
+onready var dialog_line_editor := $DialogLineEditor as WindowDialogLineEditor
+
 func _ready() -> void:
 	._ready()
 	set_slot(0, true, 0, Color(0, 0, 1), true, 0, Color(0, 1, 0))
@@ -29,7 +31,9 @@ func from_resource(resource: Resource) -> void:
 	if resource is GameGraphNodeDialogResource:
 		for dialog_line_resource in resource.dialog_lines:
 			var dialog_line = _new_dialog_line()
-			dialog_line.set_dialog_key(dialog_line_resource.dialog_key)
+			dialog_line.key = dialog_line_resource.dialog_key
+			dialog_line.who = dialog_line_resource.who
+			dialog_line.how = dialog_line_resource.how
 
 func delete_dialog_line(dialog_line: GameGraphDialogLine) -> void:
 	var slot_port = _get_slot_index(dialog_line)
@@ -58,6 +62,7 @@ func _new_dialog_line() -> GameGraphDialogLine:
 	var slot_port = dialog_line.get_index()
 	set_slot(slot_port, false, 0, Color(), true, 1, Color(1, 1, 0))
 	dialog_line.connect("delete_pressed", self, "_on_DialogLine_deleted", [dialog_line])
+	dialog_line.connect("edit_pressed", self, "_on_DialogLine_edited", [dialog_line])
 	return dialog_line
 
 func _on_Button_pressed() -> void:
@@ -65,3 +70,6 @@ func _on_Button_pressed() -> void:
 
 func _on_DialogLine_deleted(dialog_line: GameGraphDialogLine) -> void:
 	delete_dialog_line(dialog_line)
+
+func _on_DialogLine_edited(dialog_line: GameGraphDialogLine) -> void:
+	dialog_line_editor.open(dialog_line)

@@ -26,7 +26,7 @@ margin_bottom = 596.0
 rect_min_size = Vector2( 32, 0 )
 
 [node name="Dialog" type="LineEdit" parent="Line"]
-margin_right = 992.0
+margin_right = 960.0
 margin_bottom = 596.0
 rect_min_size = Vector2( 150, 0 )
 size_flags_horizontal = 3
@@ -34,7 +34,6 @@ placeholder_text = "your dialog key"
 caret_blink = true
 
 [node name="Edit" type="Button" parent="Line"]
-visible = false
 margin_left = 964.0
 margin_right = 992.0
 margin_bottom = 596.0
@@ -47,3 +46,6 @@ margin_right = 1024.0
 margin_bottom = 596.0
 icon = ExtResource( 3 )
 flat = true
+[connection signal="text_changed" from="Line/Dialog" to="." method="_on_Dialog_text_changed"]
+[connection signal="pressed" from="Line/Edit" to="." method="_on_Edit_pressed"]
+[connection signal="pressed" from="Line/Delete" to="." method="_on_Delete_pressed"]

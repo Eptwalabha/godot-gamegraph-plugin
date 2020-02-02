@@ -85,15 +85,15 @@ text = "this key is already used"
 align = 2
 
 [node name="Buttons" type="HBoxContainer" parent="Margin/Container"]
-margin_top = 96.0
+margin_top = 77.0
 margin_right = 267.0
 margin_bottom = 167.0
 size_flags_vertical = 3
 
 [node name="Cancel" type="Button" parent="Margin/Container/Buttons"]
-margin_top = 51.0
+margin_top = 70.0
 margin_right = 54.0
-margin_bottom = 71.0
+margin_bottom = 90.0
 grow_horizontal = 0
 size_flags_horizontal = 2
 size_flags_vertical = 8
@@ -103,9 +103,9 @@ align = 2
 
 [node name="Confirm" type="Button" parent="Margin/Container/Buttons"]
 margin_left = 214.0
-margin_top = 51.0
+margin_top = 70.0
 margin_right = 267.0
-margin_bottom = 71.0
+margin_bottom = 90.0
 grow_horizontal = 0
 size_flags_horizontal = 14
 size_flags_vertical = 8
