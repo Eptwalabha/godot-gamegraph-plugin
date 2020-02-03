@@ -4,6 +4,7 @@ extends MarginContainer
 
 signal dialog_selected(dialog_key)
 signal dialog_deleted(dialog_key)
+signal dialog_created
 
 onready var list_container := $Container/Scroll/Margin/DialogsList as VBoxContainer
 onready var filter := $Container/Filter as LineEdit
@@ -57,3 +58,6 @@ func _on_dialog_deleted(dialog_key: String) -> void:
 
 func _on_dialog_selected(dialog_key: String) -> void:
 	emit_signal("dialog_selected", dialog_key)
+
+func _on_New_pressed() -> void:
+	emit_signal("dialog_created")

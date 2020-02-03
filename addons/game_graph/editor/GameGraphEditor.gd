@@ -8,6 +8,7 @@ var last_slot = null
 var current_dialog_key : String = ''
 var dialogs : Dictionary = {}
 var resource_path := ''
+var current_selected_node = null
 
 onready var graph := $TabContainer/Dialog/Main/MainContainer/GraphEdit as GameGraphGraphEdit
 onready var no_dialog_container := $TabContainer/Dialog/Main/MainContainer/NoDialog as CenterContainer
@@ -47,7 +48,14 @@ func save_resource() -> GameGraphResource:
 	resource.characters = []
 	return resource
 
+func change_selection(nodes: Array) -> void:
+	if len(nodes) != 1:
+		return
+	if nodes[0] is GameGraph:
+		current_selected_node = nodes[0]
+
 func reload_interface(resource: GameGraphResource) -> void:
+	dialog_list.show()
 	current_dialog_key = ''
 	dialog_list.clear_items()
 	dialogs = {}
@@ -121,7 +129,7 @@ func _on_PopupMenu_focus_exited() -> void:
 	last_slot = null
 
 func _on_Toolbar_New_resource_pressed() -> void:
-	$WindowDialog.popup()
+	pass
 
 func _on_Toolbar_Load_resource_pressed() -> void:
 	$LoadDialog.popup_centered()
@@ -173,3 +181,6 @@ func _on_WindowDialog_key_requested(key) -> void:
 
 func _on_GraphEdit_dialog_line_edited(dialog_node, dialog_line) -> void:
 	dialog_line_editor.open(dialog_line)
+
+func _on_DialogList_dialog_created() -> void:
+	$WindowDialog.popup()

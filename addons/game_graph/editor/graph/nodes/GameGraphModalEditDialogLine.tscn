@@ -3,14 +3,16 @@
 [ext_resource path="res://addons/game_graph/editor/graph/nodes/GameGraphModalEditDialogLine.gd" type="Script" id=1]
 
 [node name="GameGraphModalEditDialogLine" type="WindowDialog"]
+visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -158.0
-margin_top = -89.0
-margin_right = 158.0
-margin_bottom = 120.0
+margin_left = -150.0
+margin_top = -100.0
+margin_right = 150.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 300, 200 )
 window_title = "Edit dialog line"
 resizable = true
 script = ExtResource( 1 )
@@ -33,64 +35,64 @@ __meta__ = {
 }
 
 [node name="Text" type="VBoxContainer" parent="Params"]
-margin_right = 307.0
+margin_right = 291.0
 margin_bottom = 82.0
 
 [node name="Label" type="Label" parent="Params/Text"]
-margin_right = 307.0
+margin_right = 291.0
 margin_bottom = 14.0
 text = "text:"
 
 [node name="Text" type="TextEdit" parent="Params/Text"]
 margin_top = 18.0
-margin_right = 307.0
+margin_right = 291.0
 margin_bottom = 82.0
 rect_min_size = Vector2( 0, 64 )
 hint_tooltip = "Your line of dialog"
 
 [node name="Who" type="HBoxContainer" parent="Params"]
 margin_top = 88.0
-margin_right = 307.0
+margin_right = 291.0
 margin_bottom = 112.0
 
 [node name="Label" type="Label" parent="Params/Who"]
 margin_top = 5.0
-margin_right = 151.0
+margin_right = 143.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
 text = "who"
 
 [node name="Text" type="LineEdit" parent="Params/Who"]
-margin_left = 155.0
-margin_right = 307.0
+margin_left = 147.0
+margin_right = 291.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 placeholder_text = "name"
 
 [node name="How" type="HBoxContainer" parent="Params"]
 margin_top = 118.0
-margin_right = 307.0
+margin_right = 291.0
 margin_bottom = 142.0
 
 [node name="Label" type="Label" parent="Params/How"]
 margin_top = 5.0
-margin_right = 151.0
+margin_right = 143.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
 text = "how"
 
 [node name="Text" type="LineEdit" parent="Params/How"]
-margin_left = 155.0
-margin_right = 307.0
+margin_left = 147.0
+margin_right = 291.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 placeholder_text = "name"
 
 [node name="Close" type="Button" parent="Params"]
-margin_left = 260.0
-margin_top = 172.0
-margin_right = 307.0
-margin_bottom = 192.0
+margin_left = 244.0
+margin_top = 164.0
+margin_right = 291.0
+margin_bottom = 184.0
 size_flags_horizontal = 8
 size_flags_vertical = 10
 text = "Close"

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://addons/game_graph/editor/dialog_list/GameGraphEditorDialogList.gd" type="Script" id=1]
 [ext_resource path="res://addons/game_graph/assets/icon_search.svg" type="Texture" id=2]
+[ext_resource path="res://addons/game_graph/assets/icon_new.svg" type="Texture" id=3]
 
 [node name="DialogList" type="MarginContainer"]
 anchor_right = 1.0
@@ -43,21 +44,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Container"]
+[node name="New" type="ToolButton" parent="Container"]
 margin_top = 28.0
-margin_right = 1019.0
-margin_bottom = 42.0
-text = "Dialogs list"
+margin_right = 101.0
+margin_bottom = 52.0
+size_flags_horizontal = 0
+text = "New dialog"
+icon = ExtResource( 3 )
 
 [node name="Scroll" type="ScrollContainer" parent="Container"]
-margin_top = 46.0
+margin_top = 56.0
 margin_right = 1019.0
 margin_bottom = 590.0
 size_flags_vertical = 3
 
 [node name="Margin" type="PanelContainer" parent="Container/Scroll"]
 margin_right = 1019.0
-margin_bottom = 544.0
+margin_bottom = 534.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -65,6 +68,7 @@ size_flags_vertical = 3
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 1012.0
-margin_bottom = 537.0
+margin_bottom = 527.0
 custom_constants/separation = 0
 [connection signal="text_changed" from="Container/Filter" to="." method="_on_Filter_text_changed"]
+[connection signal="pressed" from="Container/New" to="." method="_on_New_pressed"]

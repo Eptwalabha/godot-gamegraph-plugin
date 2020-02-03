@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://addons/game_graph/editor/dialogs/GameGraphWindowDialogNewDialog.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/game_graph/assets/icon_load.svg" type="Texture" id=2]
 [ext_resource path="res://addons/game_graph/editor/GameGraphEditor.gd" type="Script" id=3]
-[ext_resource path="res://addons/game_graph/assets/icon_new.svg" type="Texture" id=4]
 [ext_resource path="res://addons/game_graph/assets/icon_save.svg" type="Texture" id=5]
 [ext_resource path="res://addons/game_graph/editor/dialog_list/GameGraphEditorDialogList.tscn" type="PackedScene" id=6]
 [ext_resource path="res://addons/game_graph/editor/graph/GameGraphGraphEdit.tscn" type="PackedScene" id=7]
@@ -39,21 +38,14 @@ margin_right = 1016.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 
-[node name="New" type="ToolButton" parent="TabContainer/Dialog/Toolbar"]
-margin_right = 28.0
-margin_bottom = 24.0
-hint_tooltip = "add a new dialog"
-icon = ExtResource( 4 )
-
 [node name="Load" type="ToolButton" parent="TabContainer/Dialog/Toolbar"]
-margin_left = 32.0
-margin_right = 60.0
+margin_right = 28.0
 margin_bottom = 24.0
 icon = ExtResource( 2 )
 
 [node name="Save" type="ToolButton" parent="TabContainer/Dialog/Toolbar"]
-margin_left = 64.0
-margin_right = 92.0
+margin_left = 32.0
+margin_right = 60.0
 margin_bottom = 24.0
 icon = ExtResource( 5 )
 
@@ -64,13 +56,13 @@ margin_bottom = 564.0
 size_flags_vertical = 3
 
 [node name="DialogList" parent="TabContainer/Dialog/Main" instance=ExtResource( 6 )]
+visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 200.0
 margin_bottom = 536.0
 
 [node name="MainContainer" type="VBoxContainer" parent="TabContainer/Dialog/Main"]
-margin_left = 212.0
 margin_right = 1016.0
 margin_bottom = 536.0
 rect_min_size = Vector2( 200, 0 )
@@ -86,15 +78,15 @@ margin_right = 804.0
 margin_bottom = 268.0
 
 [node name="NoDialog" type="CenterContainer" parent="TabContainer/Dialog/Main/MainContainer"]
-margin_right = 804.0
+margin_right = 1016.0
 margin_bottom = 536.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="TabContainer/Dialog/Main/MainContainer/NoDialog"]
-margin_left = 340.0
+margin_left = 446.0
 margin_top = 252.0
-margin_right = 463.0
+margin_right = 569.0
 margin_bottom = 283.0
 text = "No dialog yet
 click the 'New' icon"
@@ -156,11 +148,13 @@ mode = 0
 filters = PoolStringArray( "*.tres", "*.res" )
 
 [node name="WindowDialog" parent="." instance=ExtResource( 1 )]
+visible = false
 
 [node name="WindowDialogLineEditor" parent="." instance=ExtResource( 8 )]
-[connection signal="pressed" from="TabContainer/Dialog/Toolbar/New" to="." method="_on_Toolbar_New_resource_pressed"]
+visible = false
 [connection signal="pressed" from="TabContainer/Dialog/Toolbar/Load" to="." method="_on_Toolbar_Load_resource_pressed"]
 [connection signal="pressed" from="TabContainer/Dialog/Toolbar/Save" to="." method="_on_Toolbar_Save_resource_pressed"]
+[connection signal="dialog_created" from="TabContainer/Dialog/Main/DialogList" to="." method="_on_DialogList_dialog_created"]
 [connection signal="dialog_deleted" from="TabContainer/Dialog/Main/DialogList" to="." method="_on_DialogList_dialog_deleted"]
 [connection signal="dialog_selected" from="TabContainer/Dialog/Main/DialogList" to="." method="_on_DialogList_dialog_selected"]
 [connection signal="connection_to_empty" from="TabContainer/Dialog/Main/MainContainer/GraphEdit" to="." method="_on_GraphEdit_connection_to_empty"]
