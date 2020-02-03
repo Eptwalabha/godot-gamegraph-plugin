@@ -3,7 +3,6 @@
 [ext_resource path="res://addons/game_graph/editor/graph/nodes/GameGraphModalEditDialogLine.gd" type="Script" id=1]
 
 [node name="GameGraphModalEditDialogLine" type="WindowDialog"]
-visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -88,12 +87,29 @@ margin_bottom = 24.0
 size_flags_horizontal = 3
 placeholder_text = "name"
 
-[node name="Close" type="Button" parent="Params"]
-margin_left = 244.0
+[node name="HBoxContainer" type="HBoxContainer" parent="Params"]
 margin_top = 164.0
 margin_right = 291.0
 margin_bottom = 184.0
-size_flags_horizontal = 8
+size_flags_horizontal = 3
 size_flags_vertical = 10
-text = "Close"
-[connection signal="pressed" from="Params/Close" to="." method="_on_Close_pressed"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cancel" type="Button" parent="Params/HBoxContainer"]
+margin_right = 54.0
+margin_bottom = 20.0
+size_flags_vertical = 10
+text = "Cancel"
+flat = true
+
+[node name="Save" type="Button" parent="Params/HBoxContainer"]
+margin_left = 250.0
+margin_right = 291.0
+margin_bottom = 20.0
+size_flags_horizontal = 10
+size_flags_vertical = 10
+text = "Save"
+[connection signal="pressed" from="Params/HBoxContainer/Cancel" to="." method="_on_Cancel_pressed"]
+[connection signal="pressed" from="Params/HBoxContainer/Save" to="." method="_on_Save_pressed"]

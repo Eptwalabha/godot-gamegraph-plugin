@@ -22,7 +22,10 @@ func _clear_form() -> void:
 	who.text = ""
 	how.text = ""
 
-func _on_Close_pressed() -> void:
+func _on_Cancel_pressed() -> void:
+	hide()
+
+func _on_Save_pressed() -> void:
 	if current_line is GameGraphDialogLine:
 		current_line.key = text.text
 		current_line.who = who.text

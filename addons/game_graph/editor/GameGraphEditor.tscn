@@ -148,10 +148,9 @@ mode = 0
 filters = PoolStringArray( "*.tres", "*.res" )
 
 [node name="WindowDialog" parent="." instance=ExtResource( 1 )]
-visible = false
 
 [node name="WindowDialogLineEditor" parent="." instance=ExtResource( 8 )]
-visible = false
+popup_exclusive = true
 [connection signal="pressed" from="TabContainer/Dialog/Toolbar/Load" to="." method="_on_Toolbar_Load_resource_pressed"]
 [connection signal="pressed" from="TabContainer/Dialog/Toolbar/Save" to="." method="_on_Toolbar_Save_resource_pressed"]
 [connection signal="dialog_created" from="TabContainer/Dialog/Main/DialogList" to="." method="_on_DialogList_dialog_created"]
