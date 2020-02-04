@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=101 format=2]
+[gd_resource type="Resource" load_steps=114 format=2]
 
 [ext_resource path="res://addons/game_graph/resources/GameGraphResource.gd" type="Script" id=1]
 [ext_resource path="res://addons/game_graph/resources/GameGraphGraphResource.gd" type="Script" id=2]
@@ -141,86 +141,88 @@ script = ExtResource( 7 )
 choice_key = "Let's end that tutorial"
 
 [sub_resource type="Resource" id=22]
+script = ExtResource( 3 )
+dialog_key = "this is a [color=green]choice box[color=green]"
+who = "toto"
+how = "save"
+
+[sub_resource type="Resource" id=23]
 script = ExtResource( 6 )
 offset = Vector2( 650, 300 )
 rect_size = Vector2( 238, 193 )
 node_id = 4
-question = "this is a [color=green]choice box[color=green]"
+question = SubResource( 22 )
 choices = [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ]
 
-[sub_resource type="Resource" id=23]
+[sub_resource type="Resource" id=24]
 script = ExtResource( 3 )
 dialog_key = "Good, you are curious"
 who = ""
 how = ""
 
-[sub_resource type="Resource" id=24]
+[sub_resource type="Resource" id=25]
 script = ExtResource( 4 )
 offset = Vector2( 990, 180 )
 rect_size = Vector2( 270, 153 )
 node_id = 6
-dialog_lines = [ SubResource( 23 ) ]
-
-[sub_resource type="Resource" id=25]
-script = ExtResource( 7 )
-choice_key = "Yes"
+dialog_lines = [ SubResource( 24 ) ]
 
 [sub_resource type="Resource" id=26]
 script = ExtResource( 7 )
-choice_key = "No"
+choice_key = "Yes"
 
 [sub_resource type="Resource" id=27]
+script = ExtResource( 7 )
+choice_key = "No"
+
+[sub_resource type="Resource" id=28]
+script = ExtResource( 3 )
+dialog_key = "ready for another question?"
+who = ""
+how = ""
+
+[sub_resource type="Resource" id=29]
 script = ExtResource( 6 )
 offset = Vector2( 991, 387 )
 rect_size = Vector2( 238, 166 )
 node_id = 8
-question = "ready for another question?"
-choices = [ SubResource( 25 ), SubResource( 26 ) ]
+question = SubResource( 28 )
+choices = [ SubResource( 26 ), SubResource( 27 ) ]
 
-[sub_resource type="Resource" id=28]
+[sub_resource type="Resource" id=30]
 script = ExtResource( 7 )
 choice_key = "Paris!"
 
-[sub_resource type="Resource" id=29]
+[sub_resource type="Resource" id=31]
 script = ExtResource( 7 )
 choice_key = "New York!"
 
-[sub_resource type="Resource" id=30]
+[sub_resource type="Resource" id=32]
+script = ExtResource( 3 )
+dialog_key = "what is the capital of France?"
+who = ""
+how = ""
+
+[sub_resource type="Resource" id=33]
 script = ExtResource( 6 )
 offset = Vector2( 1330, 370 )
 rect_size = Vector2( 238, 166 )
 node_id = 9
-question = "what is the capital of France?"
-choices = [ SubResource( 28 ), SubResource( 29 ) ]
+question = SubResource( 32 )
+choices = [ SubResource( 30 ), SubResource( 31 ) ]
 
-[sub_resource type="Resource" id=31]
+[sub_resource type="Resource" id=34]
 script = ExtResource( 3 )
 dialog_key = "Congrat! here's a particle effect"
 who = ""
 how = ""
 
-[sub_resource type="Resource" id=32]
+[sub_resource type="Resource" id=35]
 script = ExtResource( 4 )
 offset = Vector2( 1647, 395 )
 rect_size = Vector2( 270, 113 )
 node_id = 10
-dialog_lines = [ SubResource( 31 ) ]
-
-[sub_resource type="Resource" id=33]
-script = ExtResource( 7 )
-choice_key = "Yes"
-
-[sub_resource type="Resource" id=34]
-script = ExtResource( 7 )
-choice_key = "Na... I'm good"
-
-[sub_resource type="Resource" id=35]
-script = ExtResource( 6 )
-offset = Vector2( 1660, 690 )
-rect_size = Vector2( 238, 166 )
-node_id = 13
-question = "Do you want to try again?"
-choices = [ SubResource( 33 ), SubResource( 34 ) ]
+dialog_lines = [ SubResource( 34 ) ]
 
 [sub_resource type="Resource" id=36]
 script = ExtResource( 7 )
@@ -228,319 +230,395 @@ choice_key = "Yes"
 
 [sub_resource type="Resource" id=37]
 script = ExtResource( 7 )
-choice_key = "No"
+choice_key = "Na... I'm good"
 
 [sub_resource type="Resource" id=38]
+script = ExtResource( 3 )
+dialog_key = "Do you want to try again?"
+who = ""
+how = ""
+
+[sub_resource type="Resource" id=39]
+script = ExtResource( 6 )
+offset = Vector2( 1660, 690 )
+rect_size = Vector2( 238, 166 )
+node_id = 13
+question = SubResource( 38 )
+choices = [ SubResource( 36 ), SubResource( 37 ) ]
+
+[sub_resource type="Resource" id=40]
+script = ExtResource( 7 )
+choice_key = "Yes"
+
+[sub_resource type="Resource" id=41]
+script = ExtResource( 7 )
+choice_key = "No"
+
+[sub_resource type="Resource" id=42]
+script = ExtResource( 3 )
+dialog_key = "Ok... do you want to see a particle effect?"
+who = ""
+how = ""
+
+[sub_resource type="Resource" id=43]
 script = ExtResource( 6 )
 offset = Vector2( 1653, 910 )
 rect_size = Vector2( 238, 166 )
 node_id = 15
-question = "Ok... do you want to see a particle effect?"
-choices = [ SubResource( 36 ), SubResource( 37 ) ]
+question = SubResource( 42 )
+choices = [ SubResource( 40 ), SubResource( 41 ) ]
 
-[sub_resource type="Resource" id=39]
+[sub_resource type="Resource" id=44]
 script = ExtResource( 5 )
 offset = Vector2( 2010, 680 )
 rect_size = Vector2( 150, 55 )
 node_id = 11
 event_name = "particle"
 
-[sub_resource type="Resource" id=40]
+[sub_resource type="Resource" id=45]
 script = ExtResource( 2 )
-nodes = [ SubResource( 1 ), SubResource( 2 ), SubResource( 4 ), SubResource( 6 ), SubResource( 9 ), SubResource( 11 ), SubResource( 12 ), SubResource( 17 ), SubResource( 18 ), SubResource( 22 ), SubResource( 24 ), SubResource( 27 ), SubResource( 30 ), SubResource( 32 ), SubResource( 35 ), SubResource( 38 ), SubResource( 39 ) ]
+nodes = [ SubResource( 1 ), SubResource( 2 ), SubResource( 4 ), SubResource( 6 ), SubResource( 9 ), SubResource( 11 ), SubResource( 12 ), SubResource( 17 ), SubResource( 18 ), SubResource( 23 ), SubResource( 25 ), SubResource( 29 ), SubResource( 33 ), SubResource( 35 ), SubResource( 39 ), SubResource( 43 ), SubResource( 44 ) ]
 connections = [ [ 0, 0, 1, 0 ], [ 1, 0, 4, 0 ], [ 1, 3, 5, 0 ], [ 4, 0, 1, 0 ], [ 4, 1, 6, 0 ], [ 6, 0, 8, 0 ], [ 8, 0, 9, 0 ], [ 9, 0, 10, 0 ], [ 10, 1, 11, 0 ], [ 9, 1, 12, 0 ], [ 12, 0, 13, 0 ], [ 13, 0, 9, 0 ], [ 13, 1, 15, 0 ], [ 10, 0, 17, 0 ], [ 15, 0, 11, 0 ], [ 16, 0, 17, 0 ], [ 15, 1, 16, 0 ], [ 15, 0, 18, 0 ], [ 4, 2, 16, 0 ], [ 8, 1, 15, 0 ], [ 18, 0, 17, 0 ], [ 17, 0, 20, 0 ], [ 0, 0, 21, 0 ] ]
 
-[sub_resource type="Resource" id=41]
+[sub_resource type="Resource" id=46]
 script = ExtResource( 9 )
 label = "Complete example"
 dialog_key = "complete_example"
-graph = SubResource( 40 )
+graph = SubResource( 45 )
 
-[sub_resource type="Resource" id=42]
+[sub_resource type="Resource" id=47]
+script = ExtResource( 8 )
+offset = Vector2( 100, 100 )
+rect_size = Vector2( 88, 37 )
+node_id = 0
+
+[sub_resource type="Resource" id=48]
 script = ExtResource( 3 )
-dialog_key = "This little conversation is over now"
+dialog_key = "This is a simple dialog"
 who = ""
 how = ""
 
-[sub_resource type="Resource" id=43]
+[sub_resource type="Resource" id=49]
 script = ExtResource( 3 )
-dialog_key = "bye!"
+dialog_key = "You can use whatever you want:\\nsimple text\\nbbcode\\neven i18n key"
 who = ""
 how = ""
 
-[sub_resource type="Resource" id=44]
+[sub_resource type="Resource" id=50]
 script = ExtResource( 4 )
-offset = Vector2( 890, 60 )
-rect_size = Vector2( 299, 144 )
-node_id = 3
-dialog_lines = [ SubResource( 42 ), SubResource( 43 ) ]
+offset = Vector2( 330, 60 )
+rect_size = Vector2( 279, 144 )
+node_id = 1
+dialog_lines = [ SubResource( 48 ), SubResource( 49 ) ]
 
-[sub_resource type="Resource" id=45]
+[sub_resource type="Resource" id=51]
 script = ExtResource( 4 )
 offset = Vector2( 680, 60 )
 rect_size = Vector2( 150, 100 )
 node_id = 2
 dialog_lines = [  ]
 
-[sub_resource type="Resource" id=46]
+[sub_resource type="Resource" id=52]
 script = ExtResource( 3 )
-dialog_key = "This is a simple dialog"
+dialog_key = "This little conversation is over now"
 who = ""
 how = ""
 
-[sub_resource type="Resource" id=47]
+[sub_resource type="Resource" id=53]
 script = ExtResource( 3 )
-dialog_key = "You can use whatever you want:\\nsimple text\\nbbcode\\neven i18n key"
+dialog_key = "bye!"
 who = ""
 how = ""
 
-[sub_resource type="Resource" id=48]
+[sub_resource type="Resource" id=54]
 script = ExtResource( 4 )
-offset = Vector2( 330, 60 )
-rect_size = Vector2( 279, 144 )
-node_id = 1
-dialog_lines = [ SubResource( 46 ), SubResource( 47 ) ]
+offset = Vector2( 890, 60 )
+rect_size = Vector2( 299, 144 )
+node_id = 3
+dialog_lines = [ SubResource( 52 ), SubResource( 53 ) ]
 
-[sub_resource type="Resource" id=49]
+[sub_resource type="Resource" id=55]
+script = ExtResource( 2 )
+nodes = [ SubResource( 47 ), SubResource( 50 ), SubResource( 51 ), SubResource( 54 ) ]
+connections = [ [ 0, 0, 1, 0 ], [ 1, 0, 2, 0 ], [ 2, 0, 3, 0 ] ]
+
+[sub_resource type="Resource" id=56]
+script = ExtResource( 9 )
+label = "Dialogs"
+dialog_key = "dialogs"
+graph = SubResource( 55 )
+
+[sub_resource type="Resource" id=57]
 script = ExtResource( 8 )
 offset = Vector2( 100, 100 )
 rect_size = Vector2( 88, 37 )
 node_id = 0
 
-[sub_resource type="Resource" id=50]
-script = ExtResource( 2 )
-nodes = [ SubResource( 44 ), SubResource( 45 ), SubResource( 48 ), SubResource( 49 ) ]
-connections = [ [ 0, 0, 1, 0 ], [ 1, 0, 2, 0 ], [ 2, 0, 3, 0 ] ]
+[sub_resource type="Resource" id=58]
+script = ExtResource( 7 )
+choice_key = "Hide in another cell"
 
-[sub_resource type="Resource" id=51]
-script = ExtResource( 9 )
-label = "Dialogs"
-dialog_key = "dialogs"
-graph = SubResource( 50 )
+[sub_resource type="Resource" id=59]
+script = ExtResource( 7 )
+choice_key = "Rush toward the shadow figure"
 
-[sub_resource type="Resource" id=52]
+[sub_resource type="Resource" id=60]
+script = ExtResource( 7 )
+choice_key = "Turn back"
+
+[sub_resource type="Resource" id=61]
+script = ExtResource( 3 )
+dialog_key = "After many years rotting in this dungeon, you finally managed to escaped your prison cell.\\nAs you rush down the corridor, a shadow emerges in the corner.\\nQuick! someone is comming!"
+who = ""
+how = ""
+
+[sub_resource type="Resource" id=62]
+script = ExtResource( 6 )
+offset = Vector2( 250, 90 )
+rect_size = Vector2( 402, 193 )
+node_id = 3
+question = SubResource( 61 )
+choices = [ SubResource( 58 ), SubResource( 59 ), SubResource( 60 ) ]
+
+[sub_resource type="Resource" id=63]
+script = ExtResource( 3 )
+dialog_key = "The shadow was made by a guard and his torch.\\nYou are well hidden in the dark, but… he unfortunately put his light in your direction and immediately spots you in your new cell."
+who = ""
+how = ""
+
+[sub_resource type="Resource" id=64]
+script = ExtResource( 3 )
+dialog_key = "A grim smile enlighten his face as he closes and locks the door of your new cell"
+who = ""
+how = ""
+
+[sub_resource type="Resource" id=65]
+script = ExtResource( 3 )
+dialog_key = "«I Hope you're cosy in there lad... 'cause you're not leaving anytime soon!»"
+who = ""
+how = ""
+
+[sub_resource type="Resource" id=66]
+script = ExtResource( 4 )
+offset = Vector2( 730, 30 )
+rect_size = Vector2( 480, 175 )
+node_id = 4
+dialog_lines = [ SubResource( 63 ), SubResource( 64 ), SubResource( 65 ) ]
+
+[sub_resource type="Resource" id=67]
+script = ExtResource( 7 )
+choice_key = "Start over again"
+
+[sub_resource type="Resource" id=68]
+script = ExtResource( 7 )
+choice_key = "Quit"
+
+[sub_resource type="Resource" id=69]
+script = ExtResource( 3 )
+dialog_key = "You die miserably… too bad, you were almost out."
+who = ""
+how = ""
+
+[sub_resource type="Resource" id=70]
+script = ExtResource( 6 )
+offset = Vector2( 270, 440 )
+rect_size = Vector2( 312, 166 )
+node_id = 6
+question = SubResource( 69 )
+choices = [ SubResource( 67 ), SubResource( 68 ) ]
+
+[sub_resource type="Resource" id=71]
+script = ExtResource( 7 )
+choice_key = "Try to grab the guard's torch"
+
+[sub_resource type="Resource" id=72]
+script = ExtResource( 7 )
+choice_key = "Fight the guard"
+
+[sub_resource type="Resource" id=73]
+script = ExtResource( 7 )
+choice_key = "Politely salute the man"
+
+[sub_resource type="Resource" id=74]
+script = ExtResource( 3 )
+dialog_key = "The shadow is nothing but a guard and his torch."
+who = ""
+how = ""
+
+[sub_resource type="Resource" id=75]
+script = ExtResource( 6 )
+offset = Vector2( 720, 230 )
+rect_size = Vector2( 486, 193 )
+node_id = 7
+question = SubResource( 74 )
+choices = [ SubResource( 71 ), SubResource( 72 ), SubResource( 73 ) ]
+
+[sub_resource type="Resource" id=76]
+script = ExtResource( 7 )
+choice_key = "Start over again"
+
+[sub_resource type="Resource" id=77]
+script = ExtResource( 7 )
+choice_key = "Quit"
+
+[sub_resource type="Resource" id=78]
+script = ExtResource( 3 )
+dialog_key = "As you turn back, you trip on a small rock and fell flat on the ground... and die"
+who = ""
+how = ""
+
+[sub_resource type="Resource" id=79]
+script = ExtResource( 6 )
+offset = Vector2( 260, 620 )
+rect_size = Vector2( 353, 166 )
+node_id = 10
+question = SubResource( 78 )
+choices = [ SubResource( 76 ), SubResource( 77 ) ]
+
+[sub_resource type="Resource" id=80]
+script = ExtResource( 7 )
+choice_key = "Start over again"
+
+[sub_resource type="Resource" id=81]
+script = ExtResource( 7 )
+choice_key = "Quit"
+
+[sub_resource type="Resource" id=82]
+script = ExtResource( 3 )
+dialog_key = "You start wrestling the guard, but years of inactivity does not play in your favor.\\nYou are quickly overwhelmed and he finally kills you without breaking a sweat"
+who = ""
+how = ""
+
+[sub_resource type="Resource" id=83]
+script = ExtResource( 6 )
+offset = Vector2( 270, 1010 )
+rect_size = Vector2( 385, 166 )
+node_id = 13
+question = SubResource( 82 )
+choices = [ SubResource( 80 ), SubResource( 81 ) ]
+
+[sub_resource type="Resource" id=84]
+script = ExtResource( 7 )
+choice_key = "Start over again"
+
+[sub_resource type="Resource" id=85]
+script = ExtResource( 7 )
+choice_key = "Quit"
+
+[sub_resource type="Resource" id=86]
+script = ExtResource( 3 )
+dialog_key = "You die of old age in your new cell"
+who = ""
+how = ""
+
+[sub_resource type="Resource" id=87]
+script = ExtResource( 6 )
+offset = Vector2( 260, 820 )
+rect_size = Vector2( 346, 166 )
+node_id = 12
+question = SubResource( 86 )
+choices = [ SubResource( 84 ), SubResource( 85 ) ]
+
+[sub_resource type="Resource" id=88]
+script = ExtResource( 3 )
+dialog_key = "The guard considers you for a moment and finaly says: «good day to you too!»"
+who = ""
+how = ""
+
+[sub_resource type="Resource" id=89]
+script = ExtResource( 3 )
+dialog_key = "He then proceed to mind his own business elsewhere"
+who = ""
+how = ""
+
+[sub_resource type="Resource" id=90]
+script = ExtResource( 4 )
+offset = Vector2( 1290, 220 )
+rect_size = Vector2( 382, 168 )
+node_id = 14
+dialog_lines = [ SubResource( 88 ), SubResource( 89 ) ]
+
+[sub_resource type="Resource" id=91]
+script = ExtResource( 7 )
+choice_key = "take the one on the left"
+
+[sub_resource type="Resource" id=92]
+script = ExtResource( 7 )
+choice_key = "take the one on the right"
+
+[sub_resource type="Resource" id=93]
+script = ExtResource( 3 )
+dialog_key = "You are now in a room with two iron doors"
+who = ""
+how = ""
+
+[sub_resource type="Resource" id=94]
+script = ExtResource( 6 )
+offset = Vector2( 1740, 210 )
+rect_size = Vector2( 323, 173 )
+node_id = 15
+question = SubResource( 93 )
+choices = [ SubResource( 91 ), SubResource( 92 ) ]
+
+[sub_resource type="Resource" id=95]
+script = ExtResource( 7 )
+choice_key = "take the one on the left"
+
+[sub_resource type="Resource" id=96]
+script = ExtResource( 7 )
+choice_key = "take the one in the middle"
+
+[sub_resource type="Resource" id=97]
+script = ExtResource( 7 )
+choice_key = "take the one on the right"
+
+[sub_resource type="Resource" id=98]
+script = ExtResource( 3 )
+dialog_key = "You enter a hall with tree iron doors"
+who = ""
+how = ""
+
+[sub_resource type="Resource" id=99]
+script = ExtResource( 6 )
+offset = Vector2( 2160, 200 )
+rect_size = Vector2( 329, 193 )
+node_id = 16
+question = SubResource( 98 )
+choices = [ SubResource( 95 ), SubResource( 96 ), SubResource( 97 ) ]
+
+[sub_resource type="Resource" id=100]
+script = ExtResource( 3 )
+dialog_key = "congratulation, you escaped the dungeon"
+who = ""
+how = ""
+
+[sub_resource type="Resource" id=101]
+script = ExtResource( 4 )
+offset = Vector2( 2580, 240 )
+rect_size = Vector2( 407, 117 )
+node_id = 19
+dialog_lines = [ SubResource( 100 ) ]
+
+[sub_resource type="Resource" id=102]
 script = ExtResource( 5 )
 offset = Vector2( 3070, 280 )
 rect_size = Vector2( 150, 55 )
 node_id = 20
 event_name = "particle"
 
-[sub_resource type="Resource" id=53]
-script = ExtResource( 3 )
-dialog_key = "congratulation, you escaped the dungeon"
-who = ""
-how = ""
-
-[sub_resource type="Resource" id=54]
-script = ExtResource( 4 )
-offset = Vector2( 2580, 240 )
-rect_size = Vector2( 407, 117 )
-node_id = 19
-dialog_lines = [ SubResource( 53 ) ]
-
-[sub_resource type="Resource" id=55]
-script = ExtResource( 7 )
-choice_key = "take the one on the left"
-
-[sub_resource type="Resource" id=56]
-script = ExtResource( 7 )
-choice_key = "take the one in the middle"
-
-[sub_resource type="Resource" id=57]
-script = ExtResource( 7 )
-choice_key = "take the one on the right"
-
-[sub_resource type="Resource" id=58]
-script = ExtResource( 6 )
-offset = Vector2( 2160, 200 )
-rect_size = Vector2( 329, 193 )
-node_id = 16
-question = "You enter a hall with tree iron doors"
-choices = [ SubResource( 55 ), SubResource( 56 ), SubResource( 57 ) ]
-
-[sub_resource type="Resource" id=59]
-script = ExtResource( 7 )
-choice_key = "take the one on the left"
-
-[sub_resource type="Resource" id=60]
-script = ExtResource( 7 )
-choice_key = "take the one on the right"
-
-[sub_resource type="Resource" id=61]
-script = ExtResource( 6 )
-offset = Vector2( 1740, 210 )
-rect_size = Vector2( 323, 173 )
-node_id = 15
-question = "You are now in a room with two iron doors"
-choices = [ SubResource( 59 ), SubResource( 60 ) ]
-
-[sub_resource type="Resource" id=62]
-script = ExtResource( 3 )
-dialog_key = "The guard considers you for a moment and finaly says: «good day to you too!»"
-who = ""
-how = ""
-
-[sub_resource type="Resource" id=63]
-script = ExtResource( 3 )
-dialog_key = "He then proceed to mind his own business elsewhere"
-who = ""
-how = ""
-
-[sub_resource type="Resource" id=64]
-script = ExtResource( 4 )
-offset = Vector2( 1290, 220 )
-rect_size = Vector2( 382, 168 )
-node_id = 14
-dialog_lines = [ SubResource( 62 ), SubResource( 63 ) ]
-
-[sub_resource type="Resource" id=65]
-script = ExtResource( 7 )
-choice_key = "Start over again"
-
-[sub_resource type="Resource" id=66]
-script = ExtResource( 7 )
-choice_key = "Quit"
-
-[sub_resource type="Resource" id=67]
-script = ExtResource( 6 )
-offset = Vector2( 260, 820 )
-rect_size = Vector2( 346, 166 )
-node_id = 12
-question = "You die of old age in your new cell"
-choices = [ SubResource( 65 ), SubResource( 66 ) ]
-
-[sub_resource type="Resource" id=68]
-script = ExtResource( 7 )
-choice_key = "Start over again"
-
-[sub_resource type="Resource" id=69]
-script = ExtResource( 7 )
-choice_key = "Quit"
-
-[sub_resource type="Resource" id=70]
-script = ExtResource( 6 )
-offset = Vector2( 270, 1010 )
-rect_size = Vector2( 385, 166 )
-node_id = 13
-question = "You start wrestling the guard, but years of inactivity does not play in your favor.\\nYou are quickly overwhelmed and he finally kills you without breaking a sweat"
-choices = [ SubResource( 68 ), SubResource( 69 ) ]
-
-[sub_resource type="Resource" id=71]
-script = ExtResource( 7 )
-choice_key = "Start over again"
-
-[sub_resource type="Resource" id=72]
-script = ExtResource( 7 )
-choice_key = "Quit"
-
-[sub_resource type="Resource" id=73]
-script = ExtResource( 6 )
-offset = Vector2( 260, 620 )
-rect_size = Vector2( 353, 166 )
-node_id = 10
-question = "As you turn back, you trip on a small rock and fell flat on the ground... and die"
-choices = [ SubResource( 71 ), SubResource( 72 ) ]
-
-[sub_resource type="Resource" id=74]
-script = ExtResource( 7 )
-choice_key = "Try to grab the guard's torch"
-
-[sub_resource type="Resource" id=75]
-script = ExtResource( 7 )
-choice_key = "Fight the guard"
-
-[sub_resource type="Resource" id=76]
-script = ExtResource( 7 )
-choice_key = "Politely salute the man"
-
-[sub_resource type="Resource" id=77]
-script = ExtResource( 6 )
-offset = Vector2( 720, 230 )
-rect_size = Vector2( 486, 193 )
-node_id = 7
-question = "The shadow is nothing but a guard and his torch."
-choices = [ SubResource( 74 ), SubResource( 75 ), SubResource( 76 ) ]
-
-[sub_resource type="Resource" id=78]
-script = ExtResource( 7 )
-choice_key = "Start over again"
-
-[sub_resource type="Resource" id=79]
-script = ExtResource( 7 )
-choice_key = "Quit"
-
-[sub_resource type="Resource" id=80]
-script = ExtResource( 6 )
-offset = Vector2( 270, 440 )
-rect_size = Vector2( 312, 166 )
-node_id = 6
-question = "You die miserably… too bad, you were almost out."
-choices = [ SubResource( 78 ), SubResource( 79 ) ]
-
-[sub_resource type="Resource" id=81]
-script = ExtResource( 3 )
-dialog_key = "The shadow was made by a guard and his torch.\\nYou are well hidden in the dark, but… he unfortunately put his light in your direction and immediately spots you in your new cell."
-who = ""
-how = ""
-
-[sub_resource type="Resource" id=82]
-script = ExtResource( 3 )
-dialog_key = "A grim smile enlighten his face as he closes and locks the door of your new cell"
-who = ""
-how = ""
-
-[sub_resource type="Resource" id=83]
-script = ExtResource( 3 )
-dialog_key = "«I Hope you're cosy in there lad... 'cause you're not leaving anytime soon!»"
-who = ""
-how = ""
-
-[sub_resource type="Resource" id=84]
-script = ExtResource( 4 )
-offset = Vector2( 730, 30 )
-rect_size = Vector2( 480, 175 )
-node_id = 4
-dialog_lines = [ SubResource( 81 ), SubResource( 82 ), SubResource( 83 ) ]
-
-[sub_resource type="Resource" id=85]
-script = ExtResource( 7 )
-choice_key = "Hide in another cell"
-
-[sub_resource type="Resource" id=86]
-script = ExtResource( 7 )
-choice_key = "Rush toward the shadow figure"
-
-[sub_resource type="Resource" id=87]
-script = ExtResource( 7 )
-choice_key = "Turn back"
-
-[sub_resource type="Resource" id=88]
-script = ExtResource( 6 )
-offset = Vector2( 250, 90 )
-rect_size = Vector2( 402, 193 )
-node_id = 3
-question = "After many years rotting in this dungeon, you finally managed to escaped your prison cell.\\nAs you rush down the corridor, a shadow emerges in the corner.\\nQuick! someone is comming!"
-choices = [ SubResource( 85 ), SubResource( 86 ), SubResource( 87 ) ]
-
-[sub_resource type="Resource" id=89]
-script = ExtResource( 8 )
-offset = Vector2( 100, 100 )
-rect_size = Vector2( 88, 37 )
-node_id = 0
-
-[sub_resource type="Resource" id=90]
+[sub_resource type="Resource" id=103]
 script = ExtResource( 2 )
-nodes = [ SubResource( 52 ), SubResource( 54 ), SubResource( 58 ), SubResource( 61 ), SubResource( 64 ), SubResource( 67 ), SubResource( 70 ), SubResource( 73 ), SubResource( 77 ), SubResource( 80 ), SubResource( 84 ), SubResource( 88 ), SubResource( 89 ) ]
+nodes = [ SubResource( 57 ), SubResource( 62 ), SubResource( 66 ), SubResource( 70 ), SubResource( 75 ), SubResource( 79 ), SubResource( 83 ), SubResource( 87 ), SubResource( 90 ), SubResource( 94 ), SubResource( 99 ), SubResource( 101 ), SubResource( 102 ) ]
 connections = [ [ 0, 0, 3, 0 ], [ 3, 0, 4, 0 ], [ 6, 0, 3, 0 ], [ 3, 1, 7, 0 ], [ 3, 2, 10, 0 ], [ 10, 0, 3, 0 ], [ 4, 0, 12, 0 ], [ 12, 0, 3, 0 ], [ 7, 1, 13, 0 ], [ 7, 0, 13, 0 ], [ 13, 0, 3, 0 ], [ 7, 2, 14, 0 ], [ 14, 0, 15, 0 ], [ 15, 0, 16, 0 ], [ 15, 1, 16, 0 ], [ 16, 0, 19, 0 ], [ 16, 1, 19, 0 ], [ 16, 2, 19, 0 ], [ 19, 1, 20, 0 ] ]
 
-[sub_resource type="Resource" id=91]
+[sub_resource type="Resource" id=104]
 script = ExtResource( 9 )
 label = "Choice"
 dialog_key = "choice"
-graph = SubResource( 90 )
+graph = SubResource( 103 )
 
 [resource]
 script = ExtResource( 1 )
 plugin_version = "0.0.1"
-dialogs = [ SubResource( 41 ), SubResource( 51 ), SubResource( 91 ) ]
+dialogs = [ SubResource( 46 ), SubResource( 56 ), SubResource( 104 ) ]
 characters = [  ]

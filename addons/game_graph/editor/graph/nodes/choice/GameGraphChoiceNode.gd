@@ -2,8 +2,12 @@ tool
 class_name GameGraphChoiceNode
 extends "../GameGraphNode.gd"
 
+signal dialog_line_edited(node, line)
+
 const ChoiceLine = preload("GameGraphChoiceLine.tscn")
 const ChoiceResource = preload("res://addons/game_graph/resources/GameGraphNodeChoiceResource.gd")
+
+onready var question := $Question as GameGraphDialogLine
 
 func _ready() -> void:
 	._ready()
@@ -14,7 +18,7 @@ func save() -> Resource:
 	resource.offset = offset
 	resource.rect_size = rect_size
 	resource.node_id = node_id
-	resource.question = $HBoxContainer/Question.text
+	resource.question = question.save()
 	resource.choices = []
 	for node in get_children():
 		if not node is GameGraphChoiceLine:
@@ -25,7 +29,12 @@ func save() -> Resource:
 func from_resource(resource: Resource) -> void:
 	.from_resource(resource)
 	if resource is GameGraphNodeChoiceResource:
-		$HBoxContainer/Question.text = resource.question
+		if resource.question is String:
+			question.key = resource.question
+		elif resource.question is GameGraphNodeDialogLineResource:
+			question.key = resource.question.dialog_key
+			question.who = resource.question.who
+			question.how = resource.question.how
 		for choice_line_resource in resource.choices:
 			var choice_line = _new_choice_line()
 			choice_line.set_choice_key(choice_line_resource.choice_key)
@@ -67,3 +76,7 @@ func _on_ChoiceLine_deleted(choice_line: GameGraphChoiceLine) -> void:
 
 func _on_GameGraphChoiceNode_resize_request(new_minsize: Vector2) -> void:
 	rect_size = new_minsize
+
+
+func _on_Question_edit_pressed() -> void:
+	emit_signal("dialog_line_edited", self, question)

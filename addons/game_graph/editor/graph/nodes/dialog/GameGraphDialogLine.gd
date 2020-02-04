@@ -2,6 +2,9 @@ tool
 class_name GameGraphDialogLine
 extends MarginContainer
 
+export(bool) var show_delete_btn = true setget _enable_delete_button
+export(String) var placeholder = "your key" setget _set_placeholder
+
 signal edit_pressed
 signal delete_pressed
 
@@ -38,4 +41,14 @@ func save() -> Resource:
 	return resource
 
 func _on_Dialog_text_changed(new_text: String) -> void:
-	_set_dialog_key(new_text)
+	key = new_text
+
+func _enable_delete_button(show: bool) -> void:
+	show_delete_btn = show
+	if show_delete_btn:
+		$Line/Delete.show()
+	else:
+		$Line/Delete.hide()
+
+func _set_placeholder(new_placeholder: String) -> void:
+	$Line/Dialog.placeholder_text = new_placeholder

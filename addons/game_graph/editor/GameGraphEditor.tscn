@@ -56,13 +56,13 @@ margin_bottom = 564.0
 size_flags_vertical = 3
 
 [node name="DialogList" parent="TabContainer/Dialog/Main" instance=ExtResource( 6 )]
-visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 200.0
 margin_bottom = 536.0
 
 [node name="MainContainer" type="VBoxContainer" parent="TabContainer/Dialog/Main"]
+margin_left = 212.0
 margin_right = 1016.0
 margin_bottom = 536.0
 rect_min_size = Vector2( 200, 0 )
@@ -78,15 +78,15 @@ margin_right = 804.0
 margin_bottom = 268.0
 
 [node name="NoDialog" type="CenterContainer" parent="TabContainer/Dialog/Main/MainContainer"]
-margin_right = 1016.0
+margin_right = 804.0
 margin_bottom = 536.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="TabContainer/Dialog/Main/MainContainer/NoDialog"]
-margin_left = 446.0
+margin_left = 340.0
 margin_top = 252.0
-margin_right = 569.0
+margin_right = 463.0
 margin_bottom = 283.0
 text = "No dialog yet
 click the 'New' icon"

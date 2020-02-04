@@ -100,9 +100,9 @@ func get_next_item() -> Dictionary:
 			})
 		return {
 			'type': 'choice',
-			'text': current_node.question,
-			'who': '',
-			'how': '',
+			'text': current_node.text,
+			'who': current_node.who,
+			'how': current_node.how,
 			'choices': choices,
 		}
 	else:
@@ -199,7 +199,9 @@ func _to_dictionary(node) -> Dictionary:
 	elif node is GameGraphNodeChoiceResource:
 		var dict = {
 			'type': "choice",
-			'question': node.question,
+			'text': node.question.dialog_key,
+			'who': node.question.who,
+			'how': node.question.how,
 			'choices': [],
 			'output': null,
 			'events': []

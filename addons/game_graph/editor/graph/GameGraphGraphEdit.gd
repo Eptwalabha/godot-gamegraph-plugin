@@ -76,6 +76,7 @@ func _make_node_instance(type: String) -> GameGraphNode:
 	match type:
 		"choice":
 			node = NodeChoice.instance()
+			node.connect("dialog_line_edited", self, "_on_DialogLine_edited")
 		"dialog":
 			node = NodeDialog.instance()
 			node.connect("dialog_line_edited", self, "_on_DialogLine_edited")
@@ -182,6 +183,6 @@ func _on_GraphEdit_disconnection_request(from: String, from_slot: int, to: Strin
 	disconnect_node(from, from_slot, to, to_slot)
 
 func _on_DialogLine_edited(
-		dialog_node: GameGraphDialogNode,
+		dialog_node: GameGraphNode,
 		dialog_line: GameGraphDialogLine) -> void:
 	emit_signal("dialog_line_edited", dialog_node, dialog_line)
